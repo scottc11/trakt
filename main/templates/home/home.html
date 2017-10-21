@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load render_bundle from webpack_loader %}
+
 
 {% block styles %}
 <link rel="stylesheet" href={% static "css/home.css" %}>
@@ -9,6 +11,11 @@
 
 <section id="home" class="home col-xs-12">
   <h1 class="">TRAKT</h1>
+
+  <div id="container">
+    {% render_bundle 'main' %}
+  </div>
+
 </section>
 
 {% endblock %}
