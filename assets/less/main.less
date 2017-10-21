@@ -1,0 +1,29 @@
+@sunset-orange: #FE5F55;
+@turquoise: #49DEFf;
+@onyx: #383737;
+@mikado: #F9C80E;
+@black: #1E1A17;
+@white: #FFFFFF;
+@blue-jeans: #5DA7E7;
+@mako: #3D464D;
+
+
+.track {
+  border: 1px solid black;
+}
+
+.audio-player {
+  border: 1px solid @white;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  background: @onyx;
+  color: @white;
+  & span {
+    margin: 0 20px;
+    &:hover {
+      color: @mikado;
+      cursor: pointer;
+    }
+  }
+}

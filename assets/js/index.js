@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-var Hello = React.createClass ({
-    render: function() {
-        return (
-            <h1>
-            Hello, React!
-            </h1>
-        )
+import Track from './components/trackDetail';
+
+class App extends Component {
+    render() {
+      return (
+          <div>
+            <Track />
+          </div>
+      )
     }
-})
-console.log('getting loaded!')
-ReactDOM.render(<Hello />, document.getElementById('container'))
+}
+
+ReactDOM.render(<App />, document.getElementById('container'));

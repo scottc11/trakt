@@ -31,7 +31,7 @@ module.exports = {
     loaders: [
       // a regexp that tells webpack to use the following loads on all .js and .jsx files
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
