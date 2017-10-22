@@ -9,4 +9,3 @@ home/pycache/
 cloud_sql_proxy
 app.yaml
 static
-cors-json-file.json

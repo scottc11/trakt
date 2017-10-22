@@ -22,7 +22,6 @@ class Track(models.Model):
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     stage = models.ForeignKey(Stage, on_delete=models.SET_NULL, null=True)
-
     audio_file = models.FileField(upload_to=format_storage_path, storage=GoogleCloudStorage(), default='')
 
 
