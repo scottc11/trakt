@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'webpack_loader',
+    'django_cleanup',
     'main',
 ]
 
@@ -133,3 +136,22 @@ STATICFILES_DIRS = (
     #This lets Django's collectstatic store our bundles
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# GOOGLE CLOUD
+# ----------------------------------------------------------------------------
+
+PROJECT_ID = 'trakt-183713'
+CLOUD_STORAGE_BUCKET = 'trakt'
+MEDIA_PREFIX = "media/"
+
+CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
+    bucket_name=CLOUD_STORAGE_BUCKET
+)
+
+MEDIA_URL = "{gcs_root}{prefix}/".format(
+    gcs_root=CLOUD_STORAGE_ROOT,
+    prefix=MEDIA_PREFIX,
+)
+
+DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
