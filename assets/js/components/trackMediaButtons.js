@@ -13,3 +13,11 @@ const MediaButtons = ({track, onPlay, onPause, onStop}) => {
 }
 
 export default MediaButtons;
+
+
+// <MediaButtons
+//   onPlay={ this.onPlay.bind(this) }
+//   onPause={ this.onPause.bind(this) }
+//   onStop={ this.onStop.bind(this) }
+//   track={this.props.track}
+//   />

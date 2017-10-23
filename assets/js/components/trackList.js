@@ -3,7 +3,7 @@ import Track from './trackDetail';
 
 const TrackList = (props) => {
   const trackItems = props.tracks.map( (track) => {
-    return <Track key={track.id} track={track} />
+    return <Track key={track.id} track={track} audioCtx={props.audioCtx} />
   });
 
   return (
