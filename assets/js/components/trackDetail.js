@@ -7,7 +7,6 @@ class Track extends Component {
     console.log(this.props.track);
     this.state = {
       button: '',
-      audioElement: null,
       audioSource: null,
       gainNode: null
     };
@@ -27,6 +26,7 @@ class Track extends Component {
     this.audioElement = element;
   }
 
+  // below not yet implemented
   connectAudioSource(element) {
     let source = this.props.audioCtx.createMediaElementSource(element);
     let gainNode = this.props.audioCtx.createGain();
@@ -39,17 +39,13 @@ class Track extends Component {
   }
 
   onPlay() {
-    this.setState({ button: 'PLAY' });
+    this.setState({ button: 'PLAYING' });
     this.audioElement.play();
   }
 
   onPause() {
-    this.setState({ button: 'PAUSE' });
+    this.setState({ button: 'PAUSED' });
     this.audioElement.pause();
-  }
-
-  onStop() {
-    this.setState({ button: 'STOP' });
   }
 
   render() {
@@ -58,12 +54,15 @@ class Track extends Component {
 
     return (
       <li>
-        <div className="audio-player">
-          <h6>Title: {this.props.track.title}</h6>
-          <span onClick={ this.onPlay.bind(this) } className="fa fa-play"></span>
-          <span onClick={ this.onPause.bind(this) } className="fa fa-pause"></span>
-          <span onClick={ this.onStop.bind(this) } className="fa fa-stop"></span>
-          <h6>status: { this.state.button }</h6>
+        <div className="track">
+          <h6 className="track--title">"{ this.props.track.title }"</h6>
+          <span className="track--genre">{ this.props.track.genre }</span>
+          <span className="track--key">{ this.props.track.key }</span>
+          <span className="track--bpm">{ this.props.track.bpm }</span>
+          <div>
+            <span className="track--button fa fa-play" onClick={ this.onPlay.bind(this) }></span>
+            <span className="track--button fa fa-pause" onClick={ this.onPause.bind(this) }></span>
+          </div>
         </div>
       </li>
     )
