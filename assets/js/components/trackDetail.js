@@ -56,13 +56,13 @@ class Track extends Component {
       <li>
         <div className="track">
           <h6 className="track--title">"{ this.props.track.title }"</h6>
-          <span className="track--genre">{ this.props.track.genre }</span>
-          <span className="track--key">{ this.props.track.key }</span>
-          <span className="track--bpm">{ this.props.track.bpm }</span>
-          <div>
+          <div className="track__player">
             <span className="track--button fa fa-play" onClick={ this.onPlay.bind(this) }></span>
             <span className="track--button fa fa-pause" onClick={ this.onPause.bind(this) }></span>
           </div>
+          <span className="track--genre">{ this.props.track.genre }</span>
+          <span className="track--key">{ this.props.track.key }</span>
+          <span className="track--bpm">{ this.props.track.bpm }</span>
         </div>
       </li>
     )

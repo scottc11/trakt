@@ -2,8 +2,6 @@ db.sqlite3
 node_modules/
 webpack-stats.json
 __pycache__/
-essy/pycache/
-home/pycache/
 *.py[cod]
 *.pyc
 cloud_sql_proxy
