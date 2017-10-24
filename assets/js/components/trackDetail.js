@@ -49,9 +49,6 @@ class Track extends Component {
   }
 
   render() {
-    // if track is null/ajax still loading
-    if (!this.props.track) { return (<div>loading....</div>) }
-
     return (
       <li>
         <div className="track">
