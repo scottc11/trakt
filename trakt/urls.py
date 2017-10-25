@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from main.views import views, home
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^home/', home.home),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^home/', home.home, name='home'),
     url(r'^api/tracks/', views.TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', views.TrackDetail.as_view()),
 ]
