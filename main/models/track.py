@@ -1,6 +1,6 @@
 
 from django.template.defaultfilters import slugify
-
+from django.contrib.auth.models import User
 from django.db import models
 from main.models.key import Key
 from main.models.genre import Genre
@@ -13,7 +13,12 @@ def format_storage_path(instance, filename):
     return 'tracks/{0}/{1}'.format(title_slug, filename)
 
 
+def get_superuser():
+    return User.objects.get(is_superuser=True).id
+
+
 class Track(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_superuser )
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250, blank=False)
     slug = models.SlugField(default='', blank=True)
