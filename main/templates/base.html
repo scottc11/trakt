@@ -18,6 +18,7 @@
     <!-- CUSTOM -->
     <link rel="stylesheet" href={% static "css/main.css" %}>
     <link rel="stylesheet" href={% static "css/normalize.css" %}>
+    <link rel="stylesheet" href={% static "css/auth.css" %}>
     <link rel="stylesheet" href={% static "css/spinner.css" %}>
 
     {% block styles %}
@@ -28,6 +29,10 @@
   <body>
 
     <main class="base">
+
+      <section class="header--bg">
+        {% include 'header.html' %}
+      </section>
 
       <section class="container">
         {% block content %}
