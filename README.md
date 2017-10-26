@@ -8,6 +8,12 @@ Website built using Django + React via webpack.
 username: scottcampbell
 password: developer password
 
+#### test users
+username: John
+last_name: Lennon
+password: Test123
+email: lennon@thebeatles.com
+
 ### GitLab Authentication
 
 username: scott.m.campbell11
