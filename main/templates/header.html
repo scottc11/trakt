@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="container header">
+  <div class="header--heading col-xs-8">
+    <h1 class="">TRAKT</h1>
+  </div>
+  <div class="header--info col-xs-4">
+    <span class="">{{ user.username }}</span>
+    <a href="{% url 'logout' %}"><span class="">Logout</span></a>
+  </div>
+</div>
