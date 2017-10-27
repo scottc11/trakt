@@ -23,7 +23,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/home/'}, name='logout'),
-    url(r'^home/', home.home, name='home'),
+    url(r'^$', home.home, name='home'),
+    url(r'^submit/$', home.submit_track, name='submit_track'),
     url(r'^api/tracks/', views.TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', views.TrackDetail.as_view()),
+
 ]
