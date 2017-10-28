@@ -4,7 +4,6 @@ import MediaButtons from './trackMediaButtons';
 class Track extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.track);
     this.state = {
       active: false
     };
@@ -22,14 +21,6 @@ class Track extends Component {
     element.loop = false;
     element.autoplay = false;
     this.audioElement = element;
-  }
-
-  // below not yet implemented
-  connectAudioSource(element) {
-    let source = this.props.audioCtx.createMediaElementSource(element);
-    let gainNode = this.props.audioCtx.createGain();
-    source.connect(gainNode);
-    gainNode.connect(this.props.audioCtx.destination);
   }
 
   onPlay() {

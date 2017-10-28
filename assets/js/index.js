@@ -10,9 +10,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: [],
-      audioCtx: new (window.AudioContext || window.webkitAudioContext),
-      audioSource: null
+      tracks: {
+        ideas: [],
+        inTheWorks: [],
+        finalizing: [],
+        finished: [],
+      },
+
     };
 
     this.apiQuery();
@@ -25,15 +29,30 @@ class App extends Component {
       url: window.location.href + 'api/tracks/'
     }).done( data => {
       console.log(data);
-      this.setState({ tracks: data });
+      let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
+      data.map( (track) => {
+        if (track.stage == 'Idea') {
+          d.ideas.push(track);
+        } else if (track.stage == 'In the Works') {
+          d.inTheWorks.push(track);
+        } else if (track.stage == 'Finalizing / Mixing') {
+          d.finalizing.push(track);
+        } else if (track.stage == 'Finished') {
+          d.finished.push(track);
+        }
+      });
+      this.setState({ tracks: d });
     });
   }
 
   render() {
     return (
-        <div>
-          <TrackList tracks={this.state.tracks} audioCtx={this.state.audioCtx}/>
-        </div>
+      <div>
+        <TrackList tracks={this.state.tracks.ideas} />
+        <TrackList tracks={this.state.tracks.inTheWorks} />
+        <TrackList tracks={this.state.tracks.finalizing} />
+        <TrackList tracks={this.state.tracks.finished} />
+      </div>
     )
   }
 }
