@@ -50,9 +50,11 @@ class Track extends Component {
             { button }
             <h6 className="track--title">"{ this.props.track.title }"</h6>
           </div>
-          <span className="badge badge--genre">{ this.props.track.genre }</span>
-          <span className="badge badge--key">{ this.props.track.key }</span>
-          <span className="badge badge--bpm">{ this.props.track.bpm }</span>
+          <div className="track--badges">
+            <span className="badge badge--genre">{ this.props.track.genre }</span>
+            <span className="badge badge--key">{ this.props.track.key }</span>
+            <span className="badge badge--bpm">{ this.props.track.bpm }</span>
+          </div>
         </div>
       </li>
     )

@@ -48,10 +48,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <TrackList tracks={this.state.tracks.ideas} />
-        <TrackList tracks={this.state.tracks.inTheWorks} />
-        <TrackList tracks={this.state.tracks.finalizing} />
-        <TrackList tracks={this.state.tracks.finished} />
+        <TrackList tracks={this.state.tracks.ideas} stage="Ideas" />
+        <TrackList tracks={this.state.tracks.inTheWorks} stage="In the Works" />
+        <TrackList tracks={this.state.tracks.finalizing} stage="Mixing" />
+        <TrackList tracks={this.state.tracks.finished} stage="Finished" />
       </div>
     )
   }
