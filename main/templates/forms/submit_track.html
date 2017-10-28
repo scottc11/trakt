@@ -4,8 +4,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="auth--modal">
-    <div class="auth--login">
+  <div class="form col-xs-12 col-sm-4">
       <h2>Submit New Track</h2>
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -16,6 +15,5 @@
             </button>
         {% endbuttons %}
       </form>
-    </div>
   </div>
 {% endblock %}
