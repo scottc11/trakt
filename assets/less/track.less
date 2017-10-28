@@ -14,7 +14,8 @@
   background: @mako;
   color: @white;
   &--title {
-    color: @blue-jeans;
+    display: inline-block;
+    color: @mikado;
   }
   &--key {
     border: 1px solid @flash-white;
@@ -47,11 +48,19 @@
     font-size: @info-font-size;
   }
   &--user {}
-  &__player { padding: 5px; margin: 5px; }
+  &__player {
+    margin-bottom: 10px;
+  }
   &--button {
+    display: inline-block;
+    box-sizing: border-box;
     margin: 0 5px;
+    border-radius: 25%;
+    padding: 10px;
+    color: @white;
+    background: @baby-blue;
     &:hover {
-      color: @mikado;
+      color: @onyx;
       cursor: pointer;
     }
   }

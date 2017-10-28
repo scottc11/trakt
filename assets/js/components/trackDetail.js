@@ -6,9 +6,7 @@ class Track extends Component {
     super(props);
     console.log(this.props.track);
     this.state = {
-      button: '',
-      audioSource: null,
-      gainNode: null
+      active: false
     };
     this.audioElement = null;
   }
@@ -32,30 +30,34 @@ class Track extends Component {
     let gainNode = this.props.audioCtx.createGain();
     source.connect(gainNode);
     gainNode.connect(this.props.audioCtx.destination);
-    this.setState({
-      audioSource: source,
-      gainNode: gainNode
-    });
   }
 
   onPlay() {
-    this.setState({ button: 'PLAYING' });
+    this.setState({ active: true });
     this.audioElement.play();
   }
 
   onPause() {
-    this.setState({ button: 'PAUSED' });
+    this.setState({ active: false });
     this.audioElement.pause();
   }
 
   render() {
+
+    let button = null;
+    if (this.state.active) {
+      button = <span className="track--button fa fa-pause" onClick={ this.onPause.bind(this) }></span>;
+    } else {
+      button = <span className="track--button fa fa-play" onClick={ this.onPlay.bind(this) }></span>;
+    }
+
+
     return (
       <li>
         <div className="track">
-          <h6 className="track--title">"{ this.props.track.title }"</h6>
           <div className="track__player">
-            <span className="track--button fa fa-play" onClick={ this.onPlay.bind(this) }></span>
-            <span className="track--button fa fa-pause" onClick={ this.onPause.bind(this) }></span>
+            { button }
+            <h6 className="track--title">"{ this.props.track.title }"</h6>
           </div>
           <span className="track--genre">{ this.props.track.genre }</span>
           <span className="track--key">{ this.props.track.key }</span>
