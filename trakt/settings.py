@@ -145,7 +145,10 @@ STATICFILES_DIRS = (
 
 PROJECT_ID = 'trakt-183713'
 CLOUD_STORAGE_BUCKET = 'trakt'
-MEDIA_PREFIX = "media/"
+if DEBUG:
+    MEDIA_PREFIX = "dev/users/"
+else:
+    MEDIA_PREFIX = "prod/users/"
 
 CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
     bucket_name=CLOUD_STORAGE_BUCKET

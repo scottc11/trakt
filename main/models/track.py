@@ -10,7 +10,8 @@ from trakt.storage import GoogleCloudStorage
 
 def format_storage_path(instance, filename):
     title_slug = instance.slug
-    return 'tracks/{0}/{1}'.format(title_slug, filename)
+    username = instance.submitter
+    return '{0}/tracks/{1}/{2}'.format(username, title_slug, filename)
 
 
 def get_superuser():
@@ -37,8 +38,7 @@ class Track(models.Model):
         return self.pub_date.strftime('%b %e %Y')
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Track, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
