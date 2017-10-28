@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from main.models.track import Track
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -10,3 +11,14 @@ class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'stage', 'audio_file')
+
+
+
+
+# not yet implemented
+class UserSerializer(serializers.ModelSerializer):
+    tracks = TrackSerializer(many=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'tracks')

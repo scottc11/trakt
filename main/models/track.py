@@ -19,10 +19,10 @@ def get_superuser():
 
 
 class Track(models.Model):
-    submitter = models.ForeignKey(User, on_delete=models.CASCADE, default=get_superuser )
+    submitter = models.ForeignKey(User, related_name='tracks', on_delete=models.CASCADE, default=get_superuser )
     pub_date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=250, blank=False)
-    slug = models.SlugField(default='', blank=True)
+    slug = models.SlugField(default='', blank=False)
     bpm = models.IntegerField(blank=True)
     date_recorded = models.DateField()
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, null=True)
