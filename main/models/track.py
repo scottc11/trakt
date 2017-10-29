@@ -5,6 +5,7 @@ from django.db import models
 from main.models.key import Key
 from main.models.genre import Genre
 from main.models.stage import Stage
+from main.models.project import Project
 from trakt.storage import GoogleCloudStorage
 
 
@@ -23,13 +24,13 @@ class Track(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=250, blank=False)
     slug = models.SlugField(default='', blank=False)
-    bpm = models.IntegerField(blank=True)
+    bpm = models.IntegerField(blank=False)
     date_recorded = models.DateField()
-    key = models.ForeignKey(Key, on_delete=models.SET_NULL, null=True)
-    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
-    stage = models.ForeignKey(Stage, on_delete=models.SET_NULL, null=True)
+    key = models.ForeignKey(Key, on_delete=models.SET_NULL, blank=False, null=True)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
+    stage = models.ForeignKey(Stage, on_delete=models.SET_NULL, blank=False, null=True)
     audio_file = models.FileField(upload_to=format_storage_path, storage=GoogleCloudStorage(), default='')
-
+    projects = models.ManyToManyField(Project, blank=True, related_name='tracks')
 
     def __str__(self):
         return self.title
