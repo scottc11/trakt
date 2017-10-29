@@ -20,9 +20,28 @@ body {
   }
   &--heading {
     font-family: @bungee-outline;
+    font-size: @xs-large;
+    & a {
+      color: @white;
+    }
+
   }
   &--info {
     text-align: right;
+    font-family: @bungee-hairline;
+    & span {
+      line-height: 100%;
+      vertical-align: middle;
+      margin: 0 5px;
+    }
   }
 
+}
+
+.button {
+  &__submit-track {
+    margin: 0 10px;
+    font-size: @submit;
+    line-height: 100%;
+  }
 }

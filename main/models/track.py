@@ -10,7 +10,8 @@ from trakt.storage import GoogleCloudStorage
 
 def format_storage_path(instance, filename):
     title_slug = instance.slug
-    return 'tracks/{0}/{1}'.format(title_slug, filename)
+    username = instance.submitter
+    return '{0}/tracks/{1}/{2}'.format(username, title_slug, filename)
 
 
 def get_superuser():
@@ -18,12 +19,12 @@ def get_superuser():
 
 
 class Track(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_superuser )
-    pub_date = models.DateTimeField()
+    submitter = models.ForeignKey(User, related_name='tracks', on_delete=models.CASCADE, default=get_superuser )
+    pub_date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=250, blank=False)
-    slug = models.SlugField(default='', blank=True)
+    slug = models.SlugField(default='', blank=False)
     bpm = models.IntegerField(blank=True)
-    date_recorded = models.DateTimeField()
+    date_recorded = models.DateField()
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     stage = models.ForeignKey(Stage, on_delete=models.SET_NULL, null=True)
@@ -37,8 +38,7 @@ class Track(models.Model):
         return self.pub_date.strftime('%b %e %Y')
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Track, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

@@ -1,11 +1,7 @@
 @import 'variables';
 
-@info-font-size: 10pt;
-@info-padding: 4px;
-@info-margin: 3px;
-
 .track {
-  min-width: 200px;
+  width: 100%;
   border: 1px solid @white;
   display: inline-block;
   margin-top: 10px;
@@ -13,45 +9,28 @@
   border-radius: 10px;
   background: @mako;
   color: @white;
+  box-shadow: @box-shadow;
   &--title {
-    color: @blue-jeans;
+    display: inline-block;
+    color: @mikado;
   }
-  &--key {
-    border: 1px solid @flash-white;
-    border-radius: 10px;
-    padding: @info-padding;
-    margin: @info-margin;
-    background: @coral;
-    color: @white;
-    font-family: @bungee-hairline;
-    font-size: @info-font-size;
-  }
-  &--genre {
-    border: 1px solid @flash-white;
-    border-radius: 10px;
-    padding: @info-padding;
-    margin: @info-margin;
-    background: @rain-forest;
-    color: @white;
-    font-family: @bungee-hairline;
-    font-size: @info-font-size;
-  }
-  &--bpm {
-    border: 1px solid @flash-white;
-    border-radius: 10px;
-    padding: @info-padding;
-    margin: @info-margin;
-    background: @onyx;
-    color: @white;
-    font-family: @bungee-hairline;
-    font-size: @info-font-size;
+  &--badges {
+    text-align: right;
   }
   &--user {}
-  &__player { padding: 5px; margin: 5px; }
+  &__player {
+    margin-bottom: 10px;
+  }
   &--button {
+    display: inline-block;
+    box-sizing: border-box;
     margin: 0 5px;
+    border-radius: 25%;
+    padding: 10px;
+    color: @white;
+    background: @baby-blue;
     &:hover {
-      color: @mikado;
+      color: @onyx;
       cursor: pointer;
     }
   }

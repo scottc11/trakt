@@ -5,46 +5,18 @@ import ReactDOM from 'react-dom';
 import Track from './components/trackDetail';
 import TrackList from './components/trackList';
 
-// const audioCtx = new (window.AudioContext || window.webkitAudioContext);
-// const url = 'https://storage.googleapis.com/trakt/media%2Ftracks%2Fjolly-good%2FBirth_of_Wasps_07-26-17.mp3'
-// let audioBuffer;
-// let request = new XMLHttpRequest();
-// request.open("GET", url, true);
-// // Obtain as buffer array
-// request.responseType = "arraybuffer";
-//
-// // Send request and save it
-// request.onload = function() {
-//     audioCtx.decodeAudioData(
-//         request.response,
-//         function(buffer) {
-//             audioBuffer = buffer;
-//         }
-//     );
-// };
-//
-// request.send();
-
-// Play sound
-// function play() {
-//     // Create AudioBufferSource and attach buffer
-//     var source = audioCtx.createBufferSource();
-//     source.buffer = audioBuffer;
-//     source.connect(audioCtx.destination);
-//
-//     // Play the source
-//     source.start(0);
-// }
-
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: [],
-      audioCtx: new (window.AudioContext || window.webkitAudioContext),
-      audioSource: null
+      tracks: {
+        ideas: [],
+        inTheWorks: [],
+        finalizing: [],
+        finished: [],
+      },
+
     };
 
     this.apiQuery();
@@ -54,18 +26,36 @@ class App extends Component {
     $.ajax({
       method: 'GET',
       dataType: 'json',
-      url: window.location.href.replace('home/', 'api/tracks/'),
+      url: window.location.href + 'api/tracks/'
     }).done( data => {
       console.log(data);
-      this.setState({ tracks: data });
+      let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
+      data.map( (track) => {
+        if (track.stage == 'Idea') {
+          d.ideas.push(track);
+        } else if (track.stage == 'In the Works') {
+          d.inTheWorks.push(track);
+        } else if (track.stage == 'Finalizing / Mixing') {
+          d.finalizing.push(track);
+        } else if (track.stage == 'Finished') {
+          d.finished.push(track);
+        }
+      });
+      this.setState({ tracks: d });
     });
   }
 
   render() {
+    //TODO: potentially call a 'organize tracks' method here, so that when state is changed
+    // (ie. user changes track status/stage) then you can update the arrays based on new states
+
     return (
-        <div>
-          <TrackList tracks={this.state.tracks} audioCtx={this.state.audioCtx}/>
-        </div>
+      <div>
+        <TrackList tracks={this.state.tracks.ideas} stage="Ideas" />
+        <TrackList tracks={this.state.tracks.inTheWorks} stage="In the Works" />
+        <TrackList tracks={this.state.tracks.finalizing} stage="Mixing" />
+        <TrackList tracks={this.state.tracks.finished} stage="Finished" />
+      </div>
     )
   }
 }

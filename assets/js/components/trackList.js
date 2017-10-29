@@ -3,7 +3,7 @@ import Track from './trackDetail';
 
 const TrackList = (props) => {
   const trackItems = props.tracks.map( (track) => {
-    return <Track key={track.id} track={track} audioCtx={props.audioCtx} />
+    return <Track key={track.id} track={track} />
   });
 
   // if tracks ajax still loading
@@ -17,7 +17,8 @@ const TrackList = (props) => {
   }
 
   return (
-    <ul className="track-list">
+    <ul className="track-list col-xs-3">
+      <li className="track-list--stage">{ props.stage }</li>
       {trackItems}
     </ul>
   )

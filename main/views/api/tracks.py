@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,8 +13,9 @@ class TrackList(APIView):
     """
     List all tracks, or create a new track.
     """
+
     def get(self, request, format=None):
-        tracks = Track.objects.all()
+        tracks = Track.objects.filter(submitter=request.user)
         serializer = TrackSerializer(tracks, many=True)
         return Response(serializer.data)
 
@@ -23,6 +25,7 @@ class TrackList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class TrackDetail(APIView):

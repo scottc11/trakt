@@ -1,6 +1,20 @@
 @import 'variables';
 
 .track-list {
+  padding: 20px;
+  height: 100%;
+  &:nth-child(odd) {
+    background: rgba(193, 193, 193, 0.1);
+  }
+
+  &--stage {
+    font-family: @bungee-hairline;
+    font-size: @large;
+    color: @white;
+    border-bottom: 1px solid @mako;
+    margin-bottom: 20px;
+  }
+
   &__spinner {
     color: @blue-jeans;
   }

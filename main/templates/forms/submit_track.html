@@ -4,18 +4,16 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="auth--modal">
-    <div class="auth--login">
-      <h2>Login</h2>
-      <form method="post">
+  <div class="form col-xs-12 col-sm-4">
+      <h2>Submit New Track</h2>
+      <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "star" %} Log In
+                submit
             </button>
         {% endbuttons %}
       </form>
-    </div>
   </div>
 {% endblock %}
