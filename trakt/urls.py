@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from main.views import home
 from main.views.api import tracks
-from main.views.api.users import UserList, UserDetail
+from main.views.api.users import UserList, UserDetail, CurrentUser
 
 
 urlpatterns = [
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^api/tracks/', tracks.TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', tracks.TrackDetail.as_view()),
     url(r'^api/users/$', UserList.as_view()),
+    url(r'^api/users/current/$', CurrentUser.as_view()),
     url(r'^api/users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
 
 ]
