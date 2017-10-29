@@ -18,7 +18,7 @@ const TrackList = (props) => {
 
   return (
     <ul className="track-list col-xs-3">
-      <li className="track-list--stage">{ props.stage }</li>
+      <li className="track-list--status">{ props.status }</li>
       {trackItems}
     </ul>
   )

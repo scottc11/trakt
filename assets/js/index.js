@@ -31,13 +31,13 @@ class App extends Component {
       console.log(data);
       let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
       data.projects[0].tracks.map( (track) => {
-        if (track.stage == 1) {
+        if (track.status == 1) {
           d.ideas.push(track);
-        } else if (track.stage == 2) {
+        } else if (track.status == 2) {
           d.inTheWorks.push(track);
-        } else if (track.stage == 3) {
+        } else if (track.status == 3) {
           d.finalizing.push(track);
-        } else if (track.stage == 4) {
+        } else if (track.status == 4) {
           d.finished.push(track);
         }
       });
@@ -47,14 +47,14 @@ class App extends Component {
 
   render() {
     //TODO: potentially call a 'organize tracks' method here, so that when state is changed
-    // (ie. user changes track status/stage) then you can update the arrays based on new states
+    // (ie. user changes track status) then you can update the arrays based on new states
 
     return (
       <div>
-        <TrackList tracks={this.state.tracks.ideas} stage="Ideas" />
-        <TrackList tracks={this.state.tracks.inTheWorks} stage="In the Works" />
-        <TrackList tracks={this.state.tracks.finalizing} stage="Mixing" />
-        <TrackList tracks={this.state.tracks.finished} stage="Finished" />
+        <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
+        <TrackList tracks={this.state.tracks.inTheWorks} status="In the Works" />
+        <TrackList tracks={this.state.tracks.finalizing} status="Mixing" />
+        <TrackList tracks={this.state.tracks.finished} status="Finished" />
       </div>
     )
   }
