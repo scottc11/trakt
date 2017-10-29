@@ -46,6 +46,9 @@ class App extends Component {
   }
 
   render() {
+    //TODO: potentially call a 'organize tracks' method here, so that when state is changed
+    // (ie. user changes track status/stage) then you can update the arrays based on new states
+
     return (
       <div>
         <TrackList tracks={this.state.tracks.ideas} stage="Ideas" />
