@@ -26,18 +26,18 @@ class App extends Component {
     $.ajax({
       method: 'GET',
       dataType: 'json',
-      url: window.location.href + 'api/tracks/'
+      url: window.location.href + 'api/users/current/'
     }).done( data => {
       console.log(data);
       let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
-      data.map( (track) => {
-        if (track.stage == 'Idea') {
+      data.projects[0].tracks.map( (track) => {
+        if (track.stage == 1) {
           d.ideas.push(track);
-        } else if (track.stage == 'In the Works') {
+        } else if (track.stage == 2) {
           d.inTheWorks.push(track);
-        } else if (track.stage == 'Finalizing / Mixing') {
+        } else if (track.stage == 3) {
           d.finalizing.push(track);
-        } else if (track.stage == 'Finished') {
+        } else if (track.stage == 4) {
           d.finished.push(track);
         }
       });

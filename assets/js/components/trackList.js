@@ -7,7 +7,7 @@ const TrackList = (props) => {
   });
 
   // if tracks ajax still loading
-  if (props.tracks.length === 0) {
+  if (!props.tracks.length) {
     return (
       <div className="track-list__spinner">
         <div className="spinner--track-list">

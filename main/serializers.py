@@ -7,7 +7,7 @@ class TrackSerializer(serializers.ModelSerializer):
     submitter = serializers.StringRelatedField(many=False)
     genre = serializers.StringRelatedField(many=False)
     key = serializers.StringRelatedField(many=False)
-    stage = serializers.StringRelatedField(many=False)
+    stage = serializers.SlugRelatedField(many=False, read_only=True, slug_field='position')
 
     class Meta:
         model = Track
