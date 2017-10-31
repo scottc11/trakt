@@ -5,5 +5,4 @@ __pycache__/
 *.py[cod]
 *.pyc
 cloud_sql_proxy
-app.yaml
 static

@@ -15,19 +15,13 @@ import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname( os.path.dirname( os.path.dirname(os.path.abspath(__file__) )))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 's9ptju-5y5^v2pyhm#t*r8jp=6#%w%@q*pu^2o(&zhaz8=!gp^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -133,30 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
     #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'static'),
-)
-
-
-# GOOGLE CLOUD
-# ----------------------------------------------------------------------------
-
-PROJECT_ID = 'trakt-183713'
-CLOUD_STORAGE_BUCKET = 'trakt'
-if DEBUG:
-    MEDIA_PREFIX = "dev/users/"
-else:
-    MEDIA_PREFIX = "prod/users/"
-
-CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
-    bucket_name=CLOUD_STORAGE_BUCKET
-)
-
-MEDIA_URL = "{gcs_root}{prefix}/".format(
-    gcs_root=CLOUD_STORAGE_ROOT,
-    prefix=MEDIA_PREFIX,
+    # os.path.join(BASE_DIR, 'static'),
 )
 
 DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
