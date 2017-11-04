@@ -127,11 +127,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# for some reason, collect_static management command only works when
+# STATICFILES_DIRS is commented out and STATIC_ROOT is active
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
-    #This lets Django's collectstatic store our bundles
-    # os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
+
 
 DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'

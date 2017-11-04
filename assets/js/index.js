@@ -4,16 +4,19 @@ import ReactDOM from 'react-dom';
 
 import Track from './components/trackDetail';
 import TrackList from './components/trackList';
-
+import Header from './components/header';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: { id: '', username: '' },
+      projects: [],
+      currentProject: {},
       tracks: {
+        snippets: [],
         ideas: [],
-        inTheWorks: [],
-        finalizing: [],
+        mixing: [],
         finished: [],
       },
 
@@ -29,19 +32,26 @@ class App extends Component {
       url: window.location.href + 'api/users/current/'
     }).done( data => {
       console.log(data);
-      let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
+      let d = { snippets: [], ideas: [], mixing: [], finished: [] };
       data.projects[0].tracks.map( (track) => {
         if (track.status == 1) {
-          d.ideas.push(track);
+          d.snippets.push(track);
         } else if (track.status == 2) {
-          d.inTheWorks.push(track);
+          d.ideas.push(track);
         } else if (track.status == 3) {
-          d.finalizing.push(track);
+          d.mixing.push(track);
         } else if (track.status == 4) {
           d.finished.push(track);
         }
       });
-      this.setState({ tracks: d });
+      this.setState(
+        {
+          user: {id: data.id, username: data.username },
+          projects: data.projects,
+          currentProject: data.projects[0],
+          tracks: d
+        }
+      );
     });
   }
 
@@ -51,10 +61,19 @@ class App extends Component {
 
     return (
       <div>
-        <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
-        <TrackList tracks={this.state.tracks.inTheWorks} status="In the Works" />
-        <TrackList tracks={this.state.tracks.finalizing} status="Mixing" />
-        <TrackList tracks={this.state.tracks.finished} status="Finished" />
+        <div>
+          <Header
+            user={ this.state.user }
+            projects={ this.state.projects }
+            currentProject={ this.state.currentProject }
+          />
+        </div>
+        <div>
+          <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
+          <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
+          <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
+          <TrackList tracks={this.state.tracks.finished} status="Finished" />
+        </div>
       </div>
     )
   }

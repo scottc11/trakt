@@ -48,7 +48,11 @@ class Track extends Component {
         <div className="track">
           <div className="track__player">
             { button }
-            <h6 className="track--title">"{ this.props.track.title }"</h6>
+            <div className="track__info">
+              <h6 className="track--title">"{ this.props.track.title }"</h6>
+              <h6 className="track--submitter"> - { this.props.track.submitter }</h6>
+              <h6 className="track--date"> - { this.props.track.date_recorded }</h6>
+            </div>
           </div>
           <div className="track--badges">
             <span className="badge badge--genre">{ this.props.track.genre }</span>
