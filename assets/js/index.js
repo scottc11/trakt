@@ -1,10 +1,17 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
+import rootReducer from './reducers/reducers';
 import Track from './components/trackDetail';
 import TrackList from './components/trackList';
+import ProjectList from './containers/projectList';
+import ProjectDetail from './containers/projectDetail';
 import Header from './components/header';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -60,21 +67,23 @@ class App extends Component {
     // (ie. user changes track status) then you can update the arrays based on new states
 
     return (
-      <div>
+      <Provider store={createStore(rootReducer)}>
         <div>
-          <Header
-            user={ this.state.user }
-            projects={ this.state.projects }
-            currentProject={ this.state.currentProject }
-          />
+          <div>
+            <Header
+              user={ this.state.user }
+              projects={ this.state.projects }
+              currentProject={ this.state.currentProject }
+            />
+          </div>
+          <div>
+            <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
+            <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
+            <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
+            <TrackList tracks={this.state.tracks.finished} status="Finished" />
+          </div>
         </div>
-        <div>
-          <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
-          <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
-          <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
-          <TrackList tracks={this.state.tracks.finished} status="Finished" />
-        </div>
-      </div>
+      </Provider>
     )
   }
 }

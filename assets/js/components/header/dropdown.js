@@ -17,7 +17,7 @@ class Dropdown extends Component {
   }
 
   selectItem() {
-    
+
   }
 
   render() {
@@ -43,8 +43,7 @@ class Dropdown extends Component {
 }
 
 const DropdownItemList = (props) => {
-  const items = props.items;
-  const listItems = items.map( (item) => {
+  const listItems = props.items.map( (item) => {
     <li onClick={this.props.select} key={item.id}>{item.title}</li>
   });
   return (
