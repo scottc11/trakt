@@ -7,12 +7,17 @@ class Dropdown extends Component {
       menuActive: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.selectItem = this.selectItem.bind(this);
   }
 
   toggleMenu() {
     this.setState({
       menuActive: !this.state.menuActive
     })
+  }
+
+  selectItem() {
+    
   }
 
   render() {
@@ -39,7 +44,9 @@ class Dropdown extends Component {
 
 const DropdownItemList = (props) => {
   const items = props.items;
-  const listItems = items.map( (item) => <li key={item.id}>{item.title}</li> );
+  const listItems = items.map( (item) => {
+    <li onClick={this.props.select} key={item.id}>{item.title}</li>
+  });
   return (
     <ul>
       {listItems}
