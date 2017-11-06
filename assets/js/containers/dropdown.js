@@ -10,7 +10,7 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       menuActive: false,
-      selected: ''
+      selected: '------------------------'
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.onSelectItem = this.onSelectItem.bind(this);
@@ -23,24 +23,25 @@ class Dropdown extends Component {
   }
 
   onSelectItem(project) {
-    // go and fetch data
     this.props.fetchProject(project.id);
-    this.setState({ selected: project.title });
+    this.setState({
+      menuActive: false,
+      selected: project.title
+    });
   }
 
   render() {
     let menu;
-    let toggleClass;
     if (this.state.menuActive) {
       menu = <DropdownItemList select={this.onSelectItem} itemList={this.props.items} />
     } else {
       menu = "";
     }
     return (
-      <div className="dropdown">
-        <div className="dropdown--selected">
-          <span>{this.props.selected.title}</span>
-          <span className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></span>
+      <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
+        <div>
+          <div className="dropdown--selected">{this.state.selected}</div>
+          <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
         </div>
 
         {menu}

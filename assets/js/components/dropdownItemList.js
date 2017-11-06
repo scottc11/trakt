@@ -13,7 +13,7 @@ const DropdownItemList = (props) => {
   });
 
   return (
-    <ul>
+    <ul className="dropdown--list">
       {listItems}
     </ul>
   );
