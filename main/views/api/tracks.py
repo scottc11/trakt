@@ -36,6 +36,7 @@ class TrackDetail(APIView):
     def get_object(self, pk):
         try:
             track = Track.objects.get(pk=pk)
+            return track
         except Track.DoesNotExist:
             return Http404
 

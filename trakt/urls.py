@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from main.views import home
 from main.views.api import tracks
 from main.views.api.users import UserList, UserDetail, CurrentUser
-
+from main.views.api.projects import ProjectList, ProjectDetail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^api/users/$', UserList.as_view()),
     url(r'^api/users/current/$', CurrentUser.as_view()),
     url(r'^api/users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
-
+    url(r'^api/projects/$', ProjectList.as_view()),
+    url(r'^api/projects/(?P<pk>[0-9]+)/$', ProjectDetail.as_view()),
 ]

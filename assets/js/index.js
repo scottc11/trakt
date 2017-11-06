@@ -2,7 +2,8 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
 import rootReducer from './reducers/reducers';
 import Track from './components/trackDetail';
@@ -11,6 +12,8 @@ import ProjectList from './containers/projectList';
 import ProjectDetail from './containers/projectDetail';
 import Header from './components/header';
 
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 
 class App extends Component {

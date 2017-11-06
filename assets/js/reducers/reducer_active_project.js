@@ -1,11 +1,12 @@
+import { FETCH_PROJECT } from '../actions/actions';
+
 // State is not app state, only state this reducer is reponsible for
 // it is different than projects reducer because this state changes based
 // on Redux Actions.
 // action.payload will return a project object { title, id, tracks, ect. }
 export default function(state = null, action) {
-  switch(action.type) {
-  case 'PROJECT_SELECTED':
-    return action.payload;
+  switch (action.type) {
+    case FETCH_PROJECT:
   }
 
   return state;
