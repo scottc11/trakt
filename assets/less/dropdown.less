@@ -33,7 +33,7 @@
       background: @box-shadow-light;
     }
   }
-  &--list {
+  &__list {
     position: absolute;
     background: @light-grey;
     opacity: 1;
@@ -50,7 +50,15 @@
       &:hover {
         cursor: pointer;
         background: @box-shadow-medium;
-        color: @action-color;
+        color: @white;
+      }
+    }
+    &--add {
+      background: @box-shadow-light;
+      text-align: center;
+      &:hover {
+        border-bottom-right-radius: @dropdown-radius;
+        border-bottom-left-radius: @dropdown-radius;
       }
     }
   }

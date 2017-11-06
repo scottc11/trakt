@@ -21,9 +21,9 @@ class Header extends Component {
             />
           </div>
           <div className="header--info col-xs-4">
-            <a href=""><span className="button__submit-track fa fa-plus-square"></span></a>
+            <a href={ window.location.href + 'submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
             <span className="">{ this.props.user.username }</span>
-            <a href={ window.location + 'logout/' }><span className="">Logout</span></a>
+            <a href={ window.location + 'logout/' }><span>Logout</span></a>
           </div>
         </div>
       </div>
