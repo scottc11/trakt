@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Dropdown from './header/dropdown';
+import Dropdown from '../containers/dropdown';
 
 class Header extends Component {
   constructor(props) {

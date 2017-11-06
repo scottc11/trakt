@@ -29,7 +29,6 @@ class Project extends Component {
 
 
 function mapStateToProps(state) {
-  console.log(state.activeProject);
   return { activeProject: state.activeProject };
 }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchProject } from '../../actions/actions';
+import { fetchProject } from '../actions/actions';
+import DropdownItemList from '../components/DropdownItemList'
 
 
 class Dropdown extends Component {
@@ -47,25 +48,6 @@ class Dropdown extends Component {
       </div>
     )
   }
-}
-
-const DropdownItemList = (props) => {
-
-  const listItems = props.itemList.map( (item) => {
-    return (
-      <li
-        onClick={() => props.select(item)}
-        key={item.id} >
-        {item.title}
-      </li>
-    )
-  });
-
-  return (
-    <ul>
-      {listItems}
-    </ul>
-  );
 }
 
 
