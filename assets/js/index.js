@@ -3,17 +3,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+import promiseMiddleware from 'redux-promise';
 
 import rootReducer from './reducers/reducers';
-import Track from './components/trackDetail';
-import TrackList from './components/trackList';
 import ProjectList from './containers/projectList';
 import ProjectDetail from './containers/projectDetail';
 import Header from './components/header';
+import Project from './containers/project';
 
-
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 
 class App extends Component {
@@ -66,11 +64,8 @@ class App extends Component {
   }
 
   render() {
-    //TODO: potentially call a 'organize tracks' method here, so that when state is changed
-    // (ie. user changes track status) then you can update the arrays based on new states
-
     return (
-      <Provider store={createStore(rootReducer)}>
+      <Provider store={createStoreWithMiddleware(rootReducer)}>
         <div>
           <div>
             <Header
@@ -80,10 +75,7 @@ class App extends Component {
             />
           </div>
           <div>
-            <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
-            <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
-            <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
-            <TrackList tracks={this.state.tracks.finished} status="Finished" />
+            <Project />
           </div>
         </div>
       </Provider>
@@ -92,3 +84,8 @@ class App extends Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('container'));
+
+// <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
+// <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
+// <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
+// <TrackList tracks={this.state.tracks.finished} status="Finished" />
