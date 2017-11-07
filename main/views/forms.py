@@ -16,7 +16,9 @@ def submit_track(request):
             track = form.save(commit=False)
             track.submitter = request.user
             track.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('home'))
+
 
     # if a GET or invalid form --> create a blank form
     else:
