@@ -10,6 +10,22 @@
     -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
     animation: sk-scaleout 1.0s infinite ease-in-out;
   }
+  &--full-screen {
+    background: @sunset-orange;
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  	z-index: @z-index-top;
+  	pointer-events: none;
+    & div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
 }
 
 @-webkit-keyframes sk-scaleout {

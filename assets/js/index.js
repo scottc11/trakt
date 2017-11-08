@@ -1,63 +1,64 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Provider} from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
 
-import Track from './components/trackDetail';
-import TrackList from './components/trackList';
+import rootReducer from './reducers/reducers';
+import Header from './containers/header';
+import Project from './containers/project';
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: {
-        ideas: [],
-        inTheWorks: [],
-        finalizing: [],
-        finished: [],
-      },
-
+      user: { id: '', username: '' },
+      projects: [],
+      currentProject: {}
     };
 
-    this.apiQuery();
+    // this.apiQuery();
   }
 
   apiQuery() {
     $.ajax({
       method: 'GET',
       dataType: 'json',
-      url: window.location.href + 'api/tracks/'
+      url: window.location.href + 'api/users/current/'
     }).done( data => {
-      console.log(data);
-      let d = { ideas: [], inTheWorks: [], finalizing: [], finished: [] };
-      data.map( (track) => {
-        if (track.stage == 'Idea') {
-          d.ideas.push(track);
-        } else if (track.stage == 'In the Works') {
-          d.inTheWorks.push(track);
-        } else if (track.stage == 'Finalizing / Mixing') {
-          d.finalizing.push(track);
-        } else if (track.stage == 'Finished') {
-          d.finished.push(track);
+      this.setState(
+        {
+          user: {id: data.id, username: data.username },
+          projects: data.projects,
+          currentProject: data.projects[0]
         }
-      });
-      this.setState({ tracks: d });
+      );
     });
   }
 
   render() {
-    //TODO: potentially call a 'organize tracks' method here, so that when state is changed
-    // (ie. user changes track status/stage) then you can update the arrays based on new states
-
     return (
-      <div>
-        <TrackList tracks={this.state.tracks.ideas} stage="Ideas" />
-        <TrackList tracks={this.state.tracks.inTheWorks} stage="In the Works" />
-        <TrackList tracks={this.state.tracks.finalizing} stage="Mixing" />
-        <TrackList tracks={this.state.tracks.finished} stage="Finished" />
-      </div>
+      <Provider store={createStoreWithMiddleware(rootReducer)}>
+        <div>
+          <div>
+            <Header />
+          </div>
+          <div>
+            <Project />
+          </div>
+        </div>
+      </Provider>
     )
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('container'));
+
+// <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
+// <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
+// <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
+// <TrackList tracks={this.state.tracks.finished} status="Finished" />

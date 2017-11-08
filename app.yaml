@@ -1,0 +1,23 @@
+# [START runtime]
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT trakt.wsgi
+
+beta_settings:
+    cloud_sql_instances: trakt-183713:us-central1:trakt-prod-db-1
+
+runtime_config:
+  python_version: 3
+
+# these are enviroment variables
+# they can be access via 'os.environ'
+env_variables:
+  ON_PRODUCTION: true
+  CLOUD_STORAGE_BUCKET: trakt
+  PROJECT_ID: trakt-183713
+  DB_NAME: traktdb
+  DB_USER: scottc11
+  DB_PASS: y785HUGLPO^*kslnsai%mcx12986hfpapapa90
+  DJANGO_SECRET_KEY: s9ptju-5y5^v2pyhm#t*r8jp=6#%w%@q*pu^2o(&zhaz8=!gp^
+
+# [END runtime]
