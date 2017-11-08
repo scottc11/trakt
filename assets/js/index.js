@@ -1,12 +1,12 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider} from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 
 import rootReducer from './reducers/reducers';
-import Header from './components/header';
+import Header from './containers/header';
 import Project from './containers/project';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
@@ -21,7 +21,7 @@ class App extends Component {
       currentProject: {}
     };
 
-    this.apiQuery();
+    // this.apiQuery();
   }
 
   apiQuery() {
@@ -45,11 +45,7 @@ class App extends Component {
       <Provider store={createStoreWithMiddleware(rootReducer)}>
         <div>
           <div>
-            <Header
-              user={ this.state.user }
-              projects={ this.state.projects }
-              currentProject={ this.state.currentProject }
-            />
+            <Header />
           </div>
           <div>
             <Project />

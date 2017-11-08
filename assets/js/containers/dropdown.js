@@ -10,10 +10,13 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       menuActive: false,
-      selected: '------------------------'
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.onSelectItem = this.onSelectItem.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchProject(this.props.selected.id);
   }
 
   toggleMenu() {
@@ -26,11 +29,11 @@ class Dropdown extends Component {
     this.props.fetchProject(project.id);
     this.setState({
       menuActive: false,
-      selected: project.title
     });
   }
 
   render() {
+
     let menu;
     if (this.state.menuActive) {
       menu = <DropdownItemList select={this.onSelectItem} itemList={this.props.items} />
@@ -40,7 +43,7 @@ class Dropdown extends Component {
     return (
       <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
         <div>
-          <div className="dropdown--selected">{this.state.selected}</div>
+          <div className="dropdown--selected">{this.props.activeProject.title}</div>
           <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
         </div>
 
@@ -51,10 +54,13 @@ class Dropdown extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { activeProject: state.activeProject };
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchProject }, dispatch);
 }
 
 
-export default connect(null, mapDispatchToProps)(Dropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);

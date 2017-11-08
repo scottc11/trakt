@@ -1,23 +1,26 @@
 import axios from 'axios';
 
+export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
+export const FETCH_PROJECT = 'FETCH_PROJECT';
 
-export function selectProject(project) {
-  // selectProject is an actionCreator, it needs to return an action,
-  // which is an object with a type property
+// Get initial user data to start up application
+export function fetchCurrentUser() {
+  const url = window.location.href + 'api/users/current/';
+  const request = axios.get(url);
+
   return {
-    type: 'PROJECT_SELECTED',
-    payload: project
-  };
+    type: FETCH_CURRENT_USER,
+    payload: request
+  }
 }
 
 
-export const FETCH_PROJECT = 'FETCH_PROJECT';
-
+// get the currently selected project data
 export function fetchProject(proj_id) {
   const url = window.location.href + `api/projects/${proj_id}`;
   const request = axios.get(url);
   // promise middleware stops this action until the promise finishes
-  // once request finishes, displatches a new action of same type but
+  // once request finishes, dispatches a new action of same type but
   // with a payload of the promise response
   return {
     type: FETCH_PROJECT,

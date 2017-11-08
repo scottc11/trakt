@@ -24,9 +24,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 # not yet implemented
 class UserSerializer(serializers.ModelSerializer):
-    tracks = TrackSerializer(many=True)
     projects = ProjectSerializer(many=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'tracks', 'projects')
+        fields = ('id', 'username', 'projects')
