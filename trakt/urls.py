@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^track/submit/$', forms.submit_track, name='submit_track'),
     url(r'^track/edit/(?P<pk>[0-9]+)/$', forms.edit_track, name='edit_track'),
     url(r'^project/new/$', forms.new_project, name='new_project'),
+    url(r'^genre/new/$', forms.new_genre, name='new_genre'),
+    url(r'^key/new/$', forms.new_key, name='new_key'),
 
     url(r'^api/tracks/', tracks.TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', tracks.TrackDetail.as_view()),

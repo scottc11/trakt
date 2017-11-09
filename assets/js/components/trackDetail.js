@@ -76,9 +76,12 @@ class TrackDetail extends Component {
 
 
           { this.state.detailsActive == true &&
-            <div className="Track__details">
-              <a href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
+            <div className="track__details">
               <TrackDetails genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
+              <div className="track__details--options">
+                <a href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
+                <a href={ this.props.track.audio_file } ><span className="fa fa-cloud-download"></span></a>
+              </div>
             </div>
           }
 

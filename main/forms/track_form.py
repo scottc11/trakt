@@ -7,7 +7,7 @@ from main.models.track import Track
 class TrackSubmition(ModelForm):
     class Meta:
         model = Track
-        exclude = ['submitter', 'pub_date', 'slug']
+        exclude = ['submitter', 'slug']
         help_texts = {
             'date_recorded': _('ex. 2006-10-25'),
         }

@@ -2,4 +2,47 @@
 
 .form {
   color: @white;
+  background: @mako;
+  border-radius: 20px;
+  margin-top: 40px;
+  padding: 40px;
+  & h2 {
+    font-family: @bungee-hairline;
+    margin-bottom: 20px;
+  }
+  & label {
+    font-family: @roboto-mono;
+    font-size: @small;
+    font-weight: 300;
+    color: @light-grey;
+  }
+  &__btn {
+    &--delete {
+      background: @light-red;
+      border: none;
+    }
+    &--back {
+      margin-top: 40px;
+    }
+  }
+  &__other {
+    text-align: center;
+    & a {
+      color: @onyx;
+      display: block;
+      margin: 10px 0;
+      padding: 5px;
+      font-family: @bungee-hairline;
+      font-size: @medium;
+      font-weight: 300;
+      border-radius: 20px;
+      background: @mikado;
+      &:hover {
+        color: @white;
+      }
+      & span {
+        margin: 0 5px;
+      }
+    }
+  }
 }

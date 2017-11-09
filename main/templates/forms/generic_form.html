@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <div class="form__btn--back col-xs-12 col-sm-4 col-centered">
+    <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
+  </div>
+  <div class="form col-xs-12 col-sm-4 col-centered">
+      <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form exclude=exclude %}
+        {% buttons %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">
+                Submit
+            </button>
+        {% endbuttons %}
+      </form>
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+  </div>
+{% endblock %}
