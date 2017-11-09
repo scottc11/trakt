@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { fetchCurrentUser } from '../actions/actions';
 
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
-import Dropdown from '../containers/dropdown';
+import ProjectList from '../containers/projectList';
 
 class Header extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Header extends Component {
             <a href=""><span>YEYE</span></a>
           </div>
           <div className="col-xs-6">
-            <Dropdown
+            <ProjectList
               items={this.props.currentUser.projects}
               selected={this.props.currentUser.projects[0]}
             />

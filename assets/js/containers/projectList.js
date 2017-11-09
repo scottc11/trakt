@@ -5,7 +5,7 @@ import { fetchProject } from '../actions/actions';
 import DropdownItemList from '../components/DropdownItemList'
 
 
-class Dropdown extends Component {
+class ProjectList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,4 +63,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);
