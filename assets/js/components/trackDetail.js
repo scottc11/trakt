@@ -1,67 +1,88 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateMediaPlayer } from '../actions/actions';
+import TrackDetails from './trackInfo';
 
 class TrackDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false
+      active: false,
+      detailsActive: false
     };
-    this.audioElement = null;
+    this.onToggleDetails = this.onToggleDetails.bind(this);
   }
 
-  componentDidMount() {
-    this.createAudioSource(this.props.track.audio_file);
-  }
-
-  createAudioSource(url) {
-    let element = new Audio(url);
-    element.crossOrigin = "anonymous";
-    element.controls = false;
-    element.loop = false;
-    element.autoplay = false;
-    this.audioElement = element;
+  onToggleDetails() {
+    this.setState({
+      detailsActive: !this.state.detailsActive
+    })
   }
 
   onPlay() {
     this.setState({ active: true });
-    this.audioElement.play();
+    this.props.updateMediaPlayer(this.props.track.audio_file, true);
   }
 
   onPause() {
     this.setState({ active: false });
-    this.audioElement.pause();
+    this.props.updateMediaPlayer(this.props.track.audio_file, false);
   }
 
   render() {
 
     let button = null;
     if (this.state.active) {
-      button = <span className="track--button fa fa-pause" onClick={ this.onPause.bind(this) }></span>;
+      button = <div className="fa fa-pause" onClick={ this.onPause.bind(this) }></div>;
     } else {
-      button = <span className="track--button fa fa-play" onClick={ this.onPlay.bind(this) }></span>;
+      button = <div className="fa fa-play" onClick={ this.onPlay.bind(this) }></div>;
     }
-
 
     return (
       <li>
         <div className="track">
-          <div className="track__player">
-            { button }
-            <div className="track__info">
-              <h6 className="track--title">"{ this.props.track.title }"</h6>
-              <h6 className="track--submitter">{ this.props.track.submitter }</h6>
-              <h6 className="track--date">{ this.props.track.date_recorded }</h6>
+
+          <div>
+
+            <div className="track--button">
+              { button }
             </div>
+
+            <div className="track__info">
+              <h6 className="track__info--title">{ this.props.track.title }</h6>
+              <h6 className="track__info--submitter">{ this.props.track.submitter }</h6>
+              <span className="track__info--median"> &middot; </span>
+              <h6 className="track__info--date">{ this.props.track.date_recorded }</h6>
+            </div>
+
+            <span
+              className={ this.state.detailsActive ? 'track__details--toggle fa fa-caret-up' : 'track__details--toggle fa fa-caret-down' }
+              onClick={ () => this.onToggleDetails() } >
+            </span>
+
           </div>
-          <div className="track--badges">
-            <span className="badge badge--genre">{ this.props.track.genre }</span>
-            <span className="badge badge--key">{ this.props.track.key }</span>
-            <span className="badge badge--bpm">{ this.props.track.bpm }</span>
-          </div>
+
+
+          { this.state.detailsActive == true &&
+            <div className="track__details">
+              <TrackDetails genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
+              <div className="track__details--options">
+                <a href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
+                <a href={ this.props.track.audio_file } ><span className="fa fa-cloud-download"></span></a>
+              </div>
+            </div>
+          }
+
         </div>
       </li>
     )
   }
 };
 
-export default TrackDetail;
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateMediaPlayer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TrackDetail);

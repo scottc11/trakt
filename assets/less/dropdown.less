@@ -1,6 +1,7 @@
 @import 'variables';
 
 @dropdown-radius: 5px;
+@line-height: 40px;
 
 .dropdown {
   background: @light-grey;
@@ -24,13 +25,21 @@
     float: right;
     padding-left: 12px;
     padding-right: 12px;
-    height: 40px;
-    line-height: 40px;
+    height: @line-height;
+    line-height: @line-height;
     vertical-align: middle;
     &:hover {
       color: @white;
       cursor: pointer;
       background: @box-shadow-light;
+    }
+  }
+  &__btn {
+    &--edit {
+      font-size: @medium;
+      line-height: @line-height;
+      vertical-align: middle;
+      margin-left: 14px;
     }
   }
   &__list {

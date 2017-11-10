@@ -4,14 +4,12 @@
 
 
 {% block styles %}
-<link rel="stylesheet" href={% static "css/home.css" %}>
-<link rel="stylesheet" href={% static "css/track.css" %}>
-<link rel="stylesheet" href={% static "css/trackList.css" %}>
+
 {% endblock %}
 
 {% block content %}
 
-<section id="home" class="home col-xs-12">
+<section id="home" class="home">
 
   <div id="container">
     {% render_bundle 'main' %}

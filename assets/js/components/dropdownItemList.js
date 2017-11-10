@@ -15,7 +15,7 @@ const DropdownItemList = (props) => {
   return (
     <ul className="dropdown__list">
       {listItems}
-      <a href={ window.location.href + 'newproject/' }><li className="dropdown__list--add">New Project</li></a>
+      <a href={ window.location.href + 'project/new/' }><li className="dropdown__list--add">New Project</li></a>
     </ul>
   );
 }

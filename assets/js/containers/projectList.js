@@ -5,7 +5,7 @@ import { fetchProject } from '../actions/actions';
 import DropdownItemList from '../components/DropdownItemList'
 
 
-class Dropdown extends Component {
+class ProjectList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,14 +41,17 @@ class Dropdown extends Component {
       menu = "";
     }
     return (
-      <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
-        <div>
-          <div className="dropdown--selected">{this.props.activeProject.title}</div>
-          <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
+      <div>
+        <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
+          <div>
+            <div className="dropdown--selected">{this.props.activeProject.title}</div>
+            <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
+          </div>
+          {menu}
         </div>
-
-        {menu}
-
+        <a href={window.location.href + `project/edit/${this.props.activeProject.id}`}>
+          <span className="dropdown__btn--edit fa fa-pencil-square-o"></span>
+        </a>
       </div>
     )
   }
@@ -63,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);

@@ -1,52 +1,100 @@
 @import 'variables';
 
+@base-track-height: 60px;
+@track-radius: 10px;
 .track {
   width: 100%;
   border: 1px solid @white;
   display: inline-block;
   margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  border-radius: @track-radius;
   background: @mako;
   color: @white;
   box-shadow: @box-shadow;
-  &--title {
-    display: inline-block;
-    color: @mikado;
-  }
   &--badges {
     text-align: right;
   }
   &__info {
     display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: hidden;
+    font-size: @xs-small;
     & h6 {
-      font-family: @roboto-mono;
-      font-size: @xs-small;
-      margin: 1px;
+      margin: 0;
+    }
+    &--submitter {
+      display: inline-block;
+      color: @light-grey;
+      font-family: @console;
+      font-weight: @font-weight-lite;
+    }
+    &--date {
+      display: inline-block;
+      color: @light-grey;
+      font-family: @console;
+      font-weight: @font-weight-lite;
+    }
+    &--title {
+      font-family: @bungee-hairline;
+      font-size: @small;
+      color: @mikado;
+    }
+    &--median {
     }
   }
-  &--submitter {
-    display: inline-block;
-    color: @flash-white;
-  }
-  &--date {
-    display: inline-block;
-    color: @turquoise;
-  }
-  &__player {
-    margin-bottom: 10px;
+  &__details {
+    background: @bg-white-opac;
+    padding: 10px;
+    box-shadow: @box-shadow-inner;
+    border-top: 1px solid @light-grey;
+    border-bottom-right-radius: @track-radius;
+    border-bottom-left-radius: @track-radius;
+    &--options {
+      text-align: right;
+      margin-top: 5px;
+      font-size: @medium;
+      & span {
+        margin: 0 5px;
+      }
+    }
+    &--toggle {
+      background: @box-shadow-light;
+      box-sizing: border-box;
+      display: inline-block;
+      border-left: 1px solid #A8ADBB;
+      float: right;
+      padding-left: 12px;
+      padding-right: 12px;
+      height: @base-track-height;
+      line-height: @base-track-height;
+      vertical-align: middle;
+      border-bottom-right-radius: @track-radius;
+      border-top-right-radius: @track-radius;
+      &:hover {
+        cursor: pointer;
+        color: @action-color;
+      }
+    }
   }
   &--button {
-    display: inline-block;
+    float: left;
     box-sizing: border-box;
-    margin: 0 5px;
-    border-radius: 25%;
-    padding: 10px;
-    color: @white;
-    background: @baby-blue;
-    &:hover {
-      color: @onyx;
-      cursor: pointer;
+    margin: 0 10px;
+    height: @base-track-height;
+    line-height: @base-track-height;
+    & div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 25%;
+      padding: 12px;
+      color: @white;
+      background: @baby-blue;
+      &:hover {
+        color: @onyx;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -8,6 +8,7 @@ import promiseMiddleware from 'redux-promise';
 import rootReducer from './reducers/reducers';
 import Header from './containers/header';
 import Project from './containers/project';
+import MediaPlayer from './containers/mediaPlayer'
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
@@ -50,6 +51,7 @@ class App extends Component {
           <div>
             <Project />
           </div>
+          <MediaPlayer />
         </div>
       </Provider>
     )
@@ -57,8 +59,3 @@ class App extends Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('container'));
-
-// <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
-// <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
-// <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
-// <TrackList tracks={this.state.tracks.finished} status="Finished" />

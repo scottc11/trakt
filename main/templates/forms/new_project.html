@@ -4,15 +4,24 @@
 {% block title %}New Project{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-sm-4">
+  <div class="form col-xs-12 col-sm-4 col-centered">
+    {% if edit %}
+      <h2>Edit Existing project</h2>
+    {% else %}
       <h2>Create New Project</h2>
+    {% endif %}
       <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                submit
-            </button>
+        <button type="submit" name="submit" value="submit" class="btn btn-primary">
+            Submit
+        </button>
+        {% if edit %}
+        <button type="submit" name="delete" value="delete" class="form__btn--delete btn btn-primary">
+            Delete
+        </button>
+        {% endif %}
         {% endbuttons %}
       </form>
   </div>
