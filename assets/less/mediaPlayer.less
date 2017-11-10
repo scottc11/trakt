@@ -1,0 +1,45 @@
+@import 'variables';
+
+@line-height: 40px;
+
+.media-player {
+  background: @mako;
+  color: @white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+
+  &__btn {
+    line-height: @line-height;
+    font-size: 20pt;
+    margin: 0 10px;
+    &--play {
+
+    }
+    &--pause {
+
+    }
+  }
+
+  & progress {
+    display: inline-block;
+    width: 80%;
+  }
+
+  &__time {
+    font-family: @bungee-hairline;
+    font-size: @medium;
+    font-weight: 300;
+    margin: 0 10px;
+    line-height: @line-height;
+    &--current {
+
+    }
+    &--duration {
+
+    }
+  }
+}

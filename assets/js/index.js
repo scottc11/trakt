@@ -8,6 +8,7 @@ import promiseMiddleware from 'redux-promise';
 import rootReducer from './reducers/reducers';
 import Header from './containers/header';
 import Project from './containers/project';
+import MediaPlayer from './containers/mediaPlayer'
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
@@ -50,6 +51,7 @@ class App extends Component {
           <div>
             <Project />
           </div>
+          <MediaPlayer />
         </div>
       </Provider>
     )
