@@ -22,16 +22,13 @@ class MediaPlayer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    
     if (this.props.activeTrack !== nextProps.activeTrack) {
       if (this.props.activeTrack.url !== nextProps.activeTrack.url) {
         this.createAudioSource(nextProps.activeTrack.url);
         this.onPlay();
       } else {
-        if (nextProps.activeTrack.active) {
-          this.onPlay();
-        } else {
-          this.onPause();
-        }
+        nextProps.activeTrack.active ? this.onPlay() : this.onPause();
       }
     }
   }
@@ -69,7 +66,6 @@ class MediaPlayer extends Component {
 
   onScrub(e) {
     let progressBar = document.getElementById('progress-bar')
-    // var info = getProgressBarClickInfo(progressBar, e, this.state.duration);
     let offset = progressBar.getBoundingClientRect();
     let x = e.pageX - offset.left;
     let y = e.pageY - offset.top;

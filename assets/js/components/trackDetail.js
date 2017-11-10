@@ -11,27 +11,13 @@ class TrackDetail extends Component {
       active: false,
       detailsActive: false
     };
-    this.audioElement = null;
     this.onToggleDetails = this.onToggleDetails.bind(this);
-  }
-
-  componentDidMount() {
-    this.createAudioSource(this.props.track.audio_file);
   }
 
   onToggleDetails() {
     this.setState({
       detailsActive: !this.state.detailsActive
     })
-  }
-
-  createAudioSource(url) {
-    let element = new Audio(url);
-    element.crossOrigin = "anonymous";
-    element.controls = false;
-    element.loop = false;
-    element.autoplay = false;
-    this.audioElement = element;
   }
 
   onPlay() {

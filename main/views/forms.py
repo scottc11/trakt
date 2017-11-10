@@ -86,7 +86,7 @@ def edit_project(request, pk):
             return HttpResponseRedirect(reverse('home'))
 
         if 'submit' in request.POST:
-            form = NewProject(request.POST, instance=project)
+            form = NewProject(data=request.POST, instance=project)
 
             if form.is_valid():
                 form.save()

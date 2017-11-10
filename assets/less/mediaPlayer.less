@@ -16,17 +16,18 @@
     line-height: @line-height;
     font-size: 20pt;
     margin: 0 10px;
-    &--play {
-
-    }
-    &--pause {
-
+    &:hover {
+      color: @action-color;
+      cursor: pointer;
     }
   }
 
   & progress {
     display: inline-block;
     width: 80%;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__time {
