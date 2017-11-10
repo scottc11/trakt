@@ -1,10 +1,11 @@
-from datetime import date
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin, messages
 from main.models.track import Track
+from main.models.project import Project
 from main.forms.track_form import TrackSubmition
 from main.forms.project_form import NewProject
 from main.forms.genre_form import NewGenre
@@ -26,7 +27,7 @@ def submit_track(request):
 
     # if a GET or invalid form --> create a blank form
     else:
-        form = TrackSubmition(initial={'date_recorded': date.today()})
+        form = TrackSubmition(user=request.user)
 
     return render(request, 'forms/submit_track.html', {'form': form})
 
@@ -53,7 +54,7 @@ def edit_track(request, pk):
     # if a GET or invalid form --> create a blank form
     else:
         track = Track.objects.get(pk=pk);
-        form = TrackSubmition(instance=track)
+        form = TrackSubmition(instance=track, user=request.user)
 
         # to add more to exclude, comma seperate field names in string => 'audiofile,key,genre'
         exclude = 'audio_file'
@@ -73,6 +74,29 @@ def new_project(request):
         form = NewProject()
 
     return render(request, 'forms/new_project.html', { 'form': form })
+
+
+@login_required(login_url="/login/")
+def edit_project(request, pk):
+    if request.method == 'POST':
+        project = Project.objects.get(pk=pk)
+
+        if 'delete' in request.POST:
+            project.delete()
+            return HttpResponseRedirect(reverse('home'))
+
+        if 'submit' in request.POST:
+            form = NewProject(request.POST, instance=project)
+
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('home'))
+
+    else:
+        project = Project.objects.get(pk=pk)
+        form = NewProject(instance=project)
+        edit = True
+        return render(request, 'forms/new_project.html', { 'form': form, 'edit': edit })
 
 
 

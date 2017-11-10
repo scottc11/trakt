@@ -41,14 +41,17 @@ class ProjectList extends Component {
       menu = "";
     }
     return (
-      <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
-        <div>
-          <div className="dropdown--selected">{this.props.activeProject.title}</div>
-          <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
+      <div>
+        <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
+          <div>
+            <div className="dropdown--selected">{this.props.activeProject.title}</div>
+            <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
+          </div>
+          {menu}
         </div>
-
-        {menu}
-
+        <a href={window.location.href + `project/edit/${this.props.activeProject.id}`}>
+          <span className="dropdown__btn--edit fa fa-pencil-square-o"></span>
+        </a>
       </div>
     )
   }

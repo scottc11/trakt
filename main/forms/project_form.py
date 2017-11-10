@@ -8,3 +8,6 @@ class NewProject(ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'collaborators']
+        help_texts = {
+            'collaborators': _('Hold down COMMAND to select more than one user.'),
+        }
