@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import convertRange from '../utils/convertRange';
 
 
@@ -6,21 +7,33 @@ class MediaPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      active: false,
       currentTime: 0,
       currentTimeString: '00:00',
       duration: 100,
-      durationString: '100'
-
+      durationString: '00:00'
     }
     this.audioElement = null;
     this.onPlay = this.onPlay.bind(this);
     this.onPause = this.onPause.bind(this);
     this.updateTime = this.updateTime.bind(this);
     this.loadMetaData = this.loadMetaData.bind(this);
+    this.onScrub = this.onScrub.bind(this);
   }
 
-  componentDidMount() {
-    this.createAudioSource("https://storage.googleapis.com/trakt/dev%2Fusers%2Fjanky99%2Ftracks%2Fsc-fold%2F003_-_SC_fold_V2.wav");
+  componentWillReceiveProps(nextProps) {
+    if (this.props.activeTrack !== nextProps.activeTrack) {
+      if (this.props.activeTrack.url !== nextProps.activeTrack.url) {
+        this.createAudioSource(nextProps.activeTrack.url);
+        this.onPlay();
+      } else {
+        if (nextProps.activeTrack.active) {
+          this.onPlay();
+        } else {
+          this.onPause();
+        }
+      }
+    }
   }
 
   createAudioSource(url) {
@@ -36,10 +49,13 @@ class MediaPlayer extends Component {
 
   onPlay() {
     this.audioElement.play();
+    this.setState({ active: true })
   }
 
   onPause() {
+    //TODO: add redux action here to toggle ALL project track media buttons OFF
     this.audioElement.pause();
+    this.setState({ active: false })
   }
 
   updateTime() {
@@ -51,6 +67,17 @@ class MediaPlayer extends Component {
     })
   }
 
+  onScrub(e) {
+    let progressBar = document.getElementById('progress-bar')
+    // var info = getProgressBarClickInfo(progressBar, e, this.state.duration);
+    let offset = progressBar.getBoundingClientRect();
+    let x = e.pageX - offset.left;
+    let y = e.pageY - offset.top;
+    let max = this.state.duration;
+    let value = x * max / offset.width;
+    this.audioElement.currentTime = this.state.duration / max * value;
+  }
+
   loadMetaData(duration) {
     var time = new Date(null);
     time.setSeconds(duration);
@@ -60,13 +87,21 @@ class MediaPlayer extends Component {
     });
   }
 
+
   render() {
+
+    let button = null;
+    if (this.state.active) {
+      button = <span onClick={ () => this.onPause() } className="media-player__btn media-player__btn--pause fa fa-pause"></span>
+    } else {
+      button = <span onClick={ () => this.onPlay() } className="media-player__btn media-player__btn--play fa fa-play"></span>
+    }
+
     return (
       <div className="media-player">
-        <span onClick={ () => this.onPlay() } className="media-player__btn media-player__btn--play fa fa-play"></span>
+        { button }
         <span className="media-player__time">{this.state.currentTimeString}</span>
-        <progress max={this.state.duration} value={this.state.currentTime} ></progress>
-        <span onClick={ () => this.onPause() } className="media-player__btn media-player__btn--pause fa fa-pause"></span>
+        <progress id='progress-bar' onClick={ (event) => this.onScrub(event) } max={this.state.duration} value={this.state.currentTime} ></progress>
         <span className="media-player__time">{this.state.durationString}</span>
       </div>
     )
@@ -74,4 +109,9 @@ class MediaPlayer extends Component {
 }
 
 
-export default MediaPlayer;
+function mapStateToProps(state) {
+  return { activeTrack: state.activeTrack };
+}
+
+
+export default connect(mapStateToProps)(MediaPlayer);

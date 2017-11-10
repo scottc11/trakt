@@ -59,8 +59,3 @@ class App extends Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('container'));
-
-// <TrackList tracks={this.state.tracks.snippets} status="Snippets" />
-// <TrackList tracks={this.state.tracks.ideas} status="Ideas" />
-// <TrackList tracks={this.state.tracks.mixing} status="Mixing" />
-// <TrackList tracks={this.state.tracks.finished} status="Finished" />

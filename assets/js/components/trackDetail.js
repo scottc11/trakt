@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateMediaPlayer } from '../actions/actions';
 import TrackDetails from './trackInfo';
 
 class TrackDetail extends Component {
@@ -33,12 +36,12 @@ class TrackDetail extends Component {
 
   onPlay() {
     this.setState({ active: true });
-    this.audioElement.play();
+    this.props.updateMediaPlayer(this.props.track.audio_file, true);
   }
 
   onPause() {
     this.setState({ active: false });
-    this.audioElement.pause();
+    this.props.updateMediaPlayer(this.props.track.audio_file, false);
   }
 
   render() {
@@ -91,4 +94,9 @@ class TrackDetail extends Component {
   }
 };
 
-export default TrackDetail;
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateMediaPlayer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TrackDetail);
