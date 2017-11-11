@@ -15,7 +15,7 @@ from main.forms.key_form import NewKey
 def submit_track(request):
 
     if request.method == 'POST':
-        form = TrackSubmition(request.POST, request.FILES)
+        form = TrackSubmition(request.POST, request.FILES, user=request.user)
 
         if form.is_valid():
             track = form.save(commit=False)
@@ -45,7 +45,7 @@ def edit_track(request, pk):
 
         # EDIT
         if 'submit' in request.POST:
-            form = TrackSubmition(request.POST, request.FILES, instance=track)
+            form = TrackSubmition(request.POST, request.FILES, instance=track, user=request.user)
 
             if form.is_valid():
                 track = form.save()
