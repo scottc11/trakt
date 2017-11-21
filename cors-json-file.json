@@ -5,8 +5,8 @@
         "http://localhost:8000",
         "https://trakt-183713.appspot.com/"
       ],
-      "responseHeader": ["Content-Type"],
-      "method": ["GET", "HEAD", "DELETE"],
+      "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
+      "method": ["GET", "HEAD", "DELETE", "PUT"],
       "maxAgeSeconds": 3600
     }
 ]

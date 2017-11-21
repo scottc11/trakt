@@ -20,6 +20,8 @@ from main.views import home, forms
 from main.views.api import tracks
 from main.views.api.users import UserList, UserDetail, CurrentUser
 from main.views.api.projects import ProjectList, ProjectDetail
+from main.views.signed_urls import get_signed_url
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +31,7 @@ urlpatterns = [
 
     url(r'^track/submit/$', forms.submit_track, name='submit_track'),
     url(r'^track/edit/(?P<pk>[0-9]+)/$', forms.edit_track, name='edit_track'),
+    url(r'^track/upload/$', get_signed_url, name='get_signed_url'),
     url(r'^project/new/$', forms.new_project, name='new_project'),
     url(r'^project/edit/(?P<pk>[0-9]+)/$', forms.edit_project, name='edit_project'),
     url(r'^genre/new/$', forms.new_genre, name='new_genre'),

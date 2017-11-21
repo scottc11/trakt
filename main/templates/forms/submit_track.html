@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load bootstrap3 %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{% static 'scripts/upload.bundle.js' %}"></script>
+{% endblock %}
 
 {% block title %}Login{% endblock %}
 
