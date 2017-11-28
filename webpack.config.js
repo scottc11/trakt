@@ -10,13 +10,13 @@ module.exports = {
   // your current directory. You don't have to specify the extension now,
   // because you will specify extensions later in the `resolve` section
   entry: {
-    'static/bundles/app': './assets/js/index.js',
-    'static/scripts/upload': './assets/js/scripts/uploadAudioFile.js'
+    'app': './assets/js/index.js',
+    'upload': './assets/js/scripts/uploadAudioFile.js'
   },
 
   output: {
     // where you want your compiled bundle to be stored
-    path: path.resolve('./'),
+    path: path.resolve('./static/bundles/'),
     filename: '[name].bundle.js',
   },
 
