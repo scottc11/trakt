@@ -30,7 +30,7 @@ class Track(models.Model):
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, blank=False, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, blank=False, null=True)
-    audio_file = models.FileField(upload_to=format_storage_path, storage=GoogleCloudStorage(), default='')
+    audio_file = models.FileField(upload_to=format_storage_path, storage=GoogleCloudStorage(), default='', max_length=300, blank=True)
     projects = models.ManyToManyField(Project, blank=True, related_name='tracks')
 
     def __str__(self):

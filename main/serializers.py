@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from main.models.track import Track
 from main.models.project import Project
+from main.models.genre import Genre
 
 class TrackSerializer(serializers.ModelSerializer):
     submitter = serializers.StringRelatedField(many=False)
@@ -29,3 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'projects')
+
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ('id', 'genre')

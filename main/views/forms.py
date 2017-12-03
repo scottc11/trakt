@@ -1,9 +1,13 @@
 
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin, messages
+
+from google.cloud import storage
+
 from main.models.track import Track
 from main.models.project import Project
 from main.forms.track_form import TrackSubmition
@@ -15,15 +19,19 @@ from main.forms.key_form import NewKey
 def submit_track(request):
 
     if request.method == 'POST':
-        form = TrackSubmition(request.POST, request.FILES, user=request.user)
+        form = TrackSubmition(request.POST, user=request.user)
+        # bucket = storage.Client().get_bucket(settings.CLOUD_STORAGE_BUCKET)
 
         if form.is_valid():
             track = form.save(commit=False)
+
+            track.audio_file.name = bucket.blob('dev/tests/Clouds.mp3').name
             track.submitter = request.user
             track.save()
             form.save_m2m()
-            return HttpResponseRedirect(reverse('home'))
-
+            return JsonResponse({ 'track_id': track.id })
+        else:
+            raise ValueError('A very specific bad thing happened.')
 
     # if a GET or invalid form --> create a blank form
     else:

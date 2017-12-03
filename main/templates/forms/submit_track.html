@@ -15,7 +15,12 @@
       {% else %}
         <h2>Submit New Track</h2>
       {% endif %}
-      <form method="POST" enctype="multipart/form-data">
+
+
+      <input id="audio-file" type="file" name="" value="">
+
+
+      <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form exclude=exclude %}
         {% buttons %}
