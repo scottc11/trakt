@@ -6,6 +6,8 @@ from django.utils.deconstruct import deconstructible
 from django.core.files.storage import Storage
 from google.cloud import storage
 
+# NOTE: some great documentation on interacting with buckets and blobs
+# https://googlecloudplatform.github.io/google-cloud-python/latest/storage/blobs.html
 
 @deconstructible()
 class GoogleCloudStorage(Storage):

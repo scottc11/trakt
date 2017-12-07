@@ -24,12 +24,11 @@ def submit_track(request):
 
         if form.is_valid():
             track = form.save(commit=False)
-
-            track.audio_file.name = bucket.blob('dev/tests/Clouds.mp3').name
             track.submitter = request.user
             track.save()
             form.save_m2m()
-            return JsonResponse({ 'track_id': track.id })
+            messages.success(request, "Your data has been saved!")
+            return HttpResponseRedirect(reverse('upload_file', kwargs={'pk': track.id }))
         else:
             raise ValueError('A very specific bad thing happened.')
 
@@ -38,6 +37,11 @@ def submit_track(request):
         form = TrackSubmition(user=request.user)
 
     return render(request, 'forms/submit_track.html', {'form': form})
+
+
+def upload_file(request, pk):
+    track = Track.objects.get(pk=pk)
+    return render(request, 'forms/upload_file.html', { 'track': track })
 
 
 @login_required(login_url="/login/")

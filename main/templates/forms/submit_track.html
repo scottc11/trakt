@@ -9,29 +9,30 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-sm-4 col-centered">
+  <div class="form col-xs-12 col-md-6 col-centered">
       {% if exclude %}
         <h2>Edit Track</h2>
       {% else %}
         <h2>Submit New Track</h2>
       {% endif %}
 
-
       <input id="audio-file" type="file" name="" value="">
 
-
-      <form method="POST">
+      <form id="track-form" method="POST">
         {% csrf_token %}
         {% bootstrap_form form exclude=exclude %}
+
         {% buttons %}
-            <button type="submit" name="submit" value="submit" class="btn btn-primary">
-                Submit
-            </button>
+            <button id="json-me" type="button" name="json-btn" class="btn btn-primary">json</button>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+
+            <!-- DELETE BUTTON -->
             {% if exclude %}
-            <button type="submit" name="delete" value="delete" class="form__btn--delete btn btn-primary">
-                Delete
-            </button>
+            <button type="submit" name="delete" value="delete" class="form__btn--delete btn btn-primary">Delete</button>
             {% endif %}
+
         {% endbuttons %}
       </form>
 

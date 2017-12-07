@@ -1,6 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
-
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const UPDATE_MEDIA_PLAYER = 'UPDATE_MEDIA_PLAYER';
@@ -41,14 +39,7 @@ export function updateMediaPlayer(url, bool) {
 
 export function createGenre(values) {
   const url = window.location.href + `api/genres/`;
-  const csrftoken = Cookies.get('csrftoken');
-  const config = {
-    headers: {
-      'X-CSRFToken': csrftoken
-    }
-  };
-
-  const request = axios.post(url, values, config);
+  const request = axios.post(url, values);
 
   return {
     type: CREATE_GENRE,

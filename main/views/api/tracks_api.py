@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from main.models.track import Track
-from main.serializers import TrackSerializer
+from main.serializers import TrackSerializer, TrackCreateSerializer
 
 
 class TrackList(APIView):
@@ -21,7 +21,7 @@ class TrackList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TrackSerializer(data=request.data)
+        serializer = TrackCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

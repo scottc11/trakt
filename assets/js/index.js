@@ -1,4 +1,6 @@
-import $ from 'jquery';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider} from 'react-redux';
@@ -10,8 +12,12 @@ import Header from './containers/header';
 import Project from './containers/project';
 import MediaPlayer from './containers/mediaPlayer'
 
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
+// set scrf token from django cookie
+const csrftoken = Cookies.get('csrftoken');
+axios.defaults.headers.post['X-CSRFToken'] = csrftoken;
 
 class App extends Component {
   constructor(props) {
@@ -21,24 +27,6 @@ class App extends Component {
       projects: [],
       currentProject: {}
     };
-
-    // this.apiQuery();
-  }
-
-  apiQuery() {
-    $.ajax({
-      method: 'GET',
-      dataType: 'json',
-      url: window.location.href + 'api/users/current/'
-    }).done( data => {
-      this.setState(
-        {
-          user: {id: data.id, username: data.username },
-          projects: data.projects,
-          currentProject: data.projects[0]
-        }
-      );
-    });
   }
 
   render() {

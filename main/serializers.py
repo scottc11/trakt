@@ -15,6 +15,11 @@ class TrackSerializer(serializers.ModelSerializer):
         fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file')
 
 
+class TrackCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Track
+        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file')
+
 class ProjectSerializer(serializers.ModelSerializer):
     collaborators = serializers.StringRelatedField(many=True)
     tracks = TrackSerializer(many=True)
