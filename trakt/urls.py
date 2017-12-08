@@ -31,9 +31,10 @@ urlpatterns = [
     url(r'^$', home.home, name='home'),
 
     url(r'^track/submit/$', forms.submit_track, name='submit_track'),
+    url(r'^track/submit/sign_url/$', get_signed_url, name='get_signed_url'),
     url(r'^track/upload/(?P<pk>[0-9]+)/$', forms.upload_file, name='upload_file'),
     url(r'^track/edit/(?P<pk>[0-9]+)/$', forms.edit_track, name='edit_track'),
-    url(r'^track/sign_url/$', get_signed_url, name='get_signed_url'),
+
     url(r'^project/new/$', forms.new_project, name='new_project'),
     url(r'^project/edit/(?P<pk>[0-9]+)/$', forms.edit_project, name='edit_project'),
     url(r'^genre/new/$', forms.new_genre, name='new_genre'),

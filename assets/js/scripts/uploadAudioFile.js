@@ -13,7 +13,8 @@ $("document").ready( () => {
 
     console.log(this.files[0]);
     const file = this.files[0];
-    const track_id = $('#upload-btn').data('track-id');
+    // const track_id = $('#upload-btn').data('track-id');
+    const track_id = 41;
 
     const url = window.location.href.split('upload/')[0] + 'sign_url';
     $.get(url + `?filename=${encodeURIComponent(file.name)}&expiration=10&type=${encodeURIComponent(file.type)}&track_id=${track_id}`, (data) => {
@@ -69,9 +70,9 @@ $('#json-me').on('click', () => {
       values[formData[i]['name']] = formData[i]['value'];
     }
   }
+
   console.log(values);
   submitForm(values);
-  // const data = JSON.stringify(values);
 
 })
 
@@ -80,6 +81,10 @@ function submitForm(formData) {
   const url = window.location.href.split('track/')[0] + `api/tracks/`;
   axios.post(url, data)
     .then(function (res) {
+      // hide form
+      // show upload track button
+      // display progress bar
+      // update track.audio_file value with new gcloud url
       console.log(res);
     })
     .catch(function (err) {
