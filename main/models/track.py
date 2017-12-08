@@ -20,6 +20,8 @@ def get_superuser():
     return User.objects.get(is_superuser=True).id
 
 
+# TODO: 'tracks' field is kinda weird... when Track.model.projects 'related_name' does not equal 'tracks', things break.
+
 class Track(models.Model):
     submitter = models.ForeignKey(User, related_name='tracks', on_delete=models.CASCADE, default=get_superuser )
     pub_date = models.DateTimeField(auto_now_add=True)

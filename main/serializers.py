@@ -12,13 +12,19 @@ class TrackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file')
+        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file', 'projects')
 
+
+# NOTE: this serializer is used specifically for POSTing new tracks to the api,
+# since it doesn't 'serialize' all the foreign key relationships, it will just
+# return the 'id' of each foreign key object, which is what we want.
 
 class TrackCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file')
+        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file', 'projects')
+
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     collaborators = serializers.StringRelatedField(many=True)
