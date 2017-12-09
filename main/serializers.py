@@ -1,19 +1,30 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.models import User
-from main.models.track import Track
+from main.models.track import Track, TrackFile
 from main.models.project import Project
 from main.models.genre import Genre
+
+
+class TrackFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrackFile
+        fields = ('title', 'file', 'track')
+
 
 class TrackSerializer(serializers.ModelSerializer):
     submitter = serializers.StringRelatedField(many=False)
     genre = serializers.StringRelatedField(many=False)
     key = serializers.StringRelatedField(many=False)
     status = serializers.SlugRelatedField(many=False, read_only=True, slug_field='position')
+    audio_files = TrackFileSerializer(many=True)
 
     class Meta:
         model = Track
-        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file', 'projects')
+        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'projects', 'audio_files')
+
+
+
 
 
 # NOTE: this serializer is used specifically for POSTing new tracks to the api,
@@ -26,8 +37,7 @@ class TrackCreateSerializer(serializers.ModelSerializer):
         fields = (
                 'id', 'submitter', 'pub_date',
                 'title', 'bpm', 'date_recorded',
-                'key', 'genre', 'status',
-                'audio_file', 'projects'
+                'key', 'genre', 'status', 'projects'
                 )
 
 

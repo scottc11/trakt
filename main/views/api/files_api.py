@@ -5,47 +5,47 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from main.models.genre import Genre
-from main.serializers import GenreSerializer
+from main.models.track import TrackFile
+from main.serializers import TrackFileSerializer
 
 
-class GenreList(APIView):
+class TrackFileList(APIView):
     """
-    List all genres, or create a new genre.
+    List all files, or create a new genre.
     """
 
     def get(self, request, format=None):
-        genres = Genre.objects.all()
-        serializer = GenreSerializer(genres, many=True)
+        files = TrackFile.objects.all()
+        serializer = TrackFileSerializer(files, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = GenreSerializer(data=request.data)
+        serializer = TrackFileSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GenreDetail(APIView):
+class TrackFileDetail(APIView):
     """
     Retrieve, update or delete a genre.
     """
     def get_object(self, pk):
         try:
-            genre = Genre.objects.get(pk=pk)
+            genre = TrackFile.objects.get(pk=pk)
             return genre
-        except Genre.DoesNotExist:
+        except TrackFile.DoesNotExist:
             return Http404
 
     def get(self, request, pk, format=None):
         genre = self.get_object(pk)
-        serializer = GenreSerializer(genre)
+        serializer = TrackFileSerializer(genre)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         genre = self.get_object(pk)
-        serializer = GenreSerializer(genre, data=request.data)
+        serializer = TrackFileSerializer(genre, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

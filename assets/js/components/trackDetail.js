@@ -22,12 +22,12 @@ class TrackDetail extends Component {
 
   onPlay() {
     this.setState({ active: true });
-    this.props.updateMediaPlayer(this.props.track.audio_file, true);
+    this.props.updateMediaPlayer(this.props.track.audio_files[0].file, true);
   }
 
   onPause() {
     this.setState({ active: false });
-    this.props.updateMediaPlayer(this.props.track.audio_file, false);
+    this.props.updateMediaPlayer(this.props.track.audio_files[0].file, false);
   }
 
   render() {
@@ -51,6 +51,7 @@ class TrackDetail extends Component {
 
             <div className="track__info">
               <h6 className="track__info--title">{ this.props.track.title }</h6>
+              <h6 className="">{ this.props.track.audio_files[0].title }</h6>
               <h6 className="track__info--submitter">{ this.props.track.submitter }</h6>
               <span className="track__info--median"> &middot; </span>
               <h6 className="track__info--date">{ this.props.track.date_recorded }</h6>
@@ -69,7 +70,7 @@ class TrackDetail extends Component {
               <TrackDetails genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
               <div className="track__details--options">
                 <a href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
-                <a href={ this.props.track.audio_file } ><span className="fa fa-cloud-download"></span></a>
+                <a href={ this.props.track.audio_files[0].file } ><span className="fa fa-cloud-download"></span></a>
               </div>
             </div>
           }

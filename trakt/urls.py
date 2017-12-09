@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from main.views import home, forms
 from main.views.api.tracks_api import TrackList, TrackDetail
+from main.views.api.files_api import TrackFileList, TrackFileDetail
 from main.views.api.genres_api import GenreList, GenreDetail
 from main.views.api.users import UserList, UserDetail, CurrentUser
 from main.views.api.projects import ProjectList, ProjectDetail
@@ -40,6 +41,8 @@ urlpatterns = [
     url(r'^genre/new/$', forms.new_genre, name='new_genre'),
     url(r'^key/new/$', forms.new_key, name='new_key'),
 
+    url(r'^api/files/$', TrackFileList.as_view()),
+    url(r'^api/files/(?P<pk>[0-9]+)/$', TrackFileDetail.as_view()),
     url(r'^api/genres/$', GenreList.as_view()),
     url(r'^api/genres/(?P<pk>[0-9]+)/$', GenreDetail.as_view()),
     url(r'^api/tracks/$', TrackList.as_view()),

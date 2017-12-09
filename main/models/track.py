@@ -9,12 +9,16 @@ from main.models.status import Status
 from main.models.project import Project
 from trakt.storage import GoogleCloudStorage
 
-
+# you are going to need to keep this function around for your migrations....
 def format_storage_path(instance, filename):
     title_slug = instance.slug
     username = instance.submitter
     return '{0}/tracks/{1}/{2}'.format(username, title_slug, filename)
 
+def format_file_storage_path(instance, filename):
+    title_slug = instance.track.slug
+    username = instance.track.submitter
+    return '{0}/tracks/{1}/{2}'.format(username, title_slug, filename)
 
 def get_superuser():
     return User.objects.get(is_superuser=True).id
@@ -32,7 +36,6 @@ class Track(models.Model):
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, blank=False, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, blank=False, null=True)
-    audio_file = models.FileField(upload_to=format_storage_path, storage=GoogleCloudStorage(), default='', max_length=300, blank=True)
     projects = models.ManyToManyField(Project, blank=True, related_name='tracks')
 
     def __str__(self):
@@ -49,3 +52,10 @@ class Track(models.Model):
     def delete(self, *args, **kwargs):
         self.audio_file.delete()
         super(Track, self).delete(*args, **kwargs)
+
+
+
+class TrackFile(models.Model):
+    title = models.CharField(max_length=250, blank=False)
+    file = models.FileField(upload_to=format_file_storage_path, storage=GoogleCloudStorage(), max_length=300)
+    track = models.ForeignKey(Track, related_name='audio_files')

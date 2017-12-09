@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models.track import Track
+from .models.track import Track, TrackFile
 from .models.genre import Genre
 from .models.key import Key
 from .models.status import Status
@@ -14,3 +14,4 @@ admin.site.register(Genre)
 admin.site.register(Key)
 admin.site.register(Status)
 admin.site.register(Project)
+admin.site.register(TrackFile)
