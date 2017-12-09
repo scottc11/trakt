@@ -60,3 +60,4 @@ class TrackFile(models.Model):
     title = models.CharField(max_length=250, blank=False)
     file = models.FileField(upload_to=format_file_storage_path, storage=GoogleCloudStorage(), max_length=300, blank=True)
     track = models.ForeignKey(Track, related_name='audio_files')
+    pub_date = models.DateTimeField(auto_now_add=True)

@@ -9,7 +9,8 @@ from main.models.track import TrackFile, Track
 class TrackFileSubmition(ModelForm):
     class Meta:
         model = TrackFile
-        exclude = ['file']
+        exclude = ['file', 'pub_date']
         help_texts = {
-            'title': _('Something describing the upload ex. mix 1 OR mix 2 OR chorus (no drums)')
+            'title': _('Title should be something which describes the upload in context to the associated Track. ex. "Version 1", or "MIX[B]". Dont worry about dates.'),
+            'track': _('Which track should this audio file be associated with?')
         }

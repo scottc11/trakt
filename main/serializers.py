@@ -9,7 +9,7 @@ from main.models.genre import Genre
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackFile
-        fields = ('title', 'file', 'track')
+        fields = ('id', 'title', 'file', 'track', 'pub_date')
 
 
 class TrackSerializer(serializers.ModelSerializer):

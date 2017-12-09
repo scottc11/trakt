@@ -6,7 +6,6 @@ const TrackList = (props) => {
     if (track.status == props.status) {
       return <TrackDetail key={track.id} track={track} />
     }
-
   });
 
   return (

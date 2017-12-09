@@ -11,15 +11,14 @@
 {% block content %}
   <div class="form col-xs-12 col-md-6 col-centered">
 
-      <h2>Upload file to {{track.title}}</h2>
+      <h2 class="color-accent--baby-blue">Upload file to <span class="color-accent--mikado">"{{track.title}}"</span></h2>
 
+      <hr>
 
-      <div class="upload">
-        <input id="audio-file" type="file" name="" value="">
-
-        <button id="upload-btn" type="button" data-track-id="{{ track.id }}" class="upload--btn btn btn-primary" disabled>upload</button>
-
-        <progress id="upload-progress" class="upload--progress" value="0" max="1">0%</progress>
+      <div class="file-upload">        
+        <button id="upload-btn" type="button" data-track-id="{{ track.id }}" class="file-upload--btn btn btn-primary" disabled>upload</button>
+        <input id="audio-file" class="file-upload--input" type="file" name="" value="">
+        <progress id="upload-progress" class="file-upload--progress" value="0" max="1">0%</progress>
 
 
         <form class="" method="POST">
@@ -27,7 +26,7 @@
           {% csrf_token %}
           {% bootstrap_form form exclude=exclude %}
           <input id="file-path" type="hidden" name="file_path" value="">
-          <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+          <button id="submit" type="submit" name="submit" value="submit" class="btn btn-primary" disabled >Submit</button>
 
         </form>
 

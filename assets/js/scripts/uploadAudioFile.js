@@ -37,6 +37,7 @@ function upload(url, file_path, file) {
   axios.put(url, file, config)
     .then(function (res) {
       $('#file-path').attr('value', file_path);
+      $('#submit').attr('disabled', false);
       console.log(res);
     })
     .catch(function (err) {
