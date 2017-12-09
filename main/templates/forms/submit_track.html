@@ -16,9 +16,12 @@
         <h2>Submit New Track</h2>
       {% endif %}
 
-      <input id="audio-file" type="file" name="" value="">
+      <div class="upload">
+        <input id="audio-file" type="file" name="" value="">
 
-      <span id="upload-btn" class="btn btn-primary">upload</span>
+        <button id="upload-btn" type="button" class="upload--btn btn btn-primary" disabled>upload</button>
+        <progress id="upload-progress" class="upload--progress" value="0" max="1">0%</progress>
+      </div>
 
       <form id="track-form" method="POST">
         {% csrf_token %}

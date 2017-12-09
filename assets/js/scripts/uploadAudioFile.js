@@ -19,25 +19,32 @@ $("document").ready( () => {
     const url = window.location.href.split('upload/')[0] + 'sign_url';
     $.get(url + `?filename=${encodeURIComponent(file.name)}&expiration=10&type=${encodeURIComponent(file.type)}&track_id=${track_id}`, (data) => {
       console.log(data);
-      $('#upload-btn').on('click', () => { upload(data.signed_url, file) });
+      $('#upload-btn').on('click', () => { upload(data.signed_url, data.file_path, file) }).attr('disabled', false);
     })
 
   });
 });
 
-function upload(url, file) {
+function upload(url, file_path, file) {
   const config = {
     headers: {
       'Content-Type': file.type
     },
     onUploadProgress: progressEvent => {
       let percentLoaded = progressEvent.loaded / progressEvent.total;
-      console.log(percentLoaded);
+      $('#upload-progress').val(percentLoaded);
     }
   }
   axios.put(url, file, config)
     .then(function (res) {
       console.log(res);
+
+      const csrftoken = Cookies.get('csrftoken');
+      let config = { headers: { 'X-CSRFToken': csrftoken } }
+
+      const url = window.location.href.split('track/')[0] + `track/submit/update/${41}/`;
+      const data = { 'track_path': file_path }
+      return axios.post(url, data, config);
     })
     .catch(function (err) {
       console.log(err);
@@ -83,6 +90,8 @@ function submitForm(formData) {
     .then(function (res) {
       // hide form
       // show upload track button
+      // attach track id to data attribute of button
+      $('#upload-btn').data('track-id', res.data.id);
       // display progress bar
       // update track.audio_file value with new gcloud url
       console.log(res);

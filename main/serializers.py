@@ -23,19 +23,13 @@ class TrackSerializer(serializers.ModelSerializer):
 class TrackCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'audio_file', 'projects')
+        fields = (
+                'id', 'submitter', 'pub_date',
+                'title', 'bpm', 'date_recorded',
+                'key', 'genre', 'status',
+                'audio_file', 'projects'
+                )
 
-    # def create(self, validated_data):
-    #     user_id = self.context.get('user_id')
-    #     track = Track.objects.create(**validated_data)
-    #     track.submitter = user_id
-    #     return track
-
-    # def save(self):
-    #     self.submitter = self.context.get('user_id')
-    #
-    # def get_serializer_context(self):
-    #     return {'user_id': self.request.user.id}
 
 
 class ProjectSerializer(serializers.ModelSerializer):
