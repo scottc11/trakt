@@ -11,6 +11,7 @@ from google.cloud import storage
 from main.models.track import Track
 from main.models.project import Project
 from main.forms.track_form import TrackSubmition
+from main.forms.track_file_form import TrackFileSubmition
 from main.forms.project_form import NewProject
 from main.forms.genre_form import NewGenre
 from main.forms.key_form import NewKey
@@ -20,7 +21,6 @@ def submit_track(request):
 
     if request.method == 'POST':
         form = TrackSubmition(request.POST, user=request.user)
-        # bucket = storage.Client().get_bucket(settings.CLOUD_STORAGE_BUCKET)
 
         if form.is_valid():
             track = form.save(commit=False)
@@ -39,9 +39,27 @@ def submit_track(request):
     return render(request, 'forms/submit_track.html', {'form': form})
 
 
+#---------------------------------------------------------------
+#                UPLOAD FILE TO TRACK OBJECT
+#---------------------------------------------------------------
 def upload_file(request, pk):
     track = Track.objects.get(pk=pk)
-    return render(request, 'forms/upload_file.html', { 'track': track })
+
+    if request.method == 'POST':
+        form = TrackFileSubmition(request.POST)
+
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.file.name = request.POST.get('file_path')
+            file.save()
+            messages.success(request, "File Successfully Uploaded")
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = TrackFileSubmition(initial={'track': track})
+
+    return render(request, 'forms/upload_file.html', { 'track': track, 'form': form })
+
+
 
 
 @login_required(login_url="/login/")
@@ -67,10 +85,7 @@ def edit_track(request, pk):
     else:
         track = Track.objects.get(pk=pk);
         form = TrackSubmition(instance=track, user=request.user)
-
-        # to add more to exclude, comma seperate field names in string => 'audiofile,key,genre'
-        exclude = 'audio_file'
-        return render(request, 'forms/submit_track.html', {'form': form, 'exclude': exclude})
+        return render(request, 'forms/submit_track.html', {'form': form, 'edit': True })
 
 
 @login_required(login_url="/login/")

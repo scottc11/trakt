@@ -50,12 +50,13 @@ class Track(models.Model):
         super(Track, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        self.audio_file.delete()
+        for file in self.audio_files.all():
+            file.delete()
         super(Track, self).delete(*args, **kwargs)
 
 
 
 class TrackFile(models.Model):
     title = models.CharField(max_length=250, blank=False)
-    file = models.FileField(upload_to=format_file_storage_path, storage=GoogleCloudStorage(), max_length=300)
+    file = models.FileField(upload_to=format_file_storage_path, storage=GoogleCloudStorage(), max_length=300, blank=True)
     track = models.ForeignKey(Track, related_name='audio_files')

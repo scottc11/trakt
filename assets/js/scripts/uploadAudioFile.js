@@ -13,10 +13,9 @@ $("document").ready( () => {
 
     console.log(this.files[0]);
     const file = this.files[0];
-    // const track_id = $('#upload-btn').data('track-id');
-    const track_id = 41;
+    const track_id = $('#upload-btn').data('track-id');
 
-    const url = window.location.href.split('upload/')[0] + 'sign_url';
+    const url = window.location.href.split('upload/')[0] + 'submit/sign_url';
     $.get(url + `?filename=${encodeURIComponent(file.name)}&expiration=10&type=${encodeURIComponent(file.type)}&track_id=${track_id}`, (data) => {
       console.log(data);
       $('#upload-btn').on('click', () => { upload(data.signed_url, data.file_path, file) }).attr('disabled', false);
@@ -37,14 +36,8 @@ function upload(url, file_path, file) {
   }
   axios.put(url, file, config)
     .then(function (res) {
+      $('#file-path').attr('value', file_path);
       console.log(res);
-
-      const csrftoken = Cookies.get('csrftoken');
-      let config = { headers: { 'X-CSRFToken': csrftoken } }
-
-      const url = window.location.href.split('track/')[0] + `track/submit/update/${41}/`;
-      const data = { 'track_path': file_path }
-      return axios.post(url, data, config);
     })
     .catch(function (err) {
       console.log(err);
@@ -89,6 +82,7 @@ function submitForm(formData) {
   axios.post(url, data)
     .then(function (res) {
       // hide form
+
       // show upload track button
       // attach track id to data attribute of button
       $('#upload-btn').data('track-id', res.data.id);

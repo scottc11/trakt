@@ -8,7 +8,7 @@ from main.models.project import Project
 class TrackSubmition(ModelForm):
     class Meta:
         model = Track
-        exclude = ['submitter', 'slug', 'audio_file']
+        exclude = ['submitter', 'slug']
         help_texts = {
             'date_recorded': _('ex. 2006-10-25'),
             'projects': _('Hold down COMMAND to assign track to more than one Project')
