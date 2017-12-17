@@ -14,7 +14,7 @@ class TrackDetailFileList extends Component {
           <li className={ style } key={file.id} onClick={ () => this.props.onClick(file) }>
             <span className="fa fa-play-circle"></span> {file.title}
             <span className="track__file-list--date-time"> - {date}</span>
-            <a href={ file.file.url }><span className="track__file-list--action fa fa-cloud-download"></span></a>
+            <a href={ file.file } download ><span className="track__file-list--action fa fa-cloud-download"></span></a>
           </li>
           )
     });

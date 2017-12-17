@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.models import User
-from main.models.track import Track, TrackFile
+from main.models.track import Track, TrackFile, TrackSession
 from main.models.project import Project
 from main.models.genre import Genre
 
@@ -12,16 +12,28 @@ class TrackFileSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'file', 'track', 'pub_date')
 
 
+class SessionFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrackSession
+        fields = ('id', 'title', 'file', 'track', 'pub_date', 'date')
+
+
 class TrackSerializer(serializers.ModelSerializer):
     submitter = serializers.StringRelatedField(many=False)
     genre = serializers.StringRelatedField(many=False)
     key = serializers.StringRelatedField(many=False)
     status = serializers.SlugRelatedField(many=False, read_only=True, slug_field='position')
     audio_files = TrackFileSerializer(many=True)
+    sessions = SessionFileSerializer(many=True)
 
     class Meta:
         model = Track
-        fields = ('id', 'submitter', 'pub_date', 'title', 'bpm', 'date_recorded', 'key', 'genre', 'status', 'projects', 'audio_files')
+        fields = (
+                'id', 'submitter', 'pub_date',
+                'title', 'bpm', 'date_recorded', 'key',
+                'genre', 'status', 'projects', 'audio_files',
+                'sessions'
+                )
 
 
 

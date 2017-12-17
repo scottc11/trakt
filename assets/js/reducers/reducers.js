@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import ProjectReducer from './reducer_active_project';
 import UserReducer from './reducer_current_user';
-import TrackReducer from './reducer_active_track';
+import TrackReducer from './mediaPlayerReducer';
 
 const rootReducer = combineReducers({
   activeProject: ProjectReducer,

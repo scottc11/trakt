@@ -12,6 +12,7 @@ from main.models.track import Track
 from main.models.project import Project
 from main.forms.track_form import TrackSubmition
 from main.forms.track_file_form import TrackFileSubmition
+from main.forms.session_upload_form import SessionUpload
 from main.forms.project_form import NewProject
 from main.forms.genre_form import NewGenre
 from main.forms.key_form import NewKey
@@ -58,6 +59,28 @@ def upload_file(request, pk):
         form = TrackFileSubmition(initial={'track': track})
 
     return render(request, 'forms/upload_file.html', { 'track': track, 'form': form })
+
+
+#---------------------------------------------------------------
+#                UPLOAD SESSION FOLDER .zip FILE TO TRACK OBJECT
+#---------------------------------------------------------------
+
+def upload_session(request, pk):
+    track = Track.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = SessionUpload(request.POST)
+
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.file.name = request.POST.get('file_path')
+            file.save()
+            messages.success(request, "File Successfully Uploaded")
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = SessionUpload(initial={'track': track})
+
+    return render(request, 'forms/upload_session.html', { 'track': track, 'form': form })
 
 
 
