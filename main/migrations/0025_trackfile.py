@@ -8,6 +8,14 @@ import main.models.track
 import trakt.storage
 
 
+def update_tracks(apps, schema_editor):
+    Track = apps.get_model('main', 'Track')
+    TrackFile = apps.get_model('main', 'TrackFile')
+    for track in Track.objects.all():
+        file = TrackFile.objects.create(title=track.title, file=track.audio_file, track=track)
+        file.save()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -24,4 +32,5 @@ class Migration(migrations.Migration):
                 ('track', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='audio_files', to='main.Track')),
             ],
         ),
+        migrations.RunPython(update_tracks)
     ]

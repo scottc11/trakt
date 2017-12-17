@@ -31,7 +31,7 @@ class Track(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=250, blank=False, unique_for_date="pub_date")
     slug = models.SlugField(default='', blank=False)
-    bpm = models.IntegerField(blank=False)
+    bpm = models.FloatField(blank=False)
     date_recorded = models.DateField()
     key = models.ForeignKey(Key, on_delete=models.SET_NULL, blank=False, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
