@@ -1,27 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load bootstrap3 %}
+
+{% block scripts %}
+
+{% endblock %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-sm-4 col-centered">
+  <div class="form col-xs-12 col-md-6 col-centered">
       {% if exclude %}
         <h2>Edit Track</h2>
       {% else %}
         <h2>Submit New Track</h2>
       {% endif %}
-      <form method="POST" enctype="multipart/form-data">
+
+      <form id="track-form" method="POST">
         {% csrf_token %}
         {% bootstrap_form form exclude=exclude %}
+
         {% buttons %}
-            <button type="submit" name="submit" value="submit" class="btn btn-primary">
-                Submit
-            </button>
-            {% if exclude %}
-            <button type="submit" name="delete" value="delete" class="form__btn--delete btn btn-primary">
-                Delete
-            </button>
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+
+            <!-- DELETE BUTTON -->
+            {% if edit %}
+            <button type="submit" name="delete" value="delete" class="form__btn--delete btn btn-primary">Delete</button>
             {% endif %}
+
         {% endbuttons %}
       </form>
 

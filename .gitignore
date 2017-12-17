@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 cloud_sql_proxy
 static
+npm-debug.log

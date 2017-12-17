@@ -16,7 +16,7 @@ class Project extends Component {
     }
 
     return (
-      <div>
+      <div className='project'>
         <TrackList tracks={this.props.activeProject.tracks} status={1} label='Snippets' />
         <TrackList tracks={this.props.activeProject.tracks} status={2} label='Ideas' />
         <TrackList tracks={this.props.activeProject.tracks} status={3} label='Mixing' />

@@ -38,7 +38,7 @@ gsutil cors set cors-json-file.json gs://trakt
 run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
 
 ```
-npm start
+npm run webpack
 ```
 manually compile JavaScript files with
 

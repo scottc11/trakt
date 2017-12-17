@@ -14,6 +14,29 @@
   &--badges {
     text-align: right;
   }
+
+  &__file-list {
+    & ul {
+      padding: 0;
+      list-style: none;
+      & li {
+        box-sizing: border-box;
+        border-bottom: 1px solid @white;
+        font-family: @console;
+        font-size: @xs-small;
+        font-weight: 300;
+        &:hover {
+          cursor: pointer;
+          background: @bg-opac-light;
+          color: @mikado;
+        }
+      }
+    }
+    &--active { color: @mikado; }
+    &--date-time { font-size: @super-small; opacity: 0.3; }
+    &--action { margin: 3px; float: right; }
+  }
+
   &__info {
     display: inline-block;
     padding-top: 10px;
@@ -43,6 +66,7 @@
     &--median {
     }
   }
+
   &__details {
     background: @bg-white-opac;
     padding: 10px;
@@ -59,7 +83,7 @@
       }
     }
     &--toggle {
-      background: @box-shadow-light;
+      background: @bg-opac-light;
       box-sizing: border-box;
       display: inline-block;
       border-left: 1px solid #A8ADBB;

@@ -16,7 +16,7 @@ class TrackSubmition(ModelForm):
 
 
     def __init__(self, *args, **kwargs):
-            user = kwargs.pop('user')
-            super(TrackSubmition, self).__init__(*args, **kwargs)
-            self.fields['date_recorded'].initial = date.today()
-            self.fields['projects'].queryset = Project.objects.filter(collaborators__id=user.id)
+        user = kwargs.pop('user')
+        super(TrackSubmition, self).__init__(*args, **kwargs)
+        self.fields['date_recorded'].initial = date.today()
+        self.fields['projects'].queryset = Project.objects.filter(collaborators__id=user.id)

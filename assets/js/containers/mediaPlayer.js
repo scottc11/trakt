@@ -22,11 +22,14 @@ class MediaPlayer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
+
     if (this.props.activeTrack !== nextProps.activeTrack) {
       if (this.props.activeTrack.url !== nextProps.activeTrack.url) {
-        this.createAudioSource(nextProps.activeTrack.url);
-        this.onPlay();
+        if (nextProps.activeTrack.active) {
+          if (this.props.activeTrack.active) { this.onPause() }
+          this.createAudioSource(nextProps.activeTrack.url);
+          this.onPlay();
+        }
       } else {
         nextProps.activeTrack.active ? this.onPlay() : this.onPause();
       }

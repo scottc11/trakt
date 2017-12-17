@@ -1,12 +1,18 @@
 
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin, messages
+
+from google.cloud import storage
+
 from main.models.track import Track
 from main.models.project import Project
 from main.forms.track_form import TrackSubmition
+from main.forms.track_file_form import TrackFileSubmition
+from main.forms.session_upload_form import SessionUpload
 from main.forms.project_form import NewProject
 from main.forms.genre_form import NewGenre
 from main.forms.key_form import NewKey
@@ -15,21 +21,68 @@ from main.forms.key_form import NewKey
 def submit_track(request):
 
     if request.method == 'POST':
-        form = TrackSubmition(request.POST, request.FILES, user=request.user)
+        form = TrackSubmition(request.POST, user=request.user)
 
         if form.is_valid():
             track = form.save(commit=False)
             track.submitter = request.user
             track.save()
             form.save_m2m()
-            return HttpResponseRedirect(reverse('home'))
-
+            messages.success(request, "Your data has been saved!")
+            return HttpResponseRedirect(reverse('upload_file', kwargs={'pk': track.id }))
+        else:
+            raise ValueError('A very specific bad thing happened.')
 
     # if a GET or invalid form --> create a blank form
     else:
         form = TrackSubmition(user=request.user)
 
     return render(request, 'forms/submit_track.html', {'form': form})
+
+
+#---------------------------------------------------------------
+#                UPLOAD FILE TO TRACK OBJECT
+#---------------------------------------------------------------
+def upload_file(request, pk):
+    track = Track.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = TrackFileSubmition(request.POST)
+
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.file.name = request.POST.get('file_path')
+            file.save()
+            messages.success(request, "File Successfully Uploaded")
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = TrackFileSubmition(initial={'track': track})
+
+    return render(request, 'forms/upload_file.html', { 'track': track, 'form': form })
+
+
+#---------------------------------------------------------------
+#                UPLOAD SESSION FOLDER .zip FILE TO TRACK OBJECT
+#---------------------------------------------------------------
+
+def upload_session(request, pk):
+    track = Track.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = SessionUpload(request.POST)
+
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.file.name = request.POST.get('file_path')
+            file.save()
+            messages.success(request, "File Successfully Uploaded")
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = SessionUpload(initial={'track': track})
+
+    return render(request, 'forms/upload_session.html', { 'track': track, 'form': form })
+
+
 
 
 @login_required(login_url="/login/")
@@ -55,10 +108,7 @@ def edit_track(request, pk):
     else:
         track = Track.objects.get(pk=pk);
         form = TrackSubmition(instance=track, user=request.user)
-
-        # to add more to exclude, comma seperate field names in string => 'audiofile,key,genre'
-        exclude = 'audio_file'
-        return render(request, 'forms/submit_track.html', {'form': form, 'exclude': exclude})
+        return render(request, 'forms/submit_track.html', {'form': form, 'edit': True })
 
 
 @login_required(login_url="/login/")

@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from main.models.track import Track
-from main.serializers import TrackSerializer
+from main.serializers import TrackSerializer, TrackCreateSerializer
 
 
 class TrackList(APIView):
@@ -21,9 +21,9 @@ class TrackList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TrackSerializer(data=request.data)
+        serializer = TrackCreateSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(submitter=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -47,7 +47,10 @@ class TrackDetail(APIView):
 
     def put(self, request, pk, format=None):
         track = self.get_object(pk)
-        serializer = TrackSerializer(track, data=request.data)
+        print(request)
+        print(request.data)
+        track.audio_file.name = request.data['track_path']
+        serializer = TrackSerializer(track, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

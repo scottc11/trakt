@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { fetchCurrentUser } from '../actions/actions';
 
+import { fetchCurrentUser } from '../actions/actions';
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
 import ProjectList from '../containers/projectList';
+import GenreNew from '../components/genre_new';
 
 class Header extends Component {
   constructor(props) {
@@ -37,6 +39,11 @@ class Header extends Component {
             <a href={ window.location.href + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
             <span className="">{ this.props.currentUser.username }</span>
             <a href={ window.location + 'logout/' }><span>Logout</span></a>
+          </div>
+          <div className="col-xs-12">
+            <BrowserRouter>
+              <Route path="/new_genre" component={GenreNew} />
+            </BrowserRouter>
           </div>
         </div>
       </div>

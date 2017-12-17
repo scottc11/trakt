@@ -4,7 +4,9 @@
   "description": "Web Audio Storage Manager",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js --watch",
+    "notebook": "python manage.py shell_plus --notebook"
   },
   "author": "Scott Campbell [ESSY]",
   "license": "ISC",
@@ -31,7 +33,11 @@
   "dependencies": {
     "axios": "^0.17.0",
     "bootstrap": "^3.3.7",
+    "js-cookie": "^2.2.0",
     "normalize.css": "^7.0.0",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.2.2",
+    "redux-form": "^6.6.3",
     "redux-promise": "^0.5.3"
   }
 }

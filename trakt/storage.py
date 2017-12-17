@@ -6,6 +6,8 @@ from django.utils.deconstruct import deconstructible
 from django.core.files.storage import Storage
 from google.cloud import storage
 
+# NOTE: some great documentation on interacting with buckets and blobs
+# https://googlecloudplatform.github.io/google-cloud-python/latest/storage/blobs.html
 
 @deconstructible()
 class GoogleCloudStorage(Storage):
@@ -15,8 +17,6 @@ class GoogleCloudStorage(Storage):
         self.storage_location = settings.MEDIA_PREFIX
 
     def _open(self, name, mode='rb'):
-        print('------------------')
-        print('in open')
         filepath = self.storage_location + name # ex. 'media/filename.png'
         if self.storage_location in name:
             filepath = name
@@ -26,6 +26,7 @@ class GoogleCloudStorage(Storage):
             blob.download_to_file(temp_file)
             return File(temp_file)
 
+    # this save method should regularly upload the file
     def _save(self, name, file_obj):
         filepath = self.storage_location + name
         blob = self.bucket.blob(filepath)
