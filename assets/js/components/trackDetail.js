@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateMediaPlayer } from '../actions/actions';
 import TrackInfo from './trackDetailInfo';
-import TrackDetailFileList from './trackDetailFileList'
+import TrackDetailFileList from './trackDetailFileList';
+import TrackSessionList from './trackDetailSessionList';
 
 class TrackDetail extends Component {
   constructor(props) {
@@ -80,6 +81,7 @@ class TrackDetail extends Component {
           { this.state.detailsActive == true &&
             <div className="track__details">
               <TrackDetailFileList onClick={ this.onFileSelect.bind(this) } files={this.props.track.audio_files} active={this.state.activeFile.id} />
+              <TrackSessionList sessions={this.props.track.sessions} />
               <TrackInfo genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
               <div className="track__details--options">
                 <a href={ `${window.location.href}track/upload/${this.props.track.id}` } ><span className="fa fa-plus"></span></a>
