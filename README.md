@@ -2,7 +2,23 @@
 
 Website built using Django + React via webpack.
 
+### Setup virtual environment
 
+- install python 3.6 globally with homebrew
+```
+brew install python3
+```
+
+- navigate to project directory
+- create virtual env with python 3.6
+```
+virtualenv --python=python3.6 env
+```
+
+install python dependancies with pip
+```
+pip install -r requirements.txt
+```
 ### local sqlite3 db authentication
 
 username: scottcampbell
