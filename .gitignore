@@ -7,3 +7,4 @@ __pycache__/
 cloud_sql_proxy
 static
 npm-debug.log
+config.yaml

@@ -2,7 +2,31 @@
 
 Website built using Django + React via webpack.
 
-### Setup virtual environment
+## Running Locally
+
+#### Setup gcloud account and credentials
+gcloud lives in ```~/.config/gcloud/```
+all your authentication credentials can be found in that folder.  The following command are meant to ensure you have all neseccary creds to either deploy or run the app locally.
+Use ```gcloud config list``` to list the current authentication configuration.
+
+- set desired project, in this case it would be 'trakt-183713'
+```
+gcloud project list
+gcloud config set project [PROJECT-ID]
+```
+- set desired account to ACTIVE
+```
+gcloud auth list
+gcloud config set account scott.m.campbell11@gmail.com
+```
+
+- If needed, create an additional 'config' account and make ACTIVE
+```
+gcloud config list
+gcloud config configurations create trakt-config
+```
+
+#### Setup virtual environment
 
 - install python 3.6 globally with homebrew
 ```
@@ -15,10 +39,22 @@ brew install python3
 virtualenv --python=python3.6 env
 ```
 
-install python dependancies with pip
+- install python dependancies with pip
 ```
 pip install -r requirements.txt
 ```
+
+- Install React/Node dependencies
+```
+npm install
+```
+
+- Start the django server
+```
+python manage.py runserver
+```
+
+
 ### local sqlite3 db authentication
 
 username: scottcampbell

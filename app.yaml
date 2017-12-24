@@ -9,8 +9,14 @@ beta_settings:
 runtime_config:
   python_version: 3
 
-# these are enviroment variables
-# they can be access via 'os.environ'
+manual_scaling:
+  instances: 1
+
+resources:
+ cpu: .5
+ memory_gb: 0.91
+ disk_size_gb: 10
+
 env_variables:
   ON_PRODUCTION: true
   CLOUD_STORAGE_BUCKET: trakt
