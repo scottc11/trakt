@@ -4,6 +4,7 @@ Website built using Django + React via webpack.
 
 ## Running Locally
 
+--------------------------------------------------------------------------------
 #### Setup gcloud account and credentials
 gcloud lives in ```~/.config/gcloud/```
 all your authentication credentials can be found in that folder.  The following command are meant to ensure you have all neseccary creds to either deploy or run the app locally.
@@ -25,7 +26,7 @@ gcloud config set account scott.m.campbell11@gmail.com
 gcloud config list
 gcloud config configurations create trakt-config
 ```
-
+--------------------------------------------------------------------------------
 #### Setup virtual environment
 
 - install python 3.6 globally with homebrew
@@ -54,6 +55,22 @@ npm install
 python manage.py runserver
 ```
 
+run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
+
+```
+npm run webpack
+```
+manually compile JavaScript files with
+
+```
+npm pack
+```
+
+Start a Grunt watcher to compile LESS to CSS when changes are detected
+
+```
+grunt
+```
 
 ### local sqlite3 db authentication
 
@@ -86,23 +103,6 @@ guide --> https://cloud.google.com/storage/docs/cross-origin
 gsutil cors set cors-json-file.json gs://trakt
 ```
 
-
-run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
-
-```
-npm run webpack
-```
-manually compile JavaScript files with
-
-```
-npm pack
-```
-
-Start a Grunt watcher to compile LESS to CSS when changes are detected
-
-```
-grunt
-```
 ----------------------------------------------------------------------------
 To connect to gcloud cloud SQL client, run this
 
