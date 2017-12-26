@@ -23,12 +23,13 @@ def sign_url(method, filename, expiration, content_type, track_id):
     expiration = int(expiration)
     type = content_type
     track_obj = Track.objects.get(id=track_id)
+    storage_client = storage.Client(project=settings.PROJECT_ID)
 
     # create the path to the file in gcloud using associated Track object
     blob_path = '{0}/tracks/{1}/{2}'.format(track_obj.submitter, track_obj.slug, filename)
 
     creds = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_CREDENTIALS)
-    bucket = storage.Client().get_bucket(settings.CLOUD_STORAGE_BUCKET)
+    bucket = storage_client.get_bucket(settings.CLOUD_STORAGE_BUCKET)
     blob = bucket.blob(settings.MEDIA_PREFIX + blob_path)
 
     expiration_dt = datetime.utcnow() + timedelta(minutes=expiration)
