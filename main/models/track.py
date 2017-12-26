@@ -17,7 +17,7 @@ def format_storage_path(instance, filename):
 
 def format_file_storage_path(instance, filename):
     title_slug = instance.track.slug
-    username = instance.track.submitter
+    username = instance.track.submitter.profile.cloud_slug
     return '{0}/tracks/{1}/{2}'.format(username, title_slug, filename)
 
 def get_superuser():
