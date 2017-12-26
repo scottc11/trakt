@@ -26,6 +26,11 @@ gcloud config set account scott.m.campbell11@gmail.com
 gcloud config list
 gcloud config configurations create trakt-config
 ```
+
+- lastly, run this command to 'authenticate' local machine for use with gcloud API's (cloud storage)
+```
+gcloud auth application-default login
+```
 --------------------------------------------------------------------------------
 #### Setup virtual environment
 
