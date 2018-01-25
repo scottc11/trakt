@@ -138,6 +138,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(BASE_DIR, 'google-app-credentials.json')
+
 
 DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
 
