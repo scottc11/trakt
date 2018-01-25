@@ -141,5 +141,5 @@ STATICFILES_DIRS = (
 
 DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
 
-# A tuple representing a HTTP header/value combination that signifies a request is secure. 
-SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)
+# A tuple representing a HTTP header/value combination that signifies a request is secure.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
