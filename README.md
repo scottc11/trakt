@@ -20,6 +20,34 @@ username: scott.m.campbell11
 password: developer password
 email: scott.m.campbell11@gmail.com
 
+## HEROKU auth and deploy
+
+```
+heroku login
+```
+creds --> developer password, developer email
+
+Continuously monitor the status of your database
+```
+watch heroku pg:info
+```
+
+## POSTGRESQL
+
+install
+```
+brew install postgres
+```
+
+run the following command to start Postgres as a background service
+```
+brew services start postgresql
+```
+
+list all available postgres databases
+```
+psql --list
+```
 
 ### File Uploads
 

@@ -89,6 +89,7 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] =  dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -139,3 +140,6 @@ STATICFILES_DIRS = (
 
 
 DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
+
+# A tuple representing a HTTP header/value combination that signifies a request is secure. 
+SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)
