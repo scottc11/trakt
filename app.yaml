@@ -13,8 +13,8 @@ runtime_config:
 # they can be access via 'os.environ'
 env_variables:
   ON_PRODUCTION: true
-  CLOUD_STORAGE_BUCKET: trakt
-  PROJECT_ID: trakt-183713
+  GC_STORAGE_BUCKET: trakt
+  GC_PROJECT_ID: trakt-183713
   DB_NAME: traktdb
   DB_USER: scottc11
   DB_PASS: y785HUGLPO^*kslnsai%mcx12986hfpapapa90
