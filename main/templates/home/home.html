@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load render_bundle from webpack_loader %}
-
 
 {% block styles %}
 
+{% endblock %}
+
+{% block scripts %}
+  <script src={% static "bundles/app.bundle.js" %}></script>
 {% endblock %}
 
 {% block content %}
@@ -12,7 +14,7 @@
 <section id="home" class="home">
 
   <div id="container">
-    {% render_bundle 'app' %}
+
   </div>
 
 </section>

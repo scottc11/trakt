@@ -2,6 +2,16 @@
 
 Website built using Django + React via webpack.
 
+### GitLab Authentication
+
+username: scott.m.campbell11
+password: developer password
+email: scott.m.campbell11@gmail.com
+
+### Amazon AWS Authentication
+username: scottc11
+email: scott.m.campbell11@gmail.com
+password: developer password
 
 ### local sqlite3 db authentication
 
@@ -14,11 +24,6 @@ last_name: Lennon
 password: Test123
 email: lennon@thebeatles.com
 
-### GitLab Authentication
-
-username: scott.m.campbell11
-password: developer password
-email: scott.m.campbell11@gmail.com
 
 ## HEROKU auth and deploy
 
@@ -54,15 +59,6 @@ psql --list
 https://docs.djangoproject.com/en/1.11/topics/http/file-uploads/
 
 
-### seting CORS on Google Cloud Storage
-
-guide --> https://cloud.google.com/storage/docs/cross-origin
-
-```
-gsutil cors set cors-json-file.json gs://trakt
-```
-
-
 run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
 
 ```
@@ -79,6 +75,24 @@ Start a Grunt watcher to compile LESS to CSS when changes are detected
 ```
 grunt
 ```
+
+
+# --------- GOOGLE CLOUD STUFF ------------
+
+
+great google auth for python library docs:
+
+https://google-auth.readthedocs.io/en/latest/user-guide.html
+
+
+### seting CORS on Google Cloud Storage
+
+guide --> https://cloud.google.com/storage/docs/cross-origin
+
+```
+gsutil cors set cors-json-file.json gs://trakt
+```
+
 ----------------------------------------------------------------------------
 To connect to gcloud cloud SQL client, run this
 

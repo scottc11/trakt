@@ -36,17 +36,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'bootstrap3',
-    'webpack_loader',
     'django_cleanup',
     'main',
 ]
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-    }
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
