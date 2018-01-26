@@ -3,7 +3,8 @@
       "origin": [
         "https://s.codepen.io",
         "http://localhost:8000",
-        "https://trakt-183713.appspot.com/"
+        "https://trakt-183713.appspot.com/",
+        "https://trakt-app-1.herokuapp.com/"
       ],
       "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
       "method": ["GET", "HEAD", "DELETE", "PUT"],

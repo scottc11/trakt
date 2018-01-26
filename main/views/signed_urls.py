@@ -14,7 +14,7 @@ from django.http import JsonResponse
 
 from main.models.track import Track
 
-GOOGLE_SERVICE_CREDENTIALS = 'google-service-credentials.json'
+GOOGLE_SERVICE_CREDENTIALS = 'google-app-credentials.json'
 
 
 
