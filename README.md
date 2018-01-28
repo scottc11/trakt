@@ -2,16 +2,75 @@
 
 Website built using Django + React via webpack.
 
-### GitLab Authentication
+## Running Locally
 
-username: scott.m.campbell11
-password: developer password
-email: scott.m.campbell11@gmail.com
+--------------------------------------------------------------------------------
+#### Setup gcloud account and credentials
+gcloud lives in ```~/.config/gcloud/```
+all your authentication credentials can be found in that folder.  The following command are meant to ensure you have all neseccary creds to either deploy or run the app locally.
+Use ```gcloud config list``` to list the current authentication configuration.
 
-### Amazon AWS Authentication
-username: scottc11
-email: scott.m.campbell11@gmail.com
-password: developer password
+- set desired project, in this case it would be 'trakt-183713'
+```
+gcloud project list
+gcloud config set project [PROJECT-ID]
+```
+- set desired account to ACTIVE
+```
+gcloud auth list
+gcloud config set account scott.m.campbell11@gmail.com
+```
+
+- If needed, create an additional 'config' account and make ACTIVE
+```
+gcloud config list
+gcloud config configurations create trakt-config
+```
+--------------------------------------------------------------------------------
+#### Setup virtual environment
+
+- install python 3.6 globally with homebrew
+```
+brew install python3
+```
+
+- navigate to project directory
+- create virtual env with python 3.6
+```
+virtualenv --python=python3.6 env
+```
+
+- install python dependancies with pip
+```
+pip install -r requirements.txt
+```
+
+- Install React/Node dependencies
+```
+npm install
+```
+
+- Start the django server
+```
+python manage.py runserver
+```
+
+run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
+
+```
+npm run webpack
+```
+manually compile JavaScript files with
+
+```
+npm pack
+```
+
+Start a Grunt watcher to compile LESS to CSS when changes are detected
+
+```
+grunt
+```
 
 ### local sqlite3 db authentication
 
@@ -52,45 +111,6 @@ brew services start postgresql
 list all available postgres databases
 ```
 psql --list
-```
-
-### File Uploads
-
-https://docs.djangoproject.com/en/1.11/topics/http/file-uploads/
-
-
-run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
-
-```
-npm run webpack
-```
-manually compile JavaScript files with
-
-```
-npm pack
-```
-
-Start a Grunt watcher to compile LESS to CSS when changes are detected
-
-```
-grunt
-```
-
-
-# --------- GOOGLE CLOUD STUFF ------------
-
-
-great google auth for python library docs:
-
-https://google-auth.readthedocs.io/en/latest/user-guide.html
-
-
-### seting CORS on Google Cloud Storage
-
-guide --> https://cloud.google.com/storage/docs/cross-origin
-
-```
-gsutil cors set cors-json-file.json gs://trakt
 ```
 
 ----------------------------------------------------------------------------
