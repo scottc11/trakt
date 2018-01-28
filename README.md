@@ -1,4 +1,4 @@
-# TRAKT
+# TRAKT V1.2
 
 Website built using Django + React via webpack.
 
