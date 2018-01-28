@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from main.models.track import TrackFile
+from main.models.track_file import TrackFile
 from main.serializers import TrackFileSerializer
 
 

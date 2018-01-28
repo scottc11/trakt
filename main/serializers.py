@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.models import User
-from main.models.track import Track, TrackFile, TrackSession
+from main.models.track import Track
+from main.models.track_file import TrackFile
+from main.models.track_session import TrackSession
 from main.models.project import Project
 from main.models.genre import Genre
 

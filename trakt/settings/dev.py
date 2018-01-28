@@ -32,8 +32,8 @@ DATABASES = {
 # ----------------------------------------------------------------------------
 
 PROJECT_ID = 'trakt-183713'
-CLOUD_STORAGE_BUCKET = 'trakt'
-MEDIA_PREFIX = "dev/users/"
+CLOUD_STORAGE_BUCKET = 'trakt-dev'
+MEDIA_PREFIX = "users/"
 
 CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
     bucket_name=CLOUD_STORAGE_BUCKET

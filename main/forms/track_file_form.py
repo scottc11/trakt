@@ -3,7 +3,8 @@ from datetime import date
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
 from django.forms import Form, ModelForm
-from main.models.track import TrackFile, Track
+from main.models.track import Track
+from main.models.track_file import TrackFile
 
 
 class TrackFileSubmition(ModelForm):

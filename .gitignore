@@ -4,6 +4,7 @@ webpack-stats.json
 __pycache__/
 *.py[cod]
 *.pyc
+*.DS_Store
 cloud_sql_proxy
 static
 npm-debug.log

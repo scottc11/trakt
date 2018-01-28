@@ -58,18 +58,12 @@ python manage.py runserver
 run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
 
 ```
-npm run webpack
+npm start
 ```
 manually compile JavaScript files with
 
 ```
 npm pack
-```
-
-Start a Grunt watcher to compile LESS to CSS when changes are detected
-
-```
-grunt
 ```
 
 ### local sqlite3 db authentication
@@ -134,6 +128,14 @@ This step establishes a connection from your local computer to your Cloud SQL in
 Write google app default credentials
 ```
 gcloud auth application-default
+```
+
+### setting CORS on Google Cloud Storage
+
+guide --> https://cloud.google.com/storage/docs/cross-origin
+
+```
+gsutil cors set cors-json-file.json gs://trakt
 ```
 
 -------- DEPLOY APP ----------
