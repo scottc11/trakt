@@ -20,9 +20,7 @@ export function fetchCurrentUser() {
 export function fetchProject(proj_id) {
   const url = window.location.href + `api/projects/${proj_id}`;
   const request = axios.get(url);
-  // promise middleware stops this action until the promise finishes
-  // once request finishes, dispatches a new action of same type but
-  // with a payload of the promise response
+
   return {
     type: FETCH_PROJECT,
     payload: request

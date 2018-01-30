@@ -1,5 +1,26 @@
 @import 'variables';
 
 .project {
-  
+  &__detail {
+    height: 100%;
+    background: rgba(193, 193, 193, 0.1);
+    color: @white;
+    &--header {
+      text-align: center;
+      margin-top: 20px;
+      font-family: @bungee-hairline;
+    }
+    &--collaborators {
+      & h4 {
+        font-family: @old-code;
+        margin-top: 20px;
+      }
+      & ul {
+        padding: 10px;
+        & li {
+
+        }
+      }
+    }
+  }
 }

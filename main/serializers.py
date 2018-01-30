@@ -6,7 +6,12 @@ from main.models.track_file import TrackFile
 from main.models.track_session import TrackSession
 from main.models.project import Project
 from main.models.genre import Genre
+from main.models.status import Status
 
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ('id', 'title', 'color')
 
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,7 +29,7 @@ class TrackSerializer(serializers.ModelSerializer):
     submitter = serializers.StringRelatedField(many=False)
     genre = serializers.StringRelatedField(many=False)
     key = serializers.StringRelatedField(many=False)
-    status = serializers.SlugRelatedField(many=False, read_only=True, slug_field='position')
+    status = StatusSerializer(many=False, read_only=True)
     audio_files = TrackFileSerializer(many=True)
     sessions = SessionFileSerializer(many=True)
 

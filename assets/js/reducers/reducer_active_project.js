@@ -7,6 +7,7 @@ import { FETCH_PROJECT } from '../actions/actions';
 export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_PROJECT:
+      console.log(action.payload.data);
       return Object.assign(
         {},
         state,

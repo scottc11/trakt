@@ -2,7 +2,7 @@ from django.db import models
 
 # what stage is the track in
 class Status(models.Model):
-    stage = models.CharField(max_length=50, blank=False)
+    title = models.CharField(max_length=50, blank=False)
     color = models.CharField(max_length=10, blank=False)
 
     def __str__(self):
