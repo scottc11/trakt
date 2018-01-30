@@ -5,6 +5,7 @@ import { updateMediaPlayer } from '../actions/actions';
 import TrackBadges from './trackBadges';
 import TrackDetailFileList from './trackDetailFileList';
 import TrackSessionList from './trackDetailSessionList';
+import UserBadge from './userBadge';
 
 class TrackDetail extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class TrackDetail extends Component {
               <span className="track__info--median"> &middot; </span>
               <h6 className="track__info--active-file">{ this.state.activeFile.title }</h6>
               <span className="track__info--median"> &middot; </span>
-              <h6 className="track__info--submitter badge badge--user">{ this.props.track.submitter }</h6>
+              <UserBadge user={this.props.track.submitter} />
               <span className="track__info--median"> &middot; </span>
               <h6 className="track__info--date">{ this.props.track.date_recorded }</h6>
               <TrackBadges genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />

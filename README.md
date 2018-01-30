@@ -74,7 +74,7 @@ password: developer password
 #### test users
 username: John
 last_name: Lennon
-password: Test123
+password: Test1234
 email: lennon@thebeatles.com
 
 

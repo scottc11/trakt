@@ -7,11 +7,12 @@ from main.models.track_session import TrackSession
 from main.models.project import Project
 from main.models.genre import Genre
 from main.models.status import Status
+from main.models.profile import Profile
 
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ('id', 'title', 'color')
+        fields = ('id', 'title', 'hex_code')
 
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,8 +26,21 @@ class SessionFileSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'file', 'track', 'pub_date', 'date')
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('hex_code',)
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(many=False)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'profile')
+
+
 class TrackSerializer(serializers.ModelSerializer):
-    submitter = serializers.StringRelatedField(many=False)
+    submitter = UserSerializer(many=False)
     genre = serializers.StringRelatedField(many=False)
     key = serializers.StringRelatedField(many=False)
     status = StatusSerializer(many=False, read_only=True)
@@ -60,22 +74,21 @@ class TrackCreateSerializer(serializers.ModelSerializer):
                 )
 
 
-
 class ProjectSerializer(serializers.ModelSerializer):
-    collaborators = serializers.StringRelatedField(many=True)
+    collaborators = UserSerializer(many=True)
     tracks = TrackSerializer(many=True)
 
     class Meta:
         model = Project
         fields = ('id', 'title', 'collaborators', 'tracks')
 
-# not yet implemented
-class UserSerializer(serializers.ModelSerializer):
+class ActiveUserSerializer(serializers.ModelSerializer):
     projects = ProjectSerializer(many=True)
+    profile = ProfileSerializer(many=False)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'projects')
+        fields = ('id', 'username', 'projects', 'profile')
 
 
 class GenreSerializer(serializers.ModelSerializer):
