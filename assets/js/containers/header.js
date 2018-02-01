@@ -27,7 +27,7 @@ class Header extends Component {
       <div className="header--bg" >
         <div className="container header">
           <div className="header--heading col-xs-2">
-            <a href=""><span>YEYE</span></a>
+            <a href=""><span>V2</span></a>
           </div>
           <div className="col-xs-6">
             <ProjectList
