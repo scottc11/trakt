@@ -107,6 +107,19 @@ list all available postgres databases
 psql --list
 ```
 
+Select database
+```
+psql db-name
+```
+
+Exit out of the postgres user's shell session to get back to your regular user's shell session:
+```
+exit
+```
+OR
+```
+\q
+```
 ----------------------------------------------------------------------------
 To connect to gcloud cloud SQL client, run this
 
