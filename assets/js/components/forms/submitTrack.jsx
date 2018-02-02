@@ -8,20 +8,16 @@ class TrackForm extends React.Component {
     super(props);
     this.state = {
       title: '', // string
-      key: '', // foreign key
-      genre: '', // foreign key
-      projects: '', // foreign key
+      key: this.props.keys[0].id, // foreign key
+      genre: this.props.genres[0].id, // foreign key
+      projects: this.props.projects[0].id, // foreign key
       bpm: '', // num
+      status: this.props.statusList[0].id, // string
       date_recorded: '', // Date object
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // TODO: change to 'active project'
-    this.setState({projects: nextProps.projects[0]})
   }
 
   handleChange(event) {
