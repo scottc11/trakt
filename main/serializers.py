@@ -6,13 +6,14 @@ from main.models.track_file import TrackFile
 from main.models.track_session import TrackSession
 from main.models.project import Project
 from main.models.genre import Genre
+from main.models.key import Key
 from main.models.status import Status
 from main.models.profile import Profile
 
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ('id', 'title', 'hex_code')
+        fields = ('id', 'label', 'hex_code')
 
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -80,14 +81,14 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'title', 'collaborators', 'tracks')
+        fields = ('id', 'label', 'collaborators', 'tracks')
 
 
 class SimpleProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'title')
+        fields = ('id', 'label')
 
 
 class ActiveUserSerializer(serializers.ModelSerializer):
@@ -102,4 +103,10 @@ class ActiveUserSerializer(serializers.ModelSerializer):
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ('id', 'genre')
+        fields = ('id', 'label')
+
+
+class KeySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Key
+        fields = ('id', 'label')

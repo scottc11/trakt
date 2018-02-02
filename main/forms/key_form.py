@@ -6,4 +6,4 @@ from main.models.key import Key
 class NewKey(ModelForm):
     class Meta:
         model = Key
-        fields = ['key']
+        fields = ['label']

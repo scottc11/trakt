@@ -20,8 +20,10 @@ from main.views import home, forms
 from main.views.api.tracks_api import TrackList, TrackDetail
 from main.views.api.files_api import TrackFileList, TrackFileDetail
 from main.views.api.genres_api import GenreList, GenreDetail
+from main.views.api.keys_api import KeyList, KeyDetail
 from main.views.api.users import UserList, UserDetail, CurrentUser
 from main.views.api.projects import ProjectList, ProjectDetail
+from main.views.api.status_api import StatusList, StatusDetail
 from main.views.signed_urls import get_signed_url
 
 
@@ -46,6 +48,8 @@ urlpatterns = [
     url(r'^api/files/(?P<pk>[0-9]+)/$', TrackFileDetail.as_view()),
     url(r'^api/genres/$', GenreList.as_view()),
     url(r'^api/genres/(?P<pk>[0-9]+)/$', GenreDetail.as_view()),
+    url(r'^api/keys/$', KeyList.as_view()),
+    url(r'^api/keys/(?P<pk>[0-9]+)/$', KeyDetail.as_view()),
     url(r'^api/tracks/$', TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', TrackDetail.as_view()),
     url(r'^api/users/$', UserList.as_view()),
@@ -53,6 +57,8 @@ urlpatterns = [
     url(r'^api/users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
     url(r'^api/projects/$', ProjectList.as_view()),
     url(r'^api/projects/(?P<pk>[0-9]+)/$', ProjectDetail.as_view()),
+    url(r'^api/status/$', StatusList.as_view()),
+    url(r'^api/status/(?P<pk>[0-9]+)/$', StatusDetail.as_view()),
 
     # Catch All other url routes for react-router
 ]

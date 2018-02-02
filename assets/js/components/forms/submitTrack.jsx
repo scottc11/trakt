@@ -20,6 +20,7 @@ class TrackForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // TODO: change to 'active project'
     this.setState({projects: nextProps.projects[0]})
   }
 
@@ -56,7 +57,10 @@ class TrackForm extends React.Component {
           Date:
           <input type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
         </label>
-        <FormDropdown name="projects" handleChange={this.handleChange} items={this.props.projects}/>
+        <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
+        <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
+        <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
+        <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
         <input type="submit" value="Submit" />
       </form>
     );
@@ -64,7 +68,7 @@ class TrackForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projects };
+  return { projects: state.projects, genres: state.genres, keys: state.keys, statusList: state.statusList };
 }
 
 

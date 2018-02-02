@@ -7,7 +7,7 @@ from main.models.project import Project
 class NewProject(ModelForm):
     class Meta:
         model = Project
-        fields = ['title', 'collaborators']
+        fields = ['label', 'collaborators']
         help_texts = {
             'collaborators': _('Hold down COMMAND to select more than one user.'),
         }

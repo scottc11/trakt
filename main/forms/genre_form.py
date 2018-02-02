@@ -6,4 +6,4 @@ from main.models.genre import Genre
 class NewGenre(ModelForm):
     class Meta:
         model = Genre
-        fields = ['genre']
+        fields = ['label']
