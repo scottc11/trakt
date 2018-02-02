@@ -82,6 +82,14 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'title', 'collaborators', 'tracks')
 
+
+class SimpleProjectSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Project
+        fields = ('id', 'title')
+
+
 class ActiveUserSerializer(serializers.ModelSerializer):
     projects = ProjectSerializer(many=True)
     profile = ProfileSerializer(many=False)

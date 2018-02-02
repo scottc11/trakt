@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import FormDropdown from './formDropdown';
 
 class TrackForm extends React.Component {
   constructor(props) {
@@ -17,7 +19,12 @@ class TrackForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({project: nextProps.projects[0]})
+  }
+
   handleChange(event) {
+    console.log(event.target.value);
     this.setState({[event.target.name]: event.target.value});
   }
 
@@ -48,10 +55,16 @@ class TrackForm extends React.Component {
           Date:
           <input type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
         </label>
+        <FormDropdown name="project" handleChange={this.handleChange} items={this.props.projects}/>
         <input type="submit" value="Submit" />
       </form>
     );
   }
 }
 
-export default TrackForm;
+function mapStateToProps(state) {
+  return { projects: state.projects };
+}
+
+
+export default connect(mapStateToProps)(TrackForm);

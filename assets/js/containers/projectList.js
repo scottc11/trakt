@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchProject } from '../actions/actions';
+import { fetchProject, fetchProjects } from '../actions/actions';
 import DropdownItemList from '../components/DropdownItemList'
 
 
@@ -17,6 +17,7 @@ class ProjectList extends Component {
 
   componentDidMount() {
     this.props.fetchProject(this.props.selected.id);
+    this.props.fetchProjects();
   }
 
   toggleMenu() {
@@ -62,7 +63,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchProject }, dispatch);
+  return bindActionCreators({ fetchProject, fetchProjects }, dispatch);
 }
 
 
