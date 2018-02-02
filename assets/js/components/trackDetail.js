@@ -13,7 +13,7 @@ class TrackDetail extends Component {
     this.state = {
       active: false,
       detailsActive: false,
-      activeFile: props.track.audio_files[0]
+      activeFile: this.props.track.audio_files[0]
     };
     this.onToggleDetails = this.onToggleDetails.bind(this);
   }
@@ -22,6 +22,10 @@ class TrackDetail extends Component {
     if (nextState.activeFile.id !== this.state.activeFile.id) {
       this.onPause();
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ activeFile: this.props.track.audio_files[0] })
   }
 
   onToggleDetails() {
@@ -45,6 +49,12 @@ class TrackDetail extends Component {
   }
 
   render() {
+    let activeFile = null;
+    if (this.props.track.audio_files.length < 1) {
+      activeFile = <span>no file.</span>;
+    } else {
+      activeFile = <h6 className="track__info--active-file">{ this.state.activeFile.title }</h6>;
+    }
 
     let button = null;
     if (this.state.active) {
@@ -56,7 +66,6 @@ class TrackDetail extends Component {
     return (
       <li>
         <div className="track">
-
           <div>
 
             <div className="track--button">
@@ -66,7 +75,7 @@ class TrackDetail extends Component {
             <div className="track__info">
               <h6 className="track__info--title">{ this.props.track.title }</h6>
               <span className="track__info--median"> &middot; </span>
-              <h6 className="track__info--active-file">{ this.state.activeFile.title }</h6>
+              {activeFile}
               <span className="track__info--median"> &middot; </span>
               <UserBadge user={this.props.track.submitter} />
               <span className="track__info--median"> &middot; </span>

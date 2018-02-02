@@ -10,7 +10,7 @@ class TrackForm extends React.Component {
       title: '', // string
       key: '', // foreign key
       genre: '', // foreign key
-      project: '', // foreign key
+      projects: '', // foreign key
       bpm: '', // num
       date_recorded: '', // Date object
     };
@@ -20,7 +20,7 @@ class TrackForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({project: nextProps.projects[0]})
+    this.setState({projects: nextProps.projects[0]})
   }
 
   handleChange(event) {
@@ -31,6 +31,7 @@ class TrackForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = this.state;
+    data.projects = [parseInt(data.projects)]
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
       .then( (res) => {
@@ -55,7 +56,7 @@ class TrackForm extends React.Component {
           Date:
           <input type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
         </label>
-        <FormDropdown name="project" handleChange={this.handleChange} items={this.props.projects}/>
+        <FormDropdown name="projects" handleChange={this.handleChange} items={this.props.projects}/>
         <input type="submit" value="Submit" />
       </form>
     );
