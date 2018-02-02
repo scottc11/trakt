@@ -36,7 +36,6 @@ class Header extends Component {
             />
           </div>
           <div className="header--info col-xs-4">
-            <a href={ window.location.href + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
             <span className="">{ this.props.currentUser.username }</span>
             <a href={ window.location + 'logout/' }><span>Logout</span></a>
           </div>

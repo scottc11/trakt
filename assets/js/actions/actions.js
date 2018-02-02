@@ -3,6 +3,7 @@ export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const UPDATE_MEDIA_PLAYER = 'UPDATE_MEDIA_PLAYER';
 export const CREATE_GENRE = 'CREATE_GENRE';
+export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 
 // Get initial user data to start up application
 export function fetchCurrentUser() {
@@ -11,6 +12,16 @@ export function fetchCurrentUser() {
 
   return {
     type: FETCH_CURRENT_USER,
+    payload: request
+  }
+}
+
+export function fetchProjects() {
+  const url = axios.defaults.baseURL + 'api/projects/'
+  const request = axios.get(url);
+
+  return {
+    type: FETCH_PROJECTS,
     payload: request
   }
 }

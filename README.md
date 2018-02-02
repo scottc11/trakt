@@ -71,6 +71,12 @@ npm pack
 username: scottcampbell
 password: developer password
 
+
+### local postgres db authentication
+
+username: scottc11
+password: music password with caps and num
+
 #### test users
 username: John
 last_name: Lennon
@@ -105,6 +111,15 @@ brew services start postgresql
 list all available postgres databases
 ```
 psql --list
+```
+
+Create database
+```
+createdb database_name -U user_name
+```
+Load a dump into database
+```
+psql databasename < data_base_dump
 ```
 
 Select database
