@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import FormDropdown from './formDropdown';
+import FileInput from './fileInput';
 
 class TrackForm extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class TrackForm extends React.Component {
       bpm: '', // num
       status: this.props.statusList[0].id, // string
       date_recorded: '', // Date object
+      id: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,10 +34,12 @@ class TrackForm extends React.Component {
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
       .then( (res) => {
+        if (res.status == 201) {
+          this.setState({ id: res.data.id })
+        }
         console.log(res);
       })
       .catch( err => console.log(err) );
-
   }
 
   render() {
@@ -58,6 +62,7 @@ class TrackForm extends React.Component {
         <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
         <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
         <input type="submit" value="Submit" />
+        <FileInput track={this.state.id} />
       </form>
     );
   }

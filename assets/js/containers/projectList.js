@@ -45,7 +45,7 @@ class ProjectList extends Component {
       <div>
         <div className={ this.state.menuActive ? 'dropdown dropdown--active' : 'dropdown' }>
           <div>
-            <div className="dropdown--selected">{this.props.activeProject.title}</div>
+            <div className="dropdown--selected">{this.props.activeProject.label}</div>
             <div className={ this.state.menuActive ? 'dropdown--toggle fa fa-angle-up' : 'dropdown--toggle fa fa-angle-down' } onClick = { this.toggleMenu }></div>
           </div>
           {menu}

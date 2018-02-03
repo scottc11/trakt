@@ -15,10 +15,16 @@ class StatusSerializer(serializers.ModelSerializer):
         model = Status
         fields = ('id', 'label', 'hex_code')
 
+
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackFile
         fields = ('id', 'title', 'file', 'track', 'pub_date')
+
+class TrackFileCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrackFile
+        fields = ('id', 'title', 'file', 'track',)
 
 
 class SessionFileSerializer(serializers.ModelSerializer):
@@ -90,6 +96,12 @@ class SimpleProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'label')
 
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'projects', 'profile')
 
 class ActiveUserSerializer(serializers.ModelSerializer):
     projects = ProjectSerializer(many=True)

@@ -7,7 +7,7 @@ const DropdownItemList = (props) => {
       <li
         onClick={() => props.select(item)}
         key={item.id} >
-        {item.title}
+        {item.label}
       </li>
     )
   });

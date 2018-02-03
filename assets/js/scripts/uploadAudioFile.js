@@ -31,6 +31,8 @@ $("document").ready( () => {
     }
   });
 
+
+
   $("#session-file").change(function() {
     console.log(this.files[0]);
 
