@@ -18,13 +18,12 @@ class FileInput extends Component {
     const params = {
       filename: file.name,
       type: file.type,
-      expiration: 10,
-      track_id: this.props.id
+      expiration: '10',
+      track_id: this.props.trackID
     }
 
     if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
-      console.log(true);
-      axios.get(url, params).then( res => {
+      axios.get(url, { params: params }).then( res => {
         console.log(res);
       })
     } else {

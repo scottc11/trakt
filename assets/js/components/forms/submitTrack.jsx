@@ -62,7 +62,7 @@ class TrackForm extends React.Component {
         <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
         <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
         <input type="submit" value="Submit" />
-        <FileInput track={this.state.id} />
+        <FileInput trackID={this.state.id} />
       </form>
     );
   }
