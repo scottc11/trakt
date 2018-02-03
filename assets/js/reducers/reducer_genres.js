@@ -8,7 +8,6 @@ export default function(state = null, action) {
       return Object.assign({}, state, action.payload);
 
     case FETCH_GENRES:
-      console.log(action.payload.data);
       return action.payload.data;
 
     default:

@@ -17,13 +17,52 @@ class TrackForm extends React.Component {
       date_recorded: '', // Date object
       id: null,
     };
-
+    this.validateFile = this.validateFile.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  uploadFile(trackID) {
+    const url = axios.defaults.baseURL + 'track/submit/sign_url/'
+    const file = this.fileInput.files[0];
+
+    const params = {
+      filename: file.name,
+      type: file.type,
+      expiration: '10',
+      track_id: trackID
+    }
+    // get the signed_url from server
+    axios.get(url, { params: params }).then( res => {
+      console.log(res);
+      if (res.status == 200) {
+        // upload to directly to gcloud
+
+        const config = {
+          headers: {
+            'Content-Type': file.type
+          }
+        }
+
+        axios.put(res.data.signed_url, file, config).then( res => console.log(res) );
+      }
+    })
+  }
+
+  validateFile(event) {
+    const file = event.target.files[0];
+
+    if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
+      console.log('valid');
+    } else {
+      alert("Invalid file type.  File must be either '.mp3' or '.wav'");
+      event.target.value = event.target.defaultValue;
+    }
+    console.log(file);
+  }
+
   handleChange(event) {
-    console.log(event.target.value);
     this.setState({[event.target.name]: event.target.value});
   }
 
@@ -34,10 +73,10 @@ class TrackForm extends React.Component {
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
       .then( (res) => {
-        if (res.status == 201) {
-          this.setState({ id: res.data.id })
-        }
         console.log(res);
+        if (res.status == 201) {
+          this.uploadFile(res.data.id) // passing track id
+        }
       })
       .catch( err => console.log(err) );
   }
@@ -62,7 +101,7 @@ class TrackForm extends React.Component {
         <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
         <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
         <input type="submit" value="Submit" />
-        <FileInput trackID={this.state.id} />
+        <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
       </form>
     );
   }
