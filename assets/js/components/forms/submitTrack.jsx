@@ -15,7 +15,7 @@ class TrackForm extends React.Component {
       bpm: '', // num
       status: this.props.statusList[0].id, // string
       date_recorded: '', // Date object
-      id: null,
+      disabled: true
     };
     this.validateFile = this.validateFile.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -55,6 +55,7 @@ class TrackForm extends React.Component {
 
     if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
       console.log('valid');
+      this.setState({ disabled: false });
     } else {
       alert("Invalid file type.  File must be either '.mp3' or '.wav'");
       event.target.value = event.target.defaultValue;
@@ -100,7 +101,7 @@ class TrackForm extends React.Component {
         <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
         <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
         <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" disabled={this.state.disabled}/>
         <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
       </form>
     );
