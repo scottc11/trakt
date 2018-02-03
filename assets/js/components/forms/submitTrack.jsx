@@ -26,7 +26,7 @@ class TrackForm extends React.Component {
   uploadFile(trackID) {
     const url = axios.defaults.baseURL + 'track/submit/sign_url/'
     const file = this.fileInput.files[0];
-
+    let filePath = '';
     const params = {
       filename: file.name,
       type: file.type,
@@ -37,15 +37,28 @@ class TrackForm extends React.Component {
     axios.get(url, { params: params }).then( res => {
       console.log(res);
       if (res.status == 200) {
-        // upload to directly to gcloud
-
+        console.log(res.data.file_path);
+        filePath = res.data.file_path;
         const config = {
           headers: {
             'Content-Type': file.type
           }
         }
+        // upload file directly to gcloud
+        axios.put(res.data.signed_url, file, config).then( (res) => {
+          console.log(res);
+          console.log('create track_file object now.');
+          const url = axios.defaults.baseURL + 'api/files/'
 
-        axios.put(res.data.signed_url, file, config).then( res => console.log(res) );
+          const data = {
+            title: filePath.split('/').slice(-1)[0],
+            file_path: filePath,
+            track: trackID
+          }
+          // create a track_file object in DB via DRF
+          axios.post(url, data).then( res => console.log(res) )
+
+        });
       }
     })
   }
@@ -54,13 +67,11 @@ class TrackForm extends React.Component {
     const file = event.target.files[0];
 
     if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
-      console.log('valid');
       this.setState({ disabled: false });
     } else {
       alert("Invalid file type.  File must be either '.mp3' or '.wav'");
       event.target.value = event.target.defaultValue;
     }
-    console.log(file);
   }
 
   handleChange(event) {

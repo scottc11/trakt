@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from main.models.track_file import TrackFile
-from main.serializers import TrackFileSerializer
+from main.serializers import TrackFileSerializer, TrackFileCreateSerializer
 
 
 class TrackFileList(APIView):
@@ -20,9 +20,9 @@ class TrackFileList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TrackFileSerializer(data=request.data)
+        serializer = TrackFileCreateSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(file=request.data['file_path'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

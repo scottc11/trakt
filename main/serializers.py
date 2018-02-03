@@ -24,7 +24,7 @@ class TrackFileSerializer(serializers.ModelSerializer):
 class TrackFileCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackFile
-        fields = ('id', 'title', 'file', 'track',)
+        fields = ('id', 'title', 'track',)
 
 
 class SessionFileSerializer(serializers.ModelSerializer):
