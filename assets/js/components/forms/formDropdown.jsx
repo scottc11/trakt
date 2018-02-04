@@ -8,11 +8,8 @@ export default function(props) {
   })
 
   return (
-    <label>
-      {props.label}
-      <select name={props.name} onChange={ (e) => props.handleChange(e) }>
-        {options}
-      </select>
-    </label>
+    <select name={props.name} onChange={ (e) => props.handleChange(e) }>
+      {options}
+    </select>
   );
 }

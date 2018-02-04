@@ -12,7 +12,6 @@ const TrackList = (props) => {
     <ul className="track-list col-xs-9">
       {trackItems}
       <li><TrackForm /></li>
-      <li><a href={ axios.defaults.baseURL + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a></li>
     </ul>
   )
 }

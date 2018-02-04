@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import FormDropdown from './formDropdown';
-import FileInput from './fileInput';
 
 class TrackForm extends React.Component {
   constructor(props) {
@@ -14,13 +13,14 @@ class TrackForm extends React.Component {
       projects: this.props.projects[0].id, // foreign key
       bpm: '', // num
       status: this.props.statusList[0].id, // string
-      date_recorded: '', // Date object
+      date_recorded: new Date().toDateInputValue(), // Date object
       disabled: true
     };
     this.validateFile = this.validateFile.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   uploadFile(trackID) {
@@ -37,17 +37,17 @@ class TrackForm extends React.Component {
     axios.get(url, { params: params }).then( res => {
       console.log(res);
       if (res.status == 200) {
-        console.log(res.data.file_path);
         filePath = res.data.file_path;
         const config = {
-          headers: {
-            'Content-Type': file.type
+          headers: { 'Content-Type': file.type },
+          onUploadProgress: (progressEvent) => {
+            let percentLoaded = progressEvent.loaded / progressEvent.total;
+            console.log(percentLoaded);
           }
         }
         // upload file directly to gcloud
         axios.put(res.data.signed_url, file, config).then( (res) => {
           console.log(res);
-          console.log('create track_file object now.');
           const url = axios.defaults.baseURL + 'api/files/'
 
           const data = {
@@ -95,26 +95,19 @@ class TrackForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Title:
-          <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-        </label>
-        <label>
-          BPM:
-          <input type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
-        </label>
-        <label>
-          Date:
-          <input type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
-        </label>
-        <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
-        <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
-        <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
-        <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
-        <input type="submit" value="Submit" disabled={this.state.disabled}/>
-        <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
-      </form>
+      <div className="track form__track">
+        <form onSubmit={this.handleSubmit}>
+          <input placeholder="Title" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+          <input placeholder="BPM" type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
+          <input placeholder="Date" type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
+          <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
+          <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
+          <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
+          <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
+          <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
+          <input type="submit" value="Submit" disabled={this.state.disabled}/>
+        </form>
+      </div>
     );
   }
 }
