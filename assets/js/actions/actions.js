@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const UPDATE_MEDIA_PLAYER = 'UPDATE_MEDIA_PLAYER';

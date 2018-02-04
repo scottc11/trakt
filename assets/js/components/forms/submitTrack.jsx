@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import axios from 'axios';
+
+import { createTrackFile } from '../../actions/track_actions';
 import FormDropdown from './formDropdown';
 
 class TrackForm extends React.Component {
@@ -46,19 +49,16 @@ class TrackForm extends React.Component {
           }
         }
         // upload file directly to gcloud
-        axios.put(res.data.signed_url, file, config).then( (res) => {
-          console.log(res);
-          const url = axios.defaults.baseURL + 'api/files/'
-
-          const data = {
-            title: filePath.split('/').slice(-1)[0],
-            file_path: filePath,
-            track: trackID
-          }
-          // create a track_file object in DB via DRF
-          axios.post(url, data).then( res => console.log(res) )
-
-        });
+        axios.put(res.data.signed_url, file, config)
+          .then( (res) => {
+            // create trackFile object via action
+            // on success, action will fetchProject to update UI
+            this.props.createTrackFile(filePath, trackID, this.props.activeProject.id);
+          })
+          .catch( err => {
+            console.log(err)
+            alert("Something went wrong: uploading file");
+          });
       }
     })
   }
@@ -113,8 +113,17 @@ class TrackForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projects, genres: state.genres, keys: state.keys, statusList: state.statusList };
+  return {
+    projects: state.projects,
+    genres: state.genres,
+    keys: state.keys,
+    statusList: state.statusList,
+    activeProject: state.activeProject
+  };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ createTrackFile }, dispatch);
+}
 
-export default connect(mapStateToProps)(TrackForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackForm);

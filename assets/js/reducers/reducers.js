@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import ProjectReducer from './reducer_active_project';
+import ProjectReducer from './project_reducer';
 import ProjectsReducer from './reducer_projects';
 import UserReducer from './reducer_current_user';
 import GenresReducer from './reducer_genres';

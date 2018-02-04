@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider} from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import promiseMiddleware from 'redux-promise';
+import ReduxPromise from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
 
 import PrototypeMethods from './utils/prototypeMethods.js';
 import Styles from '../less/index.less';
@@ -14,7 +15,7 @@ import Header from './containers/header';
 import Project from './containers/project';
 import MediaPlayer from './containers/mediaPlayer'
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(createStore);
 
 // set scrf token from django cookie
 const csrftoken = Cookies.get('csrftoken');
