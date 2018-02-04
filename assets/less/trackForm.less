@@ -6,46 +6,45 @@
     border: none;
     box-shadow: none;
     border-color: @bg-white-opac;
-    & form {
-      font-family: @console;
+  }
+  & form {
+    font-family: @console;
+    color: @onyx;
+    margin: 10px 5px;
+    & label { margin: 0 5px; }
+    & input {
+      background: @bg-white-opac;
+      border-style: none;
+      border: none;
+      border-radius: 5px;
+      &::placeholder {
+        color: @white;
+        opacity: 0.5;
+      }
+    }
+    & input[type=text] {
+      cursor: text;
+    }
+    & input[type=file] {
+      display: inline-block;
+      background: none;
+      color: @white;
+    }
+    & input[type=submit] {
+      background: @dark-blue;
+      color: @white;
+      margin-top: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 5px;
+    }
+    & select, input {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    & select {
       color: @onyx;
-      margin: 10px 5px;
-      & label { margin: 0 5px; }
-      & input {
-        background: @bg-white-opac;
-        border-style: none;
-        border: none;
-        border-radius: 5px;
-        &::placeholder {
-          color: @white;
-          opacity: 0.5;
-        }
-      }
-
-      & input[type=file] {
-        display: inline-block;
-        background: none;
-        color: @white;
-      }
-      & input[type=submit] {
-        background: @dark-blue;
-        color: @white;
-        margin-top: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 10px;
-        display: block;
-        width: 30%;
-        max-width: 200px;
-      }
-      & select, input {
-        margin: 0 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
-      & select {
-        color: @onyx;
-      }
     }
   }
 }

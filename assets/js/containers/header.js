@@ -4,7 +4,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 
-import { fetchCurrentUser, fetchGenres, fetchKeys, fetchStatusList } from '../actions/actions';
+import { fetchCurrentUser } from '../actions/actions';
+import { fetchKeys } from '../actions/key_actions';
+import { fetchGenres } from '../actions/genre_actions';
+import { fetchStatusList } from '../actions/status_actions';
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
 import ProjectList from '../containers/projectList';
 import GenreNew from '../components/genre_new';

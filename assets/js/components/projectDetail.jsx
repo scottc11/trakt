@@ -1,15 +1,17 @@
 import React from 'react';
 import UserBadge from './userBadge';
+import GenreForm from './forms/genreForm';
+import StatusForm from './forms/statusForm';
+import KeyForm from './forms/keyForm';
 
 export default function(props) {
-
 
   const collaborators = props.project.collaborators.map( (user) => <li key={user.id} ><UserBadge user={user} /></li> )
 
   return (
     <div className="project__detail col-xs-3">
       <div className="project__detail--header">
-        <h1>{props.project.title}</h1>
+        <h1>{props.project.label}</h1>
         <hr></hr>
       </div>
       <div className="project__detail--collaborators">
@@ -18,6 +20,9 @@ export default function(props) {
           {collaborators}
         </ul>
       </div>
+      <GenreForm />
+      <StatusForm />
+      <KeyForm />
     </div>
   )
 }

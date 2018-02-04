@@ -95,7 +95,7 @@ class TrackForm extends React.Component {
 
   render() {
     return (
-      <div className="track form__track">
+      <div className="track form form__track">
         <form onSubmit={this.handleSubmit}>
           <input placeholder="Title" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
           <input placeholder="BPM" type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
