@@ -11,9 +11,7 @@ import ReduxThunk from 'redux-thunk';
 import PrototypeMethods from './utils/prototypeMethods.js';
 import Styles from '../less/index.less';
 import rootReducer from './reducers/reducers';
-import Header from './containers/header';
-import Project from './containers/project';
-import MediaPlayer from './containers/mediaPlayer'
+import AppContainer from './containers/appContainer';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(createStore);
 
@@ -23,29 +21,16 @@ axios.defaults.headers.post['X-CSRFToken'] = csrftoken;
 axios.defaults.baseURL = window.location.href;
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: { id: '', username: '' },
-      projects: [],
-      currentProject: {}
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <Provider store={createStoreWithMiddleware(rootReducer)}>
-        <div>
-          <div>
-            <Header />
-          </div>
-          <div>
-            <Project />
-          </div>
-          <MediaPlayer />
-        </div>
+        <AppContainer />
       </Provider>
     )
   }

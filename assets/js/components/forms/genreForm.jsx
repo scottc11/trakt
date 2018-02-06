@@ -32,8 +32,10 @@ class GenreForm extends Component {
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
-          <label>Create Genre: </label>
-          <input placeholder="Genre" type="text" name="label" value={this.state.label} onChange={this.handleChange} />
+          <label>
+            Genre:
+            <input placeholder="ex. 'electronic'" type="text" name="label" value={this.state.label} onChange={this.handleChange} />
+          </label>
           <input type="submit" value="Submit" disabled={this.state.disabled}/>
         </form>
       </div>

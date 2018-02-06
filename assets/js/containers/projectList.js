@@ -15,11 +15,6 @@ class ProjectList extends Component {
     this.onSelectItem = this.onSelectItem.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchProject(this.props.selected.id);
-    this.props.fetchProjects();
-  }
-
   toggleMenu() {
     this.setState({
       menuActive: !this.state.menuActive
@@ -37,7 +32,7 @@ class ProjectList extends Component {
 
     let menu;
     if (this.state.menuActive) {
-      menu = <DropdownItemList select={this.onSelectItem} itemList={this.props.items} />
+      menu = <DropdownItemList select={this.onSelectItem} itemList={this.props.projects} />
     } else {
       menu = "";
     }
@@ -58,12 +53,14 @@ class ProjectList extends Component {
   }
 }
 
+
+
 function mapStateToProps(state) {
-  return { activeProject: state.activeProject };
+  return { activeProject: state.activeProject, projects: state.projects };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchProject, fetchProjects }, dispatch);
+  return bindActionCreators({ fetchProject }, dispatch);
 }
 
 

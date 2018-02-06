@@ -97,14 +97,38 @@ class TrackForm extends React.Component {
     return (
       <div className="track form form__track">
         <form onSubmit={this.handleSubmit}>
-          <input placeholder="Title" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-          <input placeholder="BPM" type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
-          <input placeholder="Date" type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
-          <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
-          <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
-          <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
-          <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
-          <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
+          <label>
+            Title:
+            <input placeholder="ex. 'Ur Mom' " type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+          </label>
+          <label>
+            BPM:
+            <input placeholder="ex. 100" type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
+          </label>
+          <label>
+            Date:
+            <input placeholder="Date" type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
+          </label>
+          <label>
+            Project:
+            <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
+          </label>
+          <label>
+            Genre:
+            <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
+          </label>
+          <label>
+            Key:
+            <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
+          </label>
+          <label>
+            Status:
+            <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
+          </label>
+          <label>
+            File:
+            <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
+          </label>
           <input type="submit" value="Submit" disabled={this.state.disabled}/>
         </form>
       </div>

@@ -1,35 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import axios from 'axios';
 
-import { fetchCurrentUser } from '../actions/actions';
-import { fetchKeys } from '../actions/key_actions';
-import { fetchGenres } from '../actions/genre_actions';
-import { fetchStatusList } from '../actions/status_actions';
-import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
-import ProjectList from '../containers/projectList';
-import GenreNew from '../components/genre_new';
 
 class Header extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.fetchCurrentUser();
-    this.props.fetchGenres();
-    this.props.fetchKeys();
-    this.props.fetchStatusList();
-  }
-
   render() {
-
-    if (!this.props.currentUser) {
-      return <FullScreenSpinner />
-    }
-
     return (
       <div className="header--bg" >
         <div className="container header">
@@ -37,20 +16,12 @@ class Header extends Component {
             <a href=""><span>V2</span></a>
           </div>
           <div className="col-xs-6">
-            <ProjectList
-              items={this.props.currentUser.projects}
-              selected={this.props.currentUser.projects[0]}
-            />
+
           </div>
           <div className="header--info col-xs-4">
             <a href={ axios.defaults.baseURL + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
             <span className="">{ this.props.currentUser.username }</span>
             <a href={ window.location + 'logout/' }><span>Logout</span></a>
-          </div>
-          <div className="col-xs-12">
-            <BrowserRouter>
-              <Route path="/new_genre" component={GenreNew} />
-            </BrowserRouter>
           </div>
         </div>
       </div>
@@ -62,8 +33,4 @@ function mapStateToProps(state) {
   return { currentUser: state.currentUser };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCurrentUser, fetchGenres, fetchKeys, fetchStatusList }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

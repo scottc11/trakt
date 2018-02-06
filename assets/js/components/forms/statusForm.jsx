@@ -32,8 +32,10 @@ class StatusForm extends Component {
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
-          <label>Create Status: </label>
-          <input placeholder="Status" type="text" name="label" value={this.state.label} onChange={this.handleChange} />
+          <label>
+            Status:
+            <input placeholder="ie. 'Idea' or 'Mixing' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
+          </label>
           <input type="submit" value="Submit" disabled={this.state.disabled}/>
         </form>
       </div>

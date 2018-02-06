@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchProject } from '../actions/actions';
 import TrackList from '../components/trackList';
 import ProjectDetail from '../components/projectDetail';
 
 
 class Project extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.props.fetchProject(this.props.projects[0].id);
+  }
 
   render() {
     // if ajax still loading
@@ -28,8 +38,11 @@ class Project extends Component {
 
 
 function mapStateToProps(state) {
-  return { activeProject: state.activeProject };
+  return { activeProject: state.activeProject, projects: state.projects };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchProject }, dispatch);
+}
 
-export default connect(mapStateToProps)(Project);
+export default connect(mapStateToProps, mapDispatchToProps)(Project);
