@@ -30,7 +30,7 @@ class GenreForm extends Component {
 
   render() {
     return (
-      <div className="form">
+      <div className="form form__misc">
         <form onSubmit={this.handleSubmit}>
           <label>
             Genre:

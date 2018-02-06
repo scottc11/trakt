@@ -35,21 +35,25 @@ class ProjectDetail extends Component {
           <ul>
             {this.listCollaborators()}
           </ul>
+          <hr />
         </div>
 
         <div className="form--container">
           <h4>Create New Genre</h4>
           <GenreForm />
+          <hr />
         </div>
 
         <div className="form--container">
           <h4>Create New Status</h4>
           <StatusForm />
+          <hr />
         </div>
 
         <div className="form--container">
           <h4>Create New Key</h4>
           <KeyForm />
+          <hr />
         </div>
 
         <div className="form--container">
