@@ -26,7 +26,6 @@ class ProjectDetail extends Component {
       <div className="project__detail col-xs-3">
 
         <div className="project__detail--header">
-          <h1>{this.props.project.label}</h1>
           <ProjectList selected={this.props.activeProject} />
           <hr />
         </div>

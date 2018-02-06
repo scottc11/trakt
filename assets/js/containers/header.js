@@ -19,6 +19,9 @@ class Header extends Component {
 
           </div>
           <div className="header--info col-xs-4">
+            <a href={axios.defaults.baseURL + `project/edit/${this.props.activeProject.id}`}>
+              <span className="fa fa-pencil-square-o"></span>
+            </a>
             <a href={ axios.defaults.baseURL + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
             <span className="">{ this.props.currentUser.username }</span>
             <a href={ window.location + 'logout/' }><span>Logout</span></a>
@@ -30,7 +33,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser };
+  return { currentUser: state.currentUser, activeProject: state.activeProject };
 }
 
 export default connect(mapStateToProps)(Header);

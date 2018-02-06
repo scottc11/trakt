@@ -95,7 +95,7 @@ class TrackForm extends React.Component {
 
   render() {
     return (
-      <div className="track form form__track">
+      <div className="form form__track">
         <form onSubmit={this.handleSubmit}>
           <label>
             Title:

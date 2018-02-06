@@ -45,9 +45,6 @@ class ProjectList extends Component {
           </div>
           {menu}
         </div>
-        <a href={window.location.href + `project/edit/${this.props.activeProject.id}`}>
-          <span className="dropdown__btn--edit fa fa-pencil-square-o"></span>
-        </a>
       </div>
     )
   }
