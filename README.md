@@ -91,6 +91,11 @@ heroku login
 ```
 creds --> developer password, developer email
 
+
+```
+git push heroku master
+```
+
 Continuously monitor the status of your database
 ```
 watch heroku pg:info
@@ -134,6 +139,15 @@ exit
 OR
 ```
 \q
+```
+
+dump a postgres db
+```
+pg_dump -Fc -U scottcampbell traktdev > nameoffile.dump
+```
+Upload this file to AWS bucket, then use the AWS dump file to restore Heroku Apps database located at the DATABASE_URL env variable
+```
+heroku pg:backups:restore 'https://s3.us-east-2.amazonaws.com/trakt-aws/updatedtraktdb.dump' DATABASE_URL
 ```
 ----------------------------------------------------------------------------
 To connect to gcloud cloud SQL client, run this
