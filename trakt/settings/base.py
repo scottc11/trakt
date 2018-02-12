@@ -125,10 +125,11 @@ STATIC_URL = '/static/'
 # for some reason, collect_static management command only works when
 # STATICFILES_DIRS is commented out and STATIC_ROOT is active
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main/static'),
+]
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(BASE_DIR, 'google-app-credentials.json')
 
