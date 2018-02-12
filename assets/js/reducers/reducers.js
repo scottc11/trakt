@@ -2,11 +2,12 @@ import { combineReducers } from 'redux';
 
 import ProjectReducer from './project_reducer';
 import ProjectsReducer from './reducer_projects';
+import ProgressReducer from './progress_reducer';
 import UserReducer from './reducer_current_user';
 import GenresReducer from './genres_reducer';
 import KeysReducer from './keys_reducer';
-import TrackReducer from './mediaPlayerReducer';
 import StatusReducer from './status_reducer';
+import TrackReducer from './mediaPlayerReducer';
 
 const rootReducer = combineReducers({
   activeProject: ProjectReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   genres: GenresReducer,
   keys: KeysReducer,
   projects: ProjectsReducer,
+  progress: ProgressReducer,
   statusList: StatusReducer
 })
 

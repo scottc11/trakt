@@ -88,6 +88,7 @@ email: lennon@thebeatles.com
 
 ```
 heroku login
+git push heroku testbranch:master OR git push heroku master
 ```
 creds --> developer password, developer email
 

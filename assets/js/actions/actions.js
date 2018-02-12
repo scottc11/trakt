@@ -10,7 +10,8 @@ export const CREATE_KEY = 'CREATE_KEY';
 export const FETCH_KEYS = 'FETCH_KEYS';
 export const CREATE_STATUS = 'CREATE_STATUS';
 export const FETCH_STATUS_LIST = 'FETCH_STATUS_LIST';
-
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
+export const UPDATE_UPLOAD_STATUS = 'UPDATE_UPLOAD_STATUS';
 
 // Get initial user data to start up application
 export function fetchCurrentUser() {

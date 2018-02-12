@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios';
 
 import { createTrackFile } from '../../actions/track_actions';
+import { updateUploadProgress, updateUploadStatus } from '../../actions/progress_actions';
 import FormDropdown from './formDropdown';
 
 class TrackForm extends React.Component {
@@ -38,14 +39,13 @@ class TrackForm extends React.Component {
     }
     // get the signed_url from server
     axios.get(url, { params: params }).then( res => {
-      console.log(res);
+      this.props.updateUploadStatus(response)
       if (res.status == 200) {
         filePath = res.data.file_path;
         const config = {
           headers: { 'Content-Type': file.type },
           onUploadProgress: (progressEvent) => {
-            let percentLoaded = progressEvent.loaded / progressEvent.total;
-            console.log(percentLoaded);
+            this.props.updateUploadProgress(progressEvent.loaded, progressEvent.total);
           }
         }
         // upload file directly to gcloud
@@ -60,7 +60,7 @@ class TrackForm extends React.Component {
             alert("Something went wrong: uploading file");
           });
       }
-    })
+    }).catch( err => this.props.updateUploadStatus(err) );
   }
 
   validateFile(event) {
@@ -84,13 +84,13 @@ class TrackForm extends React.Component {
     data.projects = [parseInt(data.projects)]
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
-      .then( (res) => {
-        console.log(res);
-        if (res.status == 201) {
-          this.uploadFile(res.data.id) // passing track id
+      .then( (response) => {
+        if (response.status == 201) {
+          this.props.updateUploadStatus(response)
+          this.uploadFile(response.data.id) // passing track id
         }
       })
-      .catch( err => console.log(err) );
+      .catch( err => this.props.updateUploadStatus(err) );
   }
 
   render() {
@@ -147,7 +147,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createTrackFile }, dispatch);
+  return bindActionCreators({ createTrackFile, updateUploadProgress, updateUploadStatus }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackForm);
