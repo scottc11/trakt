@@ -85,6 +85,7 @@ class TrackForm extends React.Component {
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
       .then( (response) => {
+        this.setState({ disabled: true })
         if (response.status == 201) {
           this.props.updateUploadStatus(response)
           this.uploadFile(response.data.id) // passing track id
