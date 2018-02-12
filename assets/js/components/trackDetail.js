@@ -53,7 +53,7 @@ class TrackDetail extends Component {
     if (this.props.track.audio_files.length < 1) {
       activeFile = <span>no file.</span>;
     } else {
-      activeFile = <h6 className="track__info--active-file">{ this.state.activeFile.title }</h6>;
+      activeFile = <span className="track__info--active-file">{ this.state.activeFile.title }</span>;
     }
 
     let button = null;
@@ -73,13 +73,10 @@ class TrackDetail extends Component {
             </div>
 
             <div className="track__info">
-              <h6 className="track__info--title">{ this.props.track.title }</h6>
-              <span className="track__info--median"> &middot; </span>
+              <span className="track__info--title">{ this.props.track.title }</span>
               {activeFile}
-              <span className="track__info--median"> &middot; </span>
               <UserBadge user={this.props.track.submitter} />
-              <span className="track__info--median"> &middot; </span>
-              <h6 className="track__info--date">{ this.props.track.date_recorded }</h6>
+              <span className="track__info--date">{ this.props.track.date_recorded }</span>
               <TrackBadges genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
             </div>
             <span

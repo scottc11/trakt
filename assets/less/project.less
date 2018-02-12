@@ -2,12 +2,24 @@
 
 .project {
   &__detail {
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
     background: @mako;
     color: @white;
 
+    &--collapsed {
+      
+    }
+
     & hr {
       border-color: @bg-white-opac;
+    }
+
+    &--toggle {
+      text-align: right;
+      & > span {
+        font-size: @large;
+      }
     }
 
     &--header {

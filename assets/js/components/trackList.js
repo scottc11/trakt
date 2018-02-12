@@ -8,7 +8,7 @@ const TrackList = (props) => {
   });
 
   return (
-    <ul className="track-list col-xs-9">
+    <ul className="track-list col-xs-12 col-sm-9">
       {trackItems}
     </ul>
   )
