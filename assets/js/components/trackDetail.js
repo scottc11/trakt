@@ -19,8 +19,10 @@ class TrackDetail extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.activeFile.id !== this.state.activeFile.id) {
-      this.onPause();
+    if (this.state.activeFile) {
+      if (nextState.activeFile.id !== this.state.activeFile.id) {
+        this.onPause();
+      }
     }
   }
 

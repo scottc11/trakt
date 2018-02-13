@@ -39,7 +39,9 @@ class TrackForm extends React.Component {
     }
     // get the signed_url from server
     axios.get(url, { params: params }).then( res => {
-      this.props.updateUploadStatus(response)
+
+      this.props.updateUploadStatus('Preparing upload')
+
       if (res.status == 200) {
         filePath = res.data.file_path;
         const config = {
@@ -49,8 +51,12 @@ class TrackForm extends React.Component {
           }
         }
         // upload file directly to gcloud
+        this.props.updateUploadStatus('Uploading')
         axios.put(res.data.signed_url, file, config)
           .then( (res) => {
+
+            this.props.updateUploadStatus('Uploaded');
+
             // create trackFile object via action
             // on success, action will fetchProject to update UI
             this.props.createTrackFile(filePath, trackID, this.props.activeProject.id);
@@ -60,7 +66,7 @@ class TrackForm extends React.Component {
             alert("Something went wrong: uploading file");
           });
       }
-    }).catch( err => this.props.updateUploadStatus(err) );
+    }).catch( err => this.props.updateUploadStatus('error') );
   }
 
   validateFile(event) {
@@ -85,13 +91,12 @@ class TrackForm extends React.Component {
     const url = axios.defaults.baseURL + `api/tracks/`;
     axios.post(url, data)
       .then( (response) => {
-        this.setState({ disabled: true })
         if (response.status == 201) {
-          this.props.updateUploadStatus(response)
+          this.props.updateUploadStatus('Track Created')
           this.uploadFile(response.data.id) // passing track id
         }
       })
-      .catch( err => this.props.updateUploadStatus(err) );
+      .catch( err => this.props.updateUploadStatus('error') );
   }
 
   render() {

@@ -33,7 +33,10 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser, activeProject: state.activeProject };
+  return {
+    currentUser: state.currentUser,
+    activeProject: state.activeProject
+  };
 }
 
 export default connect(mapStateToProps)(Header);

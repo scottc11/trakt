@@ -6,6 +6,7 @@ import GenreForm from './forms/genreForm';
 import StatusForm from './forms/statusForm';
 import KeyForm from './forms/keyForm';
 import TrackForm from './forms/trackForm';
+import UploadList from './uploadList';
 
 class ProjectDetail extends Component {
   constructor(props) {
@@ -38,10 +39,6 @@ class ProjectDetail extends Component {
       return (
         <div className="project__detail col-xs-3">
 
-          <div className="project__detail--toggle">
-            <span onClick={ () => this.toggleSidebar() } className="fa fa-angle-double-left"></span>
-          </div>
-
           <div className="project__detail--header">
             <ProjectList selected={this.props.activeProject} />
           </div>
@@ -51,6 +48,18 @@ class ProjectDetail extends Component {
             <ul>
               {this.listCollaborators()}
             </ul>
+            <hr />
+          </div>
+
+          <div className="form--container">
+            <h4>Uploads</h4>
+            <UploadList />
+            <hr />
+          </div>
+
+          <div className="form--container">
+            <h4>Create New Track</h4>
+            <TrackForm />
             <hr />
           </div>
 
@@ -72,10 +81,6 @@ class ProjectDetail extends Component {
             <hr />
           </div>
 
-          <div className="form--container">
-            <h4>Create New Track</h4>
-            <TrackForm />
-          </div>
         </div>
       )
     } else {
@@ -91,7 +96,10 @@ class ProjectDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  return { activeProject: state.activeProject, currentUser: state.currentUser };
+  return {
+    activeProject: state.activeProject,
+    currentUser: state.currentUser
+  };
 }
 
 export default connect(mapStateToProps)(ProjectDetail);

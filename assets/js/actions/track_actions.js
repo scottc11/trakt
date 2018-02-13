@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { fetchProject } from './actions';
+import { updateUploadStatus } from './progress_actions';
 
 export const FETCH_TRACK = 'FETCH_TRACK';
 export const FETCH_TRACKS = 'FETCH_TRACKS';
@@ -22,6 +23,7 @@ export function createTrackFile(filePath, trackID, projID) {
     request.then( (response) => {
       console.log(response);
       if (response.status == 201) {
+        dispatch(updateUploadStatus('Done'));
         dispatch(fetchProject(projID));
       }
     })

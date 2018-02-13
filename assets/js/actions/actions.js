@@ -37,7 +37,7 @@ export function fetchProjects() {
 
 // get the currently selected project data
 export function fetchProject(proj_id) {
-  const url = window.location.href + `api/projects/${proj_id}`;
+  const url = window.location.href + `api/projects/${proj_id}/`;
   const request = axios.get(url);
 
   return {
