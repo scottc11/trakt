@@ -84,8 +84,11 @@ class TrackForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = this.state;
-    data.projects = [parseInt(data.projects)]
+    const file = this.fileInput.files[0];
+
+    data.projects = [parseInt(data.projects)] // API takes an array for track post
     const url = axios.defaults.baseURL + `api/tracks/`;
+
     axios.post(url, data)
       .then( (response) => {
         if (response.status == 201) {
