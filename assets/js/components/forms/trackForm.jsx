@@ -61,10 +61,7 @@ class TrackForm extends React.Component {
             // on success, action will fetchProject to update UI
             this.props.createTrackFile(filePath, trackID, this.props.activeProject.id);
           })
-          .catch( err => {
-            console.log(err)
-            alert("Something went wrong: uploading file");
-          });
+          .catch( err => this.props.updateUploadStatus('error') );
       }
     }).catch( err => this.props.updateUploadStatus('error') );
   }
