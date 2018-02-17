@@ -80,10 +80,12 @@ class TrackCreateSerializer(serializers.ModelSerializer):
                 'key', 'genre', 'status', 'projects'
                 )
 
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'label',)
+
 
 class ProjectDetailSerializer(serializers.ModelSerializer):
     collaborators = UserSerializer(many=True)
@@ -92,14 +94,6 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'label', 'collaborators', 'tracks')
-
-
-class SimpleProjectSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Project
-        fields = ('id', 'label')
-
 
 
 class UserSerializer(serializers.ModelSerializer):

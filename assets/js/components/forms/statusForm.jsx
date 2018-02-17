@@ -10,6 +10,7 @@ class StatusForm extends Component {
     super(props);
     this.state = {
       label: '',
+      hex_code: '#ff0000',
       disabled: false
     }
 
@@ -24,7 +25,7 @@ class StatusForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createStatus(this.state.label);
+    this.props.createStatus(this.state.label, this.state.hex_code);
     this.setState({ label: '' });
   }
 
@@ -36,6 +37,7 @@ class StatusForm extends Component {
             Status:
             <input placeholder="ie. 'Idea' or 'Mixing' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
+          <input name="hex_code" type="color" value={this.state.hex_code} onChange={this.handleChange} />
           <input type="submit" value="Submit" disabled={this.state.disabled}/>
         </form>
       </div>
