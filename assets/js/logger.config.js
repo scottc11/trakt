@@ -1,0 +1,21 @@
+export default {
+  level: 'log',
+  logger: console,
+  logErrors: true,
+  collapsed: true,
+  predicate: undefined,
+  duration: false,
+  timestamp: true,
+  stateTransformer: state => state,
+  actionTransformer: action => action,
+  errorTransformer: error => error,
+  colors: {
+    title: () => '#abda39',
+    prevState: () => '#9E9E9E',
+    action: () => '#03A9F4',
+    nextState: () => '#4CAF50',
+    error: () => '#F20404',
+  },
+  diff: false,
+  diffPredicate: undefined,
+};

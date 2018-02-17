@@ -21,7 +21,6 @@ export function createTrackFile(filePath, trackID, projID) {
 
   return (dispatch) => {
     request.then( (response) => {
-      console.log(response);
       if (response.status == 201) {
         dispatch(updateUploadStatus('Done'));
         dispatch(fetchProject(projID));

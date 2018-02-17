@@ -41,7 +41,6 @@ function submitForm(formData) {
       $('#upload-btn').data('track-id', res.data.id);
       // display progress bar
       // update track.audio_file value with new gcloud url
-      console.log(res);
     })
     .catch(function (err) {
       console.log(err);

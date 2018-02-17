@@ -20,7 +20,6 @@ class AppContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('appContainer');
     this.props.fetchCurrentUser();
     this.props.fetchProjects();
     this.props.fetchGenres();
