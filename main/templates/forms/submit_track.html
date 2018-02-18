@@ -9,7 +9,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-md-6 col-centered">
+
+  <div class="form__btn--back col-xs-12 col-sm-4 col-centered">
+    <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
+  </div>
+
+  <div class="static-form col-xs-12 col-md-6 col-centered">
       {% if exclude %}
         <h2>Edit Track</h2>
       {% else %}

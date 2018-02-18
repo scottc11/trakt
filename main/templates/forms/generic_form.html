@@ -7,7 +7,7 @@
   <div class="form__btn--back col-xs-12 col-sm-4 col-centered">
     <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
   </div>
-  <div class="form col-xs-12 col-sm-4 col-centered">
+  <div class="static-form col-xs-12 col-sm-4 col-centered">
       <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form exclude=exclude %}
