@@ -9,3 +9,6 @@ class TrackSession(models.Model):
     track = models.ForeignKey(Track, related_name='sessions')
     pub_date = models.DateTimeField(auto_now_add=True)
     date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import AudioFileForm from './forms/audioFileForm';
+
 
 class TrackDetailFileList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isFormActive: true
+    }
   }
 
   render() {
 
-    const files = this.props.files.map( (file) => {
+    const files = this.props.track.audio_files.map( (file) => {
       let date = file.pub_date.split('T')[0]
       let style = this.props.active == file.id ? 'track__file-list--active' : '';
       return (
@@ -22,6 +27,8 @@ class TrackDetailFileList extends Component {
     return (
       <div className="track__file-list">
         <ul>{files}</ul>
+        <AudioFileForm track={this.props.track}/>
+        <hr />
       </div>
     )
   }

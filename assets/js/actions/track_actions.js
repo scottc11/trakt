@@ -27,7 +27,6 @@ export function createTrackFile(filePath, trackID, projID) {
       }
     })
   }
-
 }
 
 
@@ -41,4 +40,9 @@ export function fetchTrack(id) {
     payload: request
   }
 
+}
+
+
+export function uploadAudioFile(id, prjId) {
+  
 }

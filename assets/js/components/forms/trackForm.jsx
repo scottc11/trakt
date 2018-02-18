@@ -7,7 +7,7 @@ import { createTrackFile } from '../../actions/track_actions';
 import { updateUploadProgress, updateUploadStatus } from '../../actions/progress_actions';
 import FormDropdown from './formDropdown';
 
-class TrackForm extends React.Component {
+class TrackForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

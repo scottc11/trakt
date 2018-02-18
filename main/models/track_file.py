@@ -10,3 +10,6 @@ class TrackFile(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('-pub_date',)

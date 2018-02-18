@@ -35,11 +35,14 @@
       margin-right: 10px;
     }
     & input[type=submit] {
-      background: @dark-blue;
+      background: @submit-color;
       color: @white;
       border-radius: 5px;
       display: block;
       margin-left: 0;
+    }
+    & input:disabled {
+      color: @bg-white-opac;
     }
     & select, input {
       font-family: @console;

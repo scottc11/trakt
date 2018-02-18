@@ -1,7 +1,6 @@
 import axios from 'axios';
+import { createTrackFile } from './track_actions';
 
-// onUploadProgress
-// pass the 'status' of the upload to this action, via upload thunks
 import { UPDATE_PROGRESS } from './actions';
 import { UPDATE_UPLOAD_STATUS } from './actions';
 
@@ -38,7 +37,7 @@ export function getSignedUrl(file, trackID, projID) {
 
   return (dispatch) => {
     request.then( response => {
-      dispatch(updateUploadStatus('PREPARING UPLOADING'));
+      dispatch(updateUploadStatus('PREPARING UPLOAD'));
       if (response.status == 200) {
         dispatch(uploadFileToCloud(file, response.data.file_path, response.data.signed_url, trackID, projID));
       }
@@ -53,8 +52,6 @@ export function getSignedUrl(file, trackID, projID) {
 export function uploadFileToCloud(file, filePath, signedURL, trackID, projID) {
   // immediately return a thunk so you have dispatch available for 'onUploadProgress'
   return (dispatch) => {
-
-    const filePath = filePath;
     const config = {
       headers: { 'Content-Type': file.type },
       onUploadProgress: (progressEvent) => {
@@ -70,6 +67,7 @@ export function uploadFileToCloud(file, filePath, signedURL, trackID, projID) {
         dispatch( createTrackFile(filePath, trackID, projID) );
       })
       .catch( (err) => {
+        console.log(err);
         dispatch( updateUploadStatus('ERROR') );
       });
   }
