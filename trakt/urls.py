@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from rest_framework.routers import DefaultRouter
+import notifications.urls
 
 from main.views import home, forms
 from main.views.api.tracks_api import TrackList, TrackDetail
@@ -62,5 +63,7 @@ urlpatterns = [
     url(r'^api/status/(?P<pk>[0-9]+)/$', StatusDetail.as_view()),
 
     url(r'^api/', include(router.urls)),
+
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     # Catch All other url routes for react-router
 ]
