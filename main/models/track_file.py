@@ -25,11 +25,16 @@ class TrackFile(models.Model):
 # Notifications
 @receiver(post_save, sender=TrackFile)
 def track_uploaded(sender, instance, created, **kwargs):
+
+    print(sender)
+    print(instance)
+    print(created)
+
     users = User.objects.filter(id=0)
     for project in instance.track.projects.all():
         users = users | project.collaborators.all()
 
     # delete duplicates
     users = users.distinct()
-    verb = "{} uploaded {} to {}".format(instance.uploader.username, instance.title, instance.track.title )
-    notify.send(instance, recipient=users, verb=verb)
+    verb = "uploaded {} to".format(instance.title)
+    notify.send(instance.uploader, recipient=users, verb=verb, target=instance.track)

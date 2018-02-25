@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.models import User
+from notifications.models import Notification
 from main.models.track import Track
 from main.models.track_file import TrackFile
 from main.models.track_session import TrackSession
@@ -121,3 +122,30 @@ class KeySerializer(serializers.ModelSerializer):
     class Meta:
         model = Key
         fields = ('id', 'label')
+
+
+
+class GenericNotificationRelatedField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        if isinstance(value, TrackFile):
+            serializer = TrackFileSerializer(value)
+        if isinstance(value, Track):
+            serializer = TrackCreateSerializer(value)
+        if isinstance(value, User):
+            serializer = ActiveUserSerializer(value)
+
+        return serializer.data
+
+
+class NotificationSerializer(serializers.Serializer):
+    recipient = ActiveUserSerializer(User, read_only=True)
+    unread = serializers.BooleanField(read_only=True)
+    actor = GenericNotificationRelatedField(read_only=True)
+    verb = serializers.CharField(read_only=True)
+    target = GenericNotificationRelatedField(read_only=True)
+    timestamp = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = Notification
+        fields = ('recipient', 'unread', 'actor', 'verb', 'target', 'timestamp')

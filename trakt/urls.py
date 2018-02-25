@@ -27,11 +27,13 @@ from main.views.api.keys_api import KeyList, KeyDetail
 from main.views.api.users_api import UserViewSet
 from main.views.api.projects import ProjectList, ProjectDetail
 from main.views.api.status_api import StatusList, StatusDetail
+from main.views.api.notifications_api import NotificationViewSet
 from main.views.signed_urls import get_signed_url
 
 # API routes
 router = DefaultRouter()
 router.register(r'audiofiles', TrackFileViewSet, base_name='audiofile')
+router.register(r'notifications', NotificationViewSet, base_name='notification')
 router.register(r'users', UserViewSet, base_name='user')
 
 urlpatterns = [
