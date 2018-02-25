@@ -24,7 +24,7 @@ export function updateUploadStatus(statusText) {
 // use this function as a thunk to trigger other thunks
 // initial upload kickoff
 // Geting the signed url from the server
-export function getSignedUrl(file, trackID, projID) {
+export function getSignedUrl(file, trackID) {
   const url = axios.defaults.baseURL + 'track/submit/sign_url/'
   const params = {
     filename: file.name,
@@ -39,7 +39,7 @@ export function getSignedUrl(file, trackID, projID) {
     request.then( response => {
       dispatch(updateUploadStatus('PREPARING UPLOAD'));
       if (response.status == 200) {
-        dispatch(uploadFileToCloud(file, response.data.file_path, response.data.signed_url, trackID, projID));
+        dispatch(uploadFileToCloud(file, response.data.file_path, response.data.signed_url, trackID));
       }
     })
     .catch( (err) => {
@@ -48,8 +48,10 @@ export function getSignedUrl(file, trackID, projID) {
   }
 }
 
+
+
 // upload file directly to gcloud using the returned 'signed url' file path
-export function uploadFileToCloud(file, filePath, signedURL, trackID, projID) {
+export function uploadFileToCloud(file, filePath, signedURL, trackID) {
   // immediately return a thunk so you have dispatch available for 'onUploadProgress'
   return (dispatch) => {
     const config = {
@@ -64,7 +66,7 @@ export function uploadFileToCloud(file, filePath, signedURL, trackID, projID) {
     axios.put(signedURL, file, config)
       .then( (response) => {
         dispatch( updateUploadStatus('ADDING TO PROJECT') );
-        dispatch( createTrackFile(filePath, trackID, projID) );
+        dispatch( createTrackFile(filePath, trackID) );
       })
       .catch( (err) => {
         console.log(err);

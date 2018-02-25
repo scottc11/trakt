@@ -4,8 +4,10 @@ import { updateUploadStatus } from './progress_actions';
 
 export const FETCH_TRACK = 'FETCH_TRACK';
 export const FETCH_TRACKS = 'FETCH_TRACKS';
+export const DELETE_AUDIO_FILE = 'DELETE_AUDIO_FILE';
+export const UPDATE_TRACK_IN_PROJECT = 'UPDATE_TRACK_IN_PROJECT';
 
-export function createTrackFile(filePath, trackID, projID) {
+export function createTrackFile(filePath, trackID) {
   const url = axios.defaults.baseURL + 'api/files/'
 
   const data = {
@@ -23,7 +25,7 @@ export function createTrackFile(filePath, trackID, projID) {
     request.then( (response) => {
       if (response.status == 201) {
         dispatch(updateUploadStatus('Done'));
-        dispatch(fetchProject(projID));
+        dispatch(UpdateTrackInProject(trackID));
       }
     })
   }
@@ -39,10 +41,16 @@ export function fetchTrack(id) {
     type: FETCH_TRACK,
     payload: request
   }
-
 }
 
 
-export function uploadAudioFile(id, prjId) {
-  
+export function UpdateTrackInProject(id) {
+  const url = axios.defaults.baseURL + `api/tracks/${id}/`;
+
+  const request = axios.get(url);
+
+  return {
+    type: UPDATE_TRACK_IN_PROJECT,
+    payload: request
+  }
 }

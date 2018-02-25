@@ -91,7 +91,7 @@ class TrackDetail extends Component {
 
           { this.state.detailsActive == true &&
             <div className="track__details">
-              <TrackDetailFileList onClick={ this.onFileSelect.bind(this) } track={this.props.track} active={this.state.activeFile.id} />
+              <TrackDetailFileList onSelect={ this.onFileSelect.bind(this) } track={this.props.track} active={this.state.activeFile.id} />
               <TrackSessionList sessions={this.props.track.sessions} />
               <div className="track__details--options">
                 <a title="upload audio file" href={ `${window.location.href}track/upload/${this.props.track.id}` } ><span className="fa fa-plus"></span></a>

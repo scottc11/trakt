@@ -29,6 +29,7 @@ const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 // set scrf token from django cookie
 const csrftoken = Cookies.get('csrftoken');
 axios.defaults.headers.post['X-CSRFToken'] = csrftoken;
+axios.defaults.headers.delete['X-CSRFToken'] = csrftoken;
 axios.defaults.baseURL = window.location.href;
 
 

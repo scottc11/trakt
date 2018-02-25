@@ -1,12 +1,21 @@
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
+from rest_framework.decorators import detail_route, list_route
 
 from main.models.track_file import TrackFile
 from main.serializers import TrackFileSerializer, TrackFileCreateSerializer
+
+
+class TrackFileViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing track files instances.
+    """
+    serializer_class = TrackFileSerializer
+    queryset = TrackFile.objects.all()
 
 
 class TrackFileList(APIView):

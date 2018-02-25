@@ -29,8 +29,7 @@ class AudioFileForm extends Component {
     event.preventDefault();
     const file = this.fileInput.files[0];
     const trackID = this.props.track.id;
-    const projID = this.props.activeProject.id;
-    this.props.getSignedUrl(file, trackID, projID)
+    this.props.getSignedUrl(file, trackID)
   }
 
   render() {
