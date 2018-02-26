@@ -145,7 +145,7 @@ class NotificationSerializer(serializers.Serializer):
     verb = serializers.CharField(read_only=True)
     target = GenericNotificationRelatedField(read_only=True)
     timestamp = serializers.DateTimeField(read_only=True)
-
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Notification
-        fields = ('recipient', 'unread', 'actor', 'verb', 'target', 'timestamp')
+        fields = ('id', 'recipient', 'unread', 'actor', 'verb', 'target', 'timestamp')

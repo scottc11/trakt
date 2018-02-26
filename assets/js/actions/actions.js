@@ -15,7 +15,7 @@ export const UPDATE_UPLOAD_STATUS = 'UPDATE_UPLOAD_STATUS';
 
 // Get initial user data to start up application
 export function fetchCurrentUser() {
-  const url = window.location.href + 'api/users/current/';
+  const url = axios.defaults.baseURL + 'api/users/current/';
   const request = axios.get(url);
 
   return {

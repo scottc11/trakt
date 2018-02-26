@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { FetchNotifications } from '../actions/notification_actions';
 import UserBadge from './userBadge';
 import ProjectList from '../containers/projectList';
+import ProjectActivity from './projectActivity';
 import GenreForm from './forms/genreForm';
 import StatusForm from './forms/statusForm';
 import KeyForm from './forms/keyForm';
@@ -17,6 +20,7 @@ class ProjectDetail extends Component {
 
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.listCollaborators = this.listCollaborators.bind(this);
+    this.props.FetchNotifications();
   }
 
   toggleSidebar() {
@@ -48,6 +52,12 @@ class ProjectDetail extends Component {
             <ul>
               {this.listCollaborators()}
             </ul>
+            <hr />
+          </div>
+
+          <div className="project__detail--collaborators">
+            <h4>activity</h4>
+            <ProjectActivity activity={this.props.notifications} />
             <hr />
           </div>
 
@@ -98,8 +108,13 @@ class ProjectDetail extends Component {
 function mapStateToProps(state) {
   return {
     activeProject: state.activeProject,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    notifications: state.notifications
   };
 }
 
-export default connect(mapStateToProps)(ProjectDetail);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ FetchNotifications }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);
