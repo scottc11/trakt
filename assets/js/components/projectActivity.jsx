@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spinner from './spinners/mediumSpinner';
 
 export default function(props) {
 
