@@ -14,3 +14,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
     """
     serializer_class = NotificationSerializer
     queryset = Notification.objects.all()
+
+    def list(self, request):
+        queryset = Notification.objects.filter(recipient_id=self.request.user.id)
+        serializer = NotificationSerializer(queryset, many=True)
+        return Response(serializer.data)

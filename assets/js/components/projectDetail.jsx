@@ -48,45 +48,44 @@ class ProjectDetail extends Component {
           </div>
 
           <div className="project__detail--collaborators">
-            <h4>Collaborators</h4>
+            <h4 className="project__detail--heading">COLLABORATORS</h4>
             <ul>
               {this.listCollaborators()}
             </ul>
             <hr />
           </div>
 
-          <div className="project__detail--collaborators">
-            <h4>ACTIVITY</h4>
+          <div className="project__detail__activity">
+            <h4 className="project__detail--heading">ACTIVITY</h4>
             <ProjectActivity activity={this.props.notifications} />
-            <hr />
           </div>
-
-          <div className="form--container">
-            <h4>Uploads</h4>
+          <hr />
+          <div className="">
+            <h4 className="project__detail--heading">UPLOADS</h4>
             <UploadList />
             <hr />
           </div>
 
           <div className="form--container">
-            <h4>Create New Track</h4>
+            <h4 className="project__detail--heading">Create New Track</h4>
             <TrackForm />
             <hr />
           </div>
 
           <div className="form--container">
-            <h4>Create New Genre</h4>
+            <h4 className="project__detail--heading">Create New Genre</h4>
             <GenreForm />
             <hr />
           </div>
 
           <div className="form--container">
-            <h4>Create New Status</h4>
+            <h4 className="project__detail--heading">Create New Status</h4>
             <StatusForm />
             <hr />
           </div>
 
           <div className="form--container">
-            <h4>Create New Key</h4>
+            <h4 className="project__detail--heading">Create New Key</h4>
             <KeyForm />
             <hr />
           </div>

@@ -25,7 +25,7 @@ class TrackFile(models.Model):
 # Notifications
 @receiver(post_save, sender=TrackFile)
 def track_uploaded(sender, instance, created, **kwargs):
-
+    print('----------------------------------------------------')
     print(sender)
     print(instance)
     print(created)

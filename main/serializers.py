@@ -20,12 +20,12 @@ class StatusSerializer(serializers.ModelSerializer):
 class TrackFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackFile
-        fields = ('id', 'title', 'file', 'track', 'pub_date')
+        fields = ('id', 'title', 'file', 'track', 'pub_date', 'uploader')
 
 class TrackFileCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackFile
-        fields = ('id', 'title', 'track',)
+        fields = ('id', 'title', 'track', 'uploader')
 
 
 class SessionFileSerializer(serializers.ModelSerializer):
@@ -146,6 +146,7 @@ class NotificationSerializer(serializers.Serializer):
     target = GenericNotificationRelatedField(read_only=True)
     timestamp = serializers.DateTimeField(read_only=True)
     id = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Notification
         fields = ('id', 'recipient', 'unread', 'actor', 'verb', 'target', 'timestamp')

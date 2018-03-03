@@ -31,7 +31,7 @@ class TrackFileList(APIView):
     def post(self, request, format=None):
         serializer = TrackFileCreateSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(file=request.data['file_path'])
+            serializer.save(file=request.data['file_path'], uploader=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
