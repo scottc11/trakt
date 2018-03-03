@@ -56,7 +56,7 @@ class ProjectDetail extends Component {
           </div>
 
           <div className="project__detail--collaborators">
-            <h4>activity</h4>
+            <h4>ACTIVITY</h4>
             <ProjectActivity activity={this.props.notifications} />
             <hr />
           </div>

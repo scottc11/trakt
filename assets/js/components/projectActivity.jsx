@@ -8,12 +8,18 @@ export default function(props) {
   }
 
   const activity = props.activity.map( i => {
-    return <li key={i.id}>{i.verb}</li>
+    return (
+      <li key={i.id}>
+        {i.verb}
+        {i.actor}
+        {i.target}
+        {i.timestamp}
+      </li>
+    )
   })
 
   return(
     <div>
-      ACTIVITY
       <ul>
         {activity}
       </ul>
