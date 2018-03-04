@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from main.models.track import Track
+from trakt.storage import build_file_storage_path
 
 GOOGLE_SERVICE_CREDENTIALS = 'google-app-credentials.json'
 
@@ -25,7 +26,7 @@ def sign_url(method, filename, expiration, content_type, track_id):
     track_obj = Track.objects.get(id=track_id)
 
     # create the path to the file in gcloud using associated Track object
-    blob_path = '{0}/tracks/{1}/{2}'.format(track_obj.submitter, track_obj.slug, filename)
+    blob_path = build_file_storage_path(track_obj, filename)
 
     creds = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_CREDENTIALS)
     bucket = storage.Client().get_bucket(settings.CLOUD_STORAGE_BUCKET)

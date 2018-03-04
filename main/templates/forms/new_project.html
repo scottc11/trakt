@@ -4,7 +4,12 @@
 {% block title %}New Project{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-sm-4 col-centered">
+
+  <div class="form__btn--back col-xs-12 col-sm-4 col-centered">
+    <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
+  </div>
+
+  <div class="static-form col-xs-12 col-sm-4 col-centered">
     {% if edit %}
       <h2>Edit Existing project</h2>
     {% else %}

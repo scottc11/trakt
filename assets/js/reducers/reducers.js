@@ -1,15 +1,27 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
-import ProjectReducer from './reducer_active_project';
+import ProjectReducer from './project_reducer';
+import ProjectsReducer from './reducer_projects';
+import UploadProgressReducer from './progress_reducer';
 import UserReducer from './reducer_current_user';
+import GenresReducer from './genres_reducer';
+import KeysReducer from './keys_reducer';
+import NotificationsReducer from './notifications_reducer';
+import StatusReducer from './status_reducer';
 import TrackReducer from './mediaPlayerReducer';
+import UIReducer from './ui_reducer';
 
 const rootReducer = combineReducers({
   activeProject: ProjectReducer,
   activeTrack: TrackReducer,
   currentUser: UserReducer,
-  form: formReducer
+  genres: GenresReducer,
+  keys: KeysReducer,
+  notifications: NotificationsReducer,
+  projects: ProjectsReducer,
+  uploadProgress: UploadProgressReducer,
+  statusList: StatusReducer,
+  UI: UIReducer
 })
 
 export default rootReducer;

@@ -14,9 +14,17 @@ DEBUG = True
 
 
 DATABASES = {
-    'default': {
+    'lite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'traktdev',
+        'USER': CFG['psql']['user']['name'],
+        'PASSWORD': CFG['psql']['user']['pass'],
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     },
     'test': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -32,8 +40,8 @@ DATABASES = {
 # ----------------------------------------------------------------------------
 
 PROJECT_ID = 'trakt-183713'
-CLOUD_STORAGE_BUCKET = 'trakt'
-MEDIA_PREFIX = "dev/users/"
+CLOUD_STORAGE_BUCKET = 'trakt-dev'
+MEDIA_PREFIX = "users/"
 
 CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
     bucket_name=CLOUD_STORAGE_BUCKET

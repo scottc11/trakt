@@ -30,7 +30,6 @@ class GenreNew extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
     this.props.createGenre(values);
   }
 

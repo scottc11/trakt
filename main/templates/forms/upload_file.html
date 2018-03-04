@@ -9,13 +9,18 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <div class="form col-xs-12 col-md-6 col-centered">
+
+  <div class="form__btn--back col-xs-12 col-sm-4 col-centered">
+    <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
+  </div>
+
+  <div class="static-form col-xs-12 col-md-6 col-centered">
 
       <h2 class="color-accent--baby-blue">Upload file to <span class="color-accent--mikado">"{{track.title}}"</span></h2>
 
       <hr>
 
-      <div class="file-upload">        
+      <div class="file-upload">
         <button id="upload-btn" type="button" data-track-id="{{ track.id }}" class="file-upload--btn btn btn-primary" disabled>upload</button>
         <input id="audio-file" class="file-upload--input" type="file" name="" value="">
         <progress id="upload-progress" class="file-upload--progress" value="0" max="1">0%</progress>

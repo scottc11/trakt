@@ -58,7 +58,7 @@ python manage.py runserver
 run the --watch command on webpack to auto generate new bundle.js files when changes are detected in your code.  Terminal command located in package.json.
 
 ```
-npm run webpack
+npm start
 ```
 manually compile JavaScript files with
 
@@ -66,21 +66,21 @@ manually compile JavaScript files with
 npm pack
 ```
 
-Start a Grunt watcher to compile LESS to CSS when changes are detected
-
-```
-grunt
-```
-
 ### local sqlite3 db authentication
 
 username: scottcampbell
 password: developer password
 
+
+### local postgres db authentication
+
+username: scottc11
+password: music password with caps and num
+
 #### test users
 username: John
 last_name: Lennon
-password: Test123
+password: Test1234
 email: lennon@thebeatles.com
 
 
@@ -88,8 +88,14 @@ email: lennon@thebeatles.com
 
 ```
 heroku login
+git push heroku testbranch:master OR git push heroku master
 ```
 creds --> developer password, developer email
+
+
+```
+git push heroku master
+```
 
 Continuously monitor the status of your database
 ```
@@ -113,6 +119,37 @@ list all available postgres databases
 psql --list
 ```
 
+Create database
+```
+createdb database_name -U user_name
+```
+Load a dump into database
+```
+psql databasename < data_base_dump
+```
+
+Select database
+```
+psql db-name
+```
+
+Exit out of the postgres user's shell session to get back to your regular user's shell session:
+```
+exit
+```
+OR
+```
+\q
+```
+
+dump a postgres db
+```
+pg_dump -Fc -U scottcampbell traktdev > nameoffile.dump
+```
+Upload this file to AWS bucket, then use the AWS dump file to restore Heroku Apps database located at the DATABASE_URL env variable
+```
+heroku pg:backups:restore 'https://s3.us-east-2.amazonaws.com/trakt-aws/updatedtraktdb.dump' DATABASE_URL
+```
 ----------------------------------------------------------------------------
 To connect to gcloud cloud SQL client, run this
 
@@ -134,6 +171,14 @@ This step establishes a connection from your local computer to your Cloud SQL in
 Write google app default credentials
 ```
 gcloud auth application-default
+```
+
+### setting CORS on Google Cloud Storage
+
+guide --> https://cloud.google.com/storage/docs/cross-origin
+
+```
+gsutil cors set cors-json-file.json gs://trakt
 ```
 
 -------- DEPLOY APP ----------

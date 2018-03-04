@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateMediaPlayer } from '../actions/actions';
-import TrackInfo from './trackDetailInfo';
+import TrackBadges from './trackBadges';
 import TrackDetailFileList from './trackDetailFileList';
 import TrackSessionList from './trackDetailSessionList';
+import UserBadge from './userBadge';
 
 class TrackDetail extends Component {
   constructor(props) {
@@ -12,15 +13,21 @@ class TrackDetail extends Component {
     this.state = {
       active: false,
       detailsActive: false,
-      activeFile: props.track.audio_files[0]
+      activeFile: this.props.track.audio_files[0]
     };
     this.onToggleDetails = this.onToggleDetails.bind(this);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.activeFile.id !== this.state.activeFile.id) {
-      this.onPause();
+    if (this.state.activeFile) {
+      if (nextState.activeFile.id !== this.state.activeFile.id) {
+        this.onPause();
+      }
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ activeFile: this.props.track.audio_files[0] })
   }
 
   onToggleDetails() {
@@ -44,6 +51,12 @@ class TrackDetail extends Component {
   }
 
   render() {
+    let activeFile = null;
+    if (this.props.track.audio_files.length < 1) {
+      activeFile = <span>no file.</span>;
+    } else {
+      activeFile = <span className="track__info--active-file">{ this.state.activeFile.title }</span>;
+    }
 
     let button = null;
     if (this.state.active) {
@@ -55,7 +68,6 @@ class TrackDetail extends Component {
     return (
       <li>
         <div className="track">
-
           <div>
 
             <div className="track--button">
@@ -63,13 +75,12 @@ class TrackDetail extends Component {
             </div>
 
             <div className="track__info">
-              <h6 className="track__info--title">{ this.props.track.title }</h6>
-              <h6 className="">{ this.state.activeFile.title }</h6>
-              <h6 className="track__info--submitter">{ this.props.track.submitter }</h6>
-              <span className="track__info--median"> &middot; </span>
-              <h6 className="track__info--date">{ this.props.track.date_recorded }</h6>
+              <span className="track__info--title">{ this.props.track.title }</span>
+              {activeFile}
+              <UserBadge user={this.props.track.submitter} />
+              <span className="track__info--date">{ this.props.track.date_recorded }</span>
+              <TrackBadges genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
             </div>
-
             <span
               className={ this.state.detailsActive ? 'track__details--toggle fa fa-caret-up' : 'track__details--toggle fa fa-caret-down' }
               onClick={ () => this.onToggleDetails() } >
@@ -80,9 +91,8 @@ class TrackDetail extends Component {
 
           { this.state.detailsActive == true &&
             <div className="track__details">
-              <TrackDetailFileList onClick={ this.onFileSelect.bind(this) } files={this.props.track.audio_files} active={this.state.activeFile.id} />
+              <TrackDetailFileList onSelect={ this.onFileSelect.bind(this) } track={this.props.track} active={this.state.activeFile.id} />
               <TrackSessionList sessions={this.props.track.sessions} />
-              <TrackInfo genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
               <div className="track__details--options">
                 <a title="upload audio file" href={ `${window.location.href}track/upload/${this.props.track.id}` } ><span className="fa fa-plus"></span></a>
                 <a title="upload session folder" href={ `${window.location.href}track/upload/session/${this.props.track.id}` } ><span className="fa fa-cloud-upload"></span></a>

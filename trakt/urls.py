@@ -13,17 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from rest_framework.routers import DefaultRouter
+import notifications.urls
+
 from main.views import home, forms
 from main.views.api.tracks_api import TrackList, TrackDetail
-from main.views.api.files_api import TrackFileList, TrackFileDetail
+from main.views.api.files_api import TrackFileList, TrackFileDetail, TrackFileViewSet
 from main.views.api.genres_api import GenreList, GenreDetail
-from main.views.api.users import UserList, UserDetail, CurrentUser
+from main.views.api.keys_api import KeyList, KeyDetail
+from main.views.api.users_api import UserViewSet
 from main.views.api.projects import ProjectList, ProjectDetail
+from main.views.api.status_api import StatusList, StatusDetail
+from main.views.api.notifications_api import NotificationViewSet
 from main.views.signed_urls import get_signed_url
 
+# API routes
+router = DefaultRouter()
+router.register(r'audiofiles', TrackFileViewSet, base_name='audiofile')
+router.register(r'notifications', NotificationViewSet, base_name='notification')
+router.register(r'users', UserViewSet, base_name='user')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -46,13 +57,17 @@ urlpatterns = [
     url(r'^api/files/(?P<pk>[0-9]+)/$', TrackFileDetail.as_view()),
     url(r'^api/genres/$', GenreList.as_view()),
     url(r'^api/genres/(?P<pk>[0-9]+)/$', GenreDetail.as_view()),
+    url(r'^api/keys/$', KeyList.as_view()),
+    url(r'^api/keys/(?P<pk>[0-9]+)/$', KeyDetail.as_view()),
     url(r'^api/tracks/$', TrackList.as_view()),
     url(r'^api/tracks/(?P<pk>[0-9]+)/$', TrackDetail.as_view()),
-    url(r'^api/users/$', UserList.as_view()),
-    url(r'^api/users/current/$', CurrentUser.as_view()),
-    url(r'^api/users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
     url(r'^api/projects/$', ProjectList.as_view()),
     url(r'^api/projects/(?P<pk>[0-9]+)/$', ProjectDetail.as_view()),
+    url(r'^api/status/$', StatusList.as_view()),
+    url(r'^api/status/(?P<pk>[0-9]+)/$', StatusDetail.as_view()),
 
+    url(r'^api/', include(router.urls)),
+
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     # Catch All other url routes for react-router
 ]

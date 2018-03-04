@@ -1,6 +1,7 @@
 import os
 import tempfile
-
+import urllib
+from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import Storage
@@ -60,3 +61,12 @@ class GoogleCloudStorage(Storage):
         else:
             url = "File does not exist."
         return url
+
+# the first part of this url is the media root
+def build_file_storage_path(instance, filename):
+    filename = urllib.parse.unquote(filename)
+    name, ext = os.path.splitext(filename)
+    filename = slugify(name) + ext
+    print(filename)
+    username = instance.submitter
+    return '{0}/tracks/{1}/{2}'.format(username, instance.slug, filename)

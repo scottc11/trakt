@@ -1,16 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 import TrackDetail from './trackDetail';
 
 const TrackList = (props) => {
   const trackItems = props.tracks.map( (track) => {
-    if (track.status == props.status) {
-      return <TrackDetail key={track.id} track={track} />
-    }
+    return <TrackDetail key={track.id} track={track} />
   });
 
   return (
-    <ul className="track-list col-xs-3">
-      <li className="track-list--status">{ props.label }</li>
+    <ul style={{height: props.dimensions.height}} className="track-list col-xs-12 col-sm-9">
       {trackItems}
     </ul>
   )

@@ -1,0 +1,71 @@
+@import 'variables';
+
+.form {
+  &--container {
+    font-family: @bungee-hairline;
+  }
+  & form {
+    color: @white;
+    margin: 10px 5px;
+    & label {
+      font-family: @bungee-hairline;
+      display: block;
+    }
+    & input {
+      background: @bg-white-opac;
+      border-style: none;
+      border: none;
+      border-radius: 5px;
+      &::placeholder {
+        color: @white;
+        opacity: 0.5;
+      }
+    }
+    & input[type=text] {
+      cursor: text;
+    }
+    & input[type=file] {
+      background: none;
+      color: @white;
+      display: inline;
+    }
+    & input[type=color] {
+      padding: 0;
+      margin: 0;
+      margin-right: 10px;
+    }
+    & input[type=submit] {
+      background: @submit-color;
+      color: @white;
+      border-radius: 5px;
+      display: block;
+      margin-left: 0;
+    }
+    & input:disabled {
+      color: @bg-white-opac;
+    }
+    & select, input {
+      font-family: @console;
+      margin: 5px 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    & select {
+      color: @onyx;
+    }
+  }
+
+  &__misc {
+    & form {
+      & label { display: inline-block; }
+      & input[type=submit] { display: inline-block; }
+    }
+  }
+
+  &__track {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-color: @bg-white-opac;
+  }
+}

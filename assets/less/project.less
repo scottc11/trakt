@@ -1,5 +1,65 @@
 @import 'variables';
 
 .project {
-  
+  &__detail {
+    background: @mako;
+    color: @white;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: @scrollbar-width;
+      background: @scrollbar-bg;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: @scrollbar-thumb-bg;
+      border-radius: @scrollbar-thumb-radius;
+    }
+
+    &--heading {
+      font-family: @old-code;
+      margin-top: 20px;
+    }
+
+    &--collapsed {
+
+    }
+
+    & hr {
+      border-color: @bg-white-opac;
+    }
+
+    &--toggle {
+      text-align: right;
+      & > span {
+        font-size: @large;
+      }
+    }
+
+    &--header {
+      margin-top: 20px;
+      font-family: @bungee-hairline;
+    }
+    &--collaborators {
+      & h4 {
+        font-family: @old-code;
+        margin-top: 20px;
+      }
+      & ul { padding: 10px; }
+    }
+
+    &__activity {
+      & ul {
+        max-height: 150px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: @scrollbar-width;
+          background: @scrollbar-bg;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: @scrollbar-thumb-bg;
+          border-radius: @scrollbar-thumb-radius;
+        }
+      }
+    }
+  }
 }

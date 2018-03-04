@@ -2,10 +2,15 @@
 
 .track-list {
   padding: 20px;
-  margin-bottom: 100px;
-  height: 100%;
-  &:nth-child(odd) {
-    background: rgba(193, 193, 193, 0.1);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: @scrollbar-width;
+    background: @scrollbar-bg;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: @scrollbar-thumb-bg;
+    border-radius: @scrollbar-thumb-radius;
   }
 
   &--status {

@@ -1,12 +1,21 @@
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
+from rest_framework.decorators import detail_route, list_route
 
-from main.models.track import TrackFile
-from main.serializers import TrackFileSerializer
+from main.models.track_file import TrackFile
+from main.serializers import TrackFileSerializer, TrackFileCreateSerializer
+
+
+class TrackFileViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing track files instances.
+    """
+    serializer_class = TrackFileSerializer
+    queryset = TrackFile.objects.all()
 
 
 class TrackFileList(APIView):
@@ -20,9 +29,9 @@ class TrackFileList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TrackFileSerializer(data=request.data)
+        serializer = TrackFileCreateSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(file=request.data['file_path'], uploader=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

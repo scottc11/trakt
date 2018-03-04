@@ -31,7 +31,7 @@ STATIC_URL = 'https://storage.googleapis.com/{}/static/'.format(os.environ['GC_S
 
 PROJECT_ID = os.environ['GC_PROJECT_ID']
 CLOUD_STORAGE_BUCKET = os.environ['GC_STORAGE_BUCKET']
-MEDIA_PREFIX = "prod/users/"
+MEDIA_PREFIX = "users/"
 
 CLOUD_STORAGE_ROOT = "https://storage.googleapis.com/{bucket_name}/".format(
     bucket_name=CLOUD_STORAGE_BUCKET

@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from main.models.project import Project
-from main.serializers import ProjectSerializer
+from main.serializers import ProjectSerializer, ProjectDetailSerializer
 
 
 class ProjectList(APIView):
@@ -31,5 +31,5 @@ class ProjectDetail(APIView):
 
     def get(self, request, pk, format=None):
         project = self.get_object(pk)
-        serializer = ProjectSerializer(project)
+        serializer = ProjectDetailSerializer(project)
         return Response(serializer.data)

@@ -1,6 +1,8 @@
 let path = require('path');
 let webpack = require('webpack');
 let BundleTracker = require('webpack-bundle-tracker');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 module.exports = {
   // the base directry (absolute path) for resolving the entry option
@@ -16,13 +18,14 @@ module.exports = {
 
   output: {
     // where you want your compiled bundle to be stored
-    path: path.resolve('./static/bundles/'),
+    path: path.resolve('./main/static/bundles/'),
     filename: '[name].bundle.js',
   },
 
   plugins: [
     // telss webpack where to store data about your bundles
     new BundleTracker({filename: './webpack-stats.json'}),
+    new ExtractTextPlugin("[name].css"),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -37,10 +40,11 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          // specify that we will be dealing with React code
-          presets: ['react', 'es2015']
-        }
+        query: { presets: ['react', 'es2015'] }
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
       }
     ]
   },
