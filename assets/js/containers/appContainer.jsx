@@ -9,6 +9,7 @@ import { fetchProjects } from '../actions/actions';
 import { fetchKeys } from '../actions/key_actions';
 import { fetchGenres } from '../actions/genre_actions';
 import { fetchStatusList } from '../actions/status_actions';
+import { ScreenResize } from '../actions/ui_actions';
 import Header from './header';
 import Project from './project';
 import MediaPlayer from './mediaPlayer'
@@ -25,6 +26,8 @@ class AppContainer extends Component {
     this.props.fetchGenres();
     this.props.fetchKeys();
     this.props.fetchStatusList();
+    this.props.ScreenResize();
+    window.addEventListener("resize", this.props.ScreenResize);
   }
 
   render() {
@@ -52,7 +55,14 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCurrentUser, fetchProjects, fetchGenres, fetchKeys, fetchStatusList }, dispatch);
+  return bindActionCreators({
+    fetchCurrentUser,
+    fetchProjects,
+    fetchGenres,
+    fetchKeys,
+    fetchStatusList,
+    ScreenResize
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

@@ -16,6 +16,7 @@ class ProjectDetail extends Component {
     super(props);
     this.state = {
       sidebarOpen: true,
+      height: 800,
     }
 
     this.toggleSidebar = this.toggleSidebar.bind(this);
@@ -41,7 +42,7 @@ class ProjectDetail extends Component {
 
     if (this.state.sidebarOpen) {
       return (
-        <div className="project__detail col-xs-3">
+        <div style={ { height: this.props.UI.body.height } } className="project__detail col-xs-3">
 
           <div className="project__detail--header">
             <ProjectList selected={this.props.activeProject} />
@@ -108,7 +109,8 @@ function mapStateToProps(state) {
   return {
     activeProject: state.activeProject,
     currentUser: state.currentUser,
-    notifications: state.notifications
+    notifications: state.notifications,
+    UI: state.UI
   };
 }
 

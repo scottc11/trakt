@@ -25,10 +25,6 @@ class TrackFile(models.Model):
 # Notifications
 @receiver(post_save, sender=TrackFile)
 def track_uploaded(sender, instance, created, **kwargs):
-    print('----------------------------------------------------')
-    print(sender)
-    print(instance)
-    print(created)
 
     users = User.objects.filter(id=0)
     for project in instance.track.projects.all():

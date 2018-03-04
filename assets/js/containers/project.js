@@ -29,7 +29,7 @@ class Project extends Component {
     return (
       <div className='project'>
         <ProjectDetail project={this.props.activeProject} />
-        <TrackList tracks={this.props.activeProject.tracks} />
+        <TrackList dimensions={this.props.UI.body} tracks={this.props.activeProject.tracks} />
       </div>
     );
 
@@ -38,7 +38,11 @@ class Project extends Component {
 
 
 function mapStateToProps(state) {
-  return { activeProject: state.activeProject, projects: state.projects };
+  return {
+    activeProject: state.activeProject,
+    projects: state.projects,
+    UI: state.UI
+  };
 }
 
 function mapDispatchToProps(dispatch) {
