@@ -26,6 +26,8 @@ class AppContainer extends Component {
     this.props.fetchGenres();
     this.props.fetchKeys();
     this.props.fetchStatusList();
+
+    // UI LISTENERS
     this.props.ScreenResize();
     window.addEventListener("resize", this.props.ScreenResize);
   }

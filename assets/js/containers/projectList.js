@@ -10,9 +10,16 @@ class ProjectList extends Component {
     super(props);
     this.state = {
       menuActive: false,
+      isFetching: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.onSelectItem = this.onSelectItem.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ( this.props.activeProject.id != nextProps.activeProject.id ) {
+      this.setState({ isFetching: false })
+    }
   }
 
   toggleMenu() {
@@ -22,13 +29,18 @@ class ProjectList extends Component {
   }
 
   onSelectItem(project) {
-    this.props.fetchProject(project.id);
-    this.setState({
-      menuActive: false,
-    });
+    if (this.props.activeProject.id !== project.id) {
+      this.props.fetchProject(project.id);
+      this.setState({
+        menuActive: false,
+        isFetching: true
+      });
+    } else { this.setState( { menuActive: false } ) }
   }
 
   render() {
+
+    document.body.style.cursor = this.state.isFetching ? 'progress' : 'default';
 
     let menu;
     if (this.state.menuActive) {
