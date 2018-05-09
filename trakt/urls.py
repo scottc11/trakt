@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from rest_framework.routers import DefaultRouter
 import notifications.urls
 
-from main.views import home, forms
+from main.views import home, forms, auth
 from main.views.api.tracks_api import TrackList, TrackDetail
 from main.views.api.files_api import TrackFileList, TrackFileDetail, TrackFileViewSet
 from main.views.api.genres_api import GenreList, GenreDetail
@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^signup/$', auth.signup, name='signup'),
     url(r'^$', home.home, name='home'),
 
     url(r'^track/submit/$', forms.submit_track, name='submit_track'),

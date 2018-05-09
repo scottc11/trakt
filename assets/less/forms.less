@@ -62,6 +62,39 @@
     }
   }
 
+  &__auth {
+    text-align: center;
+    margin-top: 50px;
+    background: @onyx;
+    border-radius: 25px;
+    padding: 20px;
+    color: @white;
+    & form {
+      & label { display: inline-block; }
+      & input {
+        display: inline-block;
+        background: @light-grey;
+      }
+      & input + span, ul li {
+        font-weight: 200;
+        display: block;
+        color: @baby-blue;
+        opacity: 0.5;
+        font-size: @super-small;
+      }
+      & button[type=submit] {
+        width: 60%;
+        margin: 40px 0;
+      }
+    }
+    &--logo {
+      font-family: @bungee-shade;
+    }
+    &--header {
+      font-family: @bungee-hairline;
+    }
+  }
+
   &__track {
     background: none;
     border: none;

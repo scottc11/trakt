@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {% block content %}
   <div class="form col-xs-12 col-sm-4 col-centered">
@@ -10,14 +9,15 @@
       <h1 class="form__auth--logo">TRAKT</h1>
       <hr>
 
-      <h2 class="form__auth--header">Login</h2>
+      <h2 class="form__auth--header">Sign Up</h2>
 
       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">login</button>
+        <button type="submit" class="btn btn-primary">sign up</button>
       </form>
-      <a href={% url 'signup' %}>SIGN UP</a>
+      <a href={% url 'login' %}>Login</a>
     </div>
+  </div>
   </div>
 {% endblock %}

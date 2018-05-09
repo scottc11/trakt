@@ -1,13 +1,23 @@
 @import 'variables';
 
 .auth {
-  &--modal {
-
-  }
-
-  &--login {
+  &__login {
     margin-top: 50px;
     width: 400px;
+    background: @onyx;
+    border-radius: 25px;
+    padding: 20px;
+    color: @white;
+  }
+
+  & form {
+    & input {
+      background: @light-grey;
+    }
+  }
+
+  &__logo {
+    font-family: @bungee-shade;
   }
 
 }
