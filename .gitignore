@@ -10,3 +10,4 @@ static
 npm-debug.log
 config.yaml
 package-lock.json
+env/

@@ -20,7 +20,7 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'traktdev',
+        'NAME': CFG['psql']['database_name'],
         'USER': CFG['psql']['user']['name'],
         'PASSWORD': CFG['psql']['user']['pass'],
         'HOST': '127.0.0.1',
