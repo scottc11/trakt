@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="form col-xs-12 col-sm-4 col-centered">
-    <div class="form__auth">
+    <div class="form__auth form__auth__signup">
 
       <h1 class="form__auth--logo">TRAKT</h1>
       <hr>
@@ -14,9 +14,11 @@
       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">sign up</button>
+        <button type="submit" class="btn btn-primary">Register!</button>
       </form>
-      <a href={% url 'login' %}>Login</a>
+      <div class="form__auth--alt-btn">
+        <a href={% url 'login' %}>Login</a>
+      </div>
     </div>
   </div>
   </div>

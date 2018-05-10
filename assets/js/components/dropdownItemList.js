@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 const DropdownItemList = (props) => {
 
@@ -15,7 +16,7 @@ const DropdownItemList = (props) => {
   return (
     <ul className="dropdown__list">
       {listItems}
-      <a href={ window.location.href + 'project/new/' }><li className="dropdown__list--add">New Project</li></a>
+      <a href={ axios.defaults.baseURL + 'project/new/' }><li className="dropdown__list--add">New Project</li></a>
     </ul>
   );
 }

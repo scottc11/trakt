@@ -20,7 +20,7 @@ GOOGLE_SERVICE_CREDENTIALS = 'google-app-credentials.json'
 
 
 def sign_url(method, filename, expiration, content_type, track_id):
-
+    print(content_type)
     expiration = int(expiration)
     type = content_type
     track_obj = Track.objects.get(id=track_id)

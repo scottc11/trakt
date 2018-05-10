@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
-    url(r'^signup/$', auth.signup, name='signup'),
+    url(r'^signup/$', auth.signup_view, name='signup'),
     url(r'^$', home.home, name='home'),
 
     url(r'^track/submit/$', forms.submit_track, name='submit_track'),
@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^project/edit/(?P<pk>[0-9]+)/$', forms.edit_project, name='edit_project'),
     url(r'^genre/new/$', forms.new_genre, name='new_genre'),
     url(r'^key/new/$', forms.new_key, name='new_key'),
+    url(r'^status/new/$', forms.new_status, name='new_key'),
 
     url(r'^api/files/$', TrackFileList.as_view()),
     url(r'^api/files/(?P<pk>[0-9]+)/$', TrackFileDetail.as_view()),

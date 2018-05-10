@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
 import { fetchProject } from '../actions/actions';
 import TrackList from '../components/trackList';
 import ProjectDetail from '../components/projectDetail';
@@ -10,14 +11,20 @@ class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
   }
 
   componentDidMount() {
-    this.props.fetchProject(this.props.projects[0].id);
+    if (this.props.projects.length > 0) {
+      this.props.fetchProject(this.props.projects[0].id);
+    } else {
+      window.location.href = axios.defaults.baseURL + 'project/new/';
+    }
   }
 
   render() {
     // if ajax still loading
+
     if (!this.props.activeProject.tracks) {
       return (
         <div className="track-list__spinner">

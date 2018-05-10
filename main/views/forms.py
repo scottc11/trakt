@@ -16,6 +16,7 @@ from main.forms.session_upload_form import SessionUpload
 from main.forms.project_form import NewProject
 from main.forms.genre_form import NewGenre
 from main.forms.key_form import NewKey
+from main.forms.status_form import NewStatus
 
 @login_required(login_url="/login/")
 def submit_track(request):
@@ -158,14 +159,14 @@ def new_genre(request):
         if form.is_valid():
             genre = form.save()
             next = request.POST.get('next', '/')
-            message = 'Created new genre: ' + '"' + genre.genre + '"'
+            message = 'Created new genre: ' + '"' + genre.label + '"'
             messages.add_message(request, messages.INFO, message)
             return HttpResponseRedirect(next)
 
     else:
         form = NewGenre()
 
-    return render(request, 'forms/generic_form.html', { 'form': form })
+    return render(request, 'forms/generic_form.html', { 'form': form, 'form_title': 'New Genre' })
 
 
 @login_required(login_url="/login/")
@@ -176,11 +177,29 @@ def new_key(request):
         if form.is_valid():
             key = form.save()
             next = request.POST.get('next', '/')
-            message = 'Created new genre: ' + '"' + key.key + '"'
+            message = 'Created new key: ' + '"' + key.label + '"'
             messages.add_message(request, messages.INFO, message)
             return HttpResponseRedirect(next)
 
     else:
         form = NewKey()
 
-    return render(request, 'forms/generic_form.html', { 'form': form })
+    return render(request, 'forms/generic_form.html', { 'form': form, 'form_title': 'New Key' })
+
+
+@login_required(login_url="/login/")
+def new_status(request):
+    if request.method == 'POST':
+        form = NewStatus(request.POST)
+
+        if form.is_valid():
+            status = form.save()
+            next = request.POST.get('next', '/')
+            message = 'Created new status: ' + '"' + status.label + '"'
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(next)
+
+    else:
+        form = NewStatus()
+
+    return render(request, 'forms/generic_form.html', { 'form': form, 'form_title': 'New Status' })

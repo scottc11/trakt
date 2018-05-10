@@ -8,6 +8,9 @@
     <a href="{% url 'home' %}"><h4><span class="fa fa-arrow-left"></span> Home</h4></a>
   </div>
   <div class="static-form col-xs-12 col-sm-4 col-centered">
+
+      <h1>{{form_title}}</h1>
+
       <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form exclude=exclude %}

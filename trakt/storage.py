@@ -13,7 +13,7 @@ from google.cloud import storage
 @deconstructible()
 class GoogleCloudStorage(Storage):
     def __init__(self, option=None):
-        self.storage_client = storage.Client(project=settings.PROJECT_ID)
+        self.storage_client = storage.Client.from_service_account_json('google-app-credentials.json')
         self.bucket = self.storage_client.get_bucket(settings.CLOUD_STORAGE_BUCKET)
         self.storage_location = settings.MEDIA_PREFIX
 

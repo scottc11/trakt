@@ -42,7 +42,7 @@
     font-size: @xs-small;
     line-height: @row-line-height;
     & > span {
-      margin: 0 20px;
+      margin: 0 5px;
       display: inline-block;
       font-size: @xs-small;
     }
@@ -72,9 +72,11 @@
     border-bottom-right-radius: @track-radius;
     border-bottom-left-radius: @track-radius;
     &--options {
-      text-align: right;
-      margin-top: 5px;
+      display: inline-block;
       font-size: @medium;
+      line-height: @row-line-height;
+      vertical-align: middle;
+      margin-left: 20px;
       & span {
         margin: 0 5px;
       }

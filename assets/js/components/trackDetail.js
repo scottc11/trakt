@@ -80,7 +80,15 @@ class TrackDetail extends Component {
               <UserBadge user={this.props.track.submitter} />
               <span className="track__info--date">{ this.props.track.date_recorded }</span>
               <TrackBadges genre={this.props.track.genre} bpm={this.props.track.bpm} _key={this.props.track.key} />
+
+              <div className="track__details--options">
+                <a title="upload audio file" href={ `${window.location.href}track/upload/${this.props.track.id}` } ><span className="fa fa-plus"></span></a>
+                <a title="upload session folder" href={ `${window.location.href}track/upload/session/${this.props.track.id}` } ><span className="fa fa-cloud-upload"></span></a>
+                <a title="edit track" href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
+              </div>
+
             </div>
+
             <span
               className={ this.state.detailsActive ? 'track__details--toggle fa fa-caret-up' : 'track__details--toggle fa fa-caret-down' }
               onClick={ () => this.onToggleDetails() } >
@@ -93,11 +101,6 @@ class TrackDetail extends Component {
             <div className="track__details">
               <TrackDetailFileList onSelect={ this.onFileSelect.bind(this) } track={this.props.track} active={this.state.activeFile.id} />
               <TrackSessionList sessions={this.props.track.sessions} />
-              <div className="track__details--options">
-                <a title="upload audio file" href={ `${window.location.href}track/upload/${this.props.track.id}` } ><span className="fa fa-plus"></span></a>
-                <a title="upload session folder" href={ `${window.location.href}track/upload/session/${this.props.track.id}` } ><span className="fa fa-cloud-upload"></span></a>
-                <a title="edit track" href={ `${window.location.href}track/edit/${this.props.track.id}` } ><span className="fa fa-pencil-square-o"></span></a>
-              </div>
             </div>
           }
 
