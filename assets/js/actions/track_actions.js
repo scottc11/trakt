@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { fetchProject } from './actions';
 import { updateUploadStatus } from './progress_actions';
-import {FETCH_TRACK, FETCH_TRACKS, DELETE_AUDIO_FILE, UPDATE_TRACK_IN_PROJECT} from './actionTypes';
+import {
+  FETCH_TRACK,
+  FETCH_TRACKS,
+  DELETE_AUDIO_FILE,
+  UPDATE_TRACK_IN_PROJECT
+} from './actionTypes';
 
 export function createTrackFile(filePath, trackID) {
   const url = axios.defaults.baseURL + 'api/files/'
@@ -35,6 +40,15 @@ export function fetchTrack(id) {
 
   return {
     type: FETCH_TRACK,
+    payload: request
+  }
+}
+
+export function FetchTracks() {
+  const url = 'api/tracks/'
+  const request = axios.get(url);
+  return {
+    type: FETCH_TRACKS,
     payload: request
   }
 }

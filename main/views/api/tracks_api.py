@@ -16,7 +16,7 @@ class TrackList(APIView):
 
     def get(self, request, format=None):
         # get user group --> get users in group --> create array of user objects --> pass to submitter
-        tracks = Track.objects.filter(submitter=request.user)
+        tracks = Track.objects.filter(projects__collaborators__id=request.user)
         serializer = TrackSerializer(tracks, many=True)
         return Response(serializer.data)
 

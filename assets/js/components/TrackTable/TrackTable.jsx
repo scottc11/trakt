@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { PlayAudioFile, PauseAudioFile } from '../../actions/mediaPlayerActions';
 import config from './table.config';
 
 
@@ -8,22 +11,12 @@ class TrackTable extends Component {
     super(props);
   }
 
-  playTrack() {
-    this.setState({ active: true });
-    this.props.updateMediaPlayer(this.state.activeFile.file, true);
-  }
-
-  pauseTrack() {
-    this.setState({ active: false });
-    this.props.updateMediaPlayer(this.state.activeFile.file, false);
-  }
-
 
   render() {
     return(
       <ReactTable
         data={this.props.tracks}
-        columns={config()}
+        columns={config(this.props.activeTrack, this.props.PlayAudioFile, this.props.PauseAudioFile)}
         showPagination={false}
         className="-striped -highlight"
         SubComponent={ row => <div>the sub compnenntss</div>}
@@ -33,5 +26,13 @@ class TrackTable extends Component {
 
 }
 
+function mapStateToProps(state) {
+  return { activeTrack: state.activeTrack }
+}
 
-export default TrackTable;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ PlayAudioFile, PauseAudioFile }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrackTable);

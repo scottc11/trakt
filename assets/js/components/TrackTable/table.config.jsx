@@ -1,13 +1,17 @@
 import React from 'react';
 import UserBadge from '../userBadge';
 
-export default function() {
+export default function(activeAudioFile, playFn, pauseFn) {
   return [
     {
       Header: '',
       accessor: 'none',
       Cell: row => {
-        return <span className="fa fa-play" onClick={() => console.log('clicks') }></span>
+        if ( row.original.audio_files[0].file == activeAudioFile.url && activeAudioFile.active == false || row.original.audio_files[0].file !== activeAudioFile.url ) {
+          return <span className="fa fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></span>
+        } else {
+          return <span className="fa fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></span>
+        }
       },
       width: 50
     },

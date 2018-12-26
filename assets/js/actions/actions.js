@@ -3,7 +3,6 @@ import {
   FETCH_CURRENT_USER,
   FETCH_PROJECTS,
   FETCH_PROJECT,
-  UPDATE_MEDIA_PLAYER
 } from './actionTypes';
 
 // Get initial user data to start up application
@@ -36,13 +35,5 @@ export function fetchProject(proj_id) {
   return {
     type: FETCH_PROJECT,
     payload: request
-  }
-}
-
-// update the media player with a new url to create <audio> element.
-export function updateMediaPlayer(url, bool) {
-  return {
-    type: UPDATE_MEDIA_PLAYER,
-    payload: { 'url': url, 'active': bool }
   }
 }
