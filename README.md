@@ -7,7 +7,7 @@ Website built using Django + React via webpack.
 --------------------------------------------------------------------------------
 #### Setup gcloud account and credentials
 gcloud lives in ```~/.config/gcloud/```
-all your authentication credentials can be found in that folder.  The following command are meant to ensure you have all neseccary creds to either deploy or run the app locally.
+all your authentication credentials can be found in that folder.  The following commands are meant to ensure you have all necessary creds to either deploy or run the app locally.
 Use ```gcloud config list``` to list the current authentication configuration.
 
 - set desired project, in this case it would be 'trakt-183713'
