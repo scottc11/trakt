@@ -1,4 +1,4 @@
-import { FETCH_STATUS_LIST, CREATE_STATUS } from '../actions/actions';
+import { FETCH_STATUS_LIST, CREATE_STATUS } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch (action.type) {

@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { createTrackFile } from './track_actions';
 
-import { UPDATE_PROGRESS } from './actions';
-import { UPDATE_UPLOAD_STATUS } from './actions';
+import { UPDATE_PROGRESS, UPDATE_UPLOAD_STATUS } from './actionTypes';
 
 export function updateUploadProgress(loaded, total) {
   let percentLoaded = Math.round( (loaded / total) * 100 );

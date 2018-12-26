@@ -1,4 +1,4 @@
-import { UPDATE_PROGRESS, UPDATE_UPLOAD_STATUS } from '../actions/actions';
+import { UPDATE_PROGRESS, UPDATE_UPLOAD_STATUS } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch (action.type) {

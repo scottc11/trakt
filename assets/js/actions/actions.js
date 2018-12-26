@@ -1,17 +1,10 @@
 import axios from 'axios';
-
-export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
-export const FETCH_PROJECT = 'FETCH_PROJECT';
-export const UPDATE_MEDIA_PLAYER = 'UPDATE_MEDIA_PLAYER';
-export const CREATE_GENRE = 'CREATE_GENRE';
-export const FETCH_GENRES = 'FETCH_GENRES';
-export const FETCH_PROJECTS = 'FETCH_PROJECTS';
-export const CREATE_KEY = 'CREATE_KEY';
-export const FETCH_KEYS = 'FETCH_KEYS';
-export const CREATE_STATUS = 'CREATE_STATUS';
-export const FETCH_STATUS_LIST = 'FETCH_STATUS_LIST';
-export const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
-export const UPDATE_UPLOAD_STATUS = 'UPDATE_UPLOAD_STATUS';
+import {
+  FETCH_CURRENT_USER,
+  FETCH_PROJECTS,
+  FETCH_PROJECT,
+  UPDATE_MEDIA_PLAYER
+} from './actionTypes';
 
 // Get initial user data to start up application
 export function fetchCurrentUser() {

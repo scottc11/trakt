@@ -8,10 +8,12 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import loggerConfig from './logger.config';
 
-import PrototypeMethods from './utils/prototypeMethods.js';
+import 'react-table/react-table.css';
 import Styles from '../less/index.less';
+
+import loggerConfig from './logger.config';
+import PrototypeMethods from './utils/prototypeMethods.js';
 import rootReducer from './reducers/reducers';
 import AppContainer from './containers/appContainer';
 

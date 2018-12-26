@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CREATE_STATUS, FETCH_STATUS_LIST } from './actions';
+import { CREATE_STATUS, FETCH_STATUS_LIST } from './actionTypes';
 
 
 export function createStatus(label, hex_code) {

@@ -1,4 +1,4 @@
-import { FETCH_KEYS, CREATE_KEY } from '../actions/actions';
+import { FETCH_KEYS, CREATE_KEY } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch (action.type) {

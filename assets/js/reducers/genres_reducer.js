@@ -1,5 +1,4 @@
-import { CREATE_GENRE } from '../actions/actions';
-import { FETCH_GENRES } from '../actions/actions';
+import { CREATE_GENRE, FETCH_GENRES } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch (action.type) {

@@ -1,11 +1,7 @@
 import axios from 'axios';
 import { fetchProject } from './actions';
 import { updateUploadStatus } from './progress_actions';
-
-export const FETCH_TRACK = 'FETCH_TRACK';
-export const FETCH_TRACKS = 'FETCH_TRACKS';
-export const DELETE_AUDIO_FILE = 'DELETE_AUDIO_FILE';
-export const UPDATE_TRACK_IN_PROJECT = 'UPDATE_TRACK_IN_PROJECT';
+import {FETCH_TRACK, FETCH_TRACKS, DELETE_AUDIO_FILE, UPDATE_TRACK_IN_PROJECT} from './actionTypes';
 
 export function createTrackFile(filePath, trackID) {
   const url = axios.defaults.baseURL + 'api/files/'

@@ -1,4 +1,4 @@
-export const SCREEN_RESIZE = 'SCREEN_RESIZE';
+import {SCREEN_RESIZE} from './actionTypes';
 
 // ACTIONS FOR GENERAL UI CHANGES
 

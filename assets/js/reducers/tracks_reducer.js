@@ -1,4 +1,4 @@
-import { FETCH_TRACK, FETCH_TRACKS } from '../actions/track_actions';
+import { FETCH_TRACK, FETCH_TRACKS } from '../actions/actionTypes';
 
 // NOTE: slice reducer: a reducer that is being used to handle updates to one
 // specific slice of the state tree, usually done by passing it to combineReducers

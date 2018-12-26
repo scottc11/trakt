@@ -34,7 +34,9 @@ class Project extends Component {
 
     return (
       <div className='project'>
-        <TrackTable tracks={this.props.activeProject.tracks}/>
+        <TrackTable
+          tracks={this.props.activeProject.tracks}
+        />
       </div>
     );
 

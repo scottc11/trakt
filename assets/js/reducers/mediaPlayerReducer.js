@@ -1,4 +1,4 @@
-import { UPDATE_MEDIA_PLAYER } from '../actions/actions';
+import { UPDATE_MEDIA_PLAYER } from '../actions/actionTypes';
 
 export default function(state = { 'url': '', 'active': false }, action) {
   switch (action.type) {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CREATE_KEY, FETCH_KEYS } from './actions';
+import { CREATE_KEY, FETCH_KEYS } from './actionTypes';
 
 export function createKey(label) {
   const url = window.location.href + `api/keys/`;

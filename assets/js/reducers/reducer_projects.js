@@ -1,4 +1,4 @@
-import { FETCH_PROJECTS } from '../actions/actions';
+import { FETCH_PROJECTS } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch (action.type) {

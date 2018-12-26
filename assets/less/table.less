@@ -1,0 +1,34 @@
+@import 'variables';
+
+// ---------------------
+// react-table overrides
+// ---------------------
+
+.ReactTable {
+  border: none !important;
+}
+
+.rt {
+  &-table {
+    // table-layout: fixed;
+    background-color: @tbl-bg;
+    font-family: @tbl-font;
+    color: @tbl-font-color;
+    font-size: @tbl-font-size;
+  }
+  // ROWS
+  &-td {
+    vertical-align: middle;
+    font-weight: @tbl-row-fnt-weight;
+  }
+  &-th {
+    // background-color: @tbl-head-bg;
+  }
+  &-tbody {
+    & > .rt-tr-group {
+      &:hover {
+        background: @tbl-row-hover !important;
+      }
+    }
+  }
+}

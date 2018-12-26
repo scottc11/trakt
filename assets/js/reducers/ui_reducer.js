@@ -1,4 +1,4 @@
-import { SCREEN_RESIZE } from '../actions/ui_actions';
+import { SCREEN_RESIZE } from '../actions/actionTypes';
 
 const initialState = {
   screen: null,

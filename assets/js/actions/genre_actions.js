@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CREATE_GENRE, FETCH_GENRES } from './actions';
+import { CREATE_GENRE, FETCH_GENRES } from './actionTypes';
 
 export function createGenre(label) {
   const url = window.location.href + `api/genres/`;

@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
+import { FETCH_NOTIFICATIONS } from './actionTypes';
 
 export function FetchNotifications() {
   const url = axios.defaults.baseURL + 'api/notifications/';

@@ -1,4 +1,4 @@
-import { FETCH_NOTIFICATIONS } from '../actions/notification_actions';
+import { FETCH_NOTIFICATIONS } from '../actions/actionTypes';
 
 export default function(state = null, action) {
   switch(action.type) {
