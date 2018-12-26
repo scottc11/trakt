@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
@@ -26,7 +26,9 @@ module.exports = {
   plugins: [
     // telss webpack where to store data about your bundles
     new BundleTracker({filename: './webpack-stats.json'}),
-    new ExtractTextPlugin("[name].css"),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
     new CleanWebpackPlugin(
       ['./main/static/bundles/'],
       { root: process.cwd() }
@@ -41,16 +43,29 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: { presets: ['react'] }
       },
-      // LESS/CSS
+
+      // LESS
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ],
       },
+
+      // CSS
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+
+
       // IMAGES
       {
         test: /\.(png|svg|jpg|gif)$/,

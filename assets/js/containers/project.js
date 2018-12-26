@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { fetchProject } from '../actions/actions';
-import TrackList from '../components/trackList';
-import ProjectDetail from '../components/projectDetail';
+import TrackTable from '../components/TrackTable/TrackTable';
 
 
 class Project extends Component {
@@ -35,8 +34,7 @@ class Project extends Component {
 
     return (
       <div className='project'>
-        <ProjectDetail project={this.props.activeProject} />
-        <TrackList dimensions={this.props.UI.body} tracks={this.props.activeProject.tracks} />
+        <TrackTable tracks={this.props.activeProject.tracks}/>
       </div>
     );
 
