@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 import notifications.urls
 
 from main.views import home, forms, auth
-from main.views.api.tracks_api import TrackList, TrackDetail
+from main.views.api.tracks_api import TrackViewset, TrackDetail
 from main.views.api.files_api import TrackFileList, TrackFileDetail, TrackFileViewSet
 from main.views.api.genres_api import GenreList, GenreDetail
 from main.views.api.keys_api import KeyList, KeyDetail
@@ -20,6 +20,7 @@ from main.views.signed_urls import get_signed_url
 router = DefaultRouter()
 router.register(r'audiofiles', TrackFileViewSet, base_name='audiofile')
 router.register(r'notifications', NotificationViewSet, base_name='notification')
+router.register(r'tracks', TrackViewset, base_name='track')
 router.register(r'users', UserViewSet, base_name='user')
 
 urlpatterns = [
@@ -47,8 +48,6 @@ urlpatterns = [
     url(r'^api/genres/(?P<pk>[0-9]+)/$', GenreDetail.as_view()),
     url(r'^api/keys/$', KeyList.as_view()),
     url(r'^api/keys/(?P<pk>[0-9]+)/$', KeyDetail.as_view()),
-    url(r'^api/tracks/$', TrackList.as_view()),
-    url(r'^api/tracks/(?P<pk>[0-9]+)/$', TrackDetail.as_view()),
     url(r'^api/projects/$', ProjectList.as_view()),
     url(r'^api/projects/(?P<pk>[0-9]+)/$', ProjectDetail.as_view()),
     url(r'^api/status/$', StatusList.as_view()),

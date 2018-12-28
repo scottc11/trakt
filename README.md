@@ -179,6 +179,7 @@ guide --> https://cloud.google.com/storage/docs/cross-origin
 
 ```
 gsutil cors set cors-json-file.json gs://trakt
+gsutil cors set cors-json-file.json gs://trakt-dev
 ```
 
 -------- DEPLOY APP ----------

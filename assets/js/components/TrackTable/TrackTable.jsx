@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { PlayAudioFile, PauseAudioFile } from '../../actions/mediaPlayerActions';
 import config from './table.config';
-import TrackDetail from '../trackDetail';
+import TrackDetail from '../TrackDetail';
 
 class TrackTable extends Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
+from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,18 +10,16 @@ from main.models.track import Track
 from main.serializers import TrackSerializer, TrackCreateSerializer
 
 
-class TrackList(APIView):
-    """
-    List all tracks, or create a new track.
-    """
+class TrackViewset(viewsets.ModelViewSet):
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self, request, format=None):
-        # get user group --> get users in group --> create array of user objects --> pass to submitter
-        tracks = Track.objects.filter(projects__collaborators__id=request.user.id)
-        serializer = TrackSerializer(tracks, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        queryset = Track.objects.filter(projects__collaborators__id=self.request.user.id)
+        return queryset
 
-    def post(self, request, format=None):
+    def create(self, request, *args, **kwargs):
         serializer = TrackCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(submitter=request.user)

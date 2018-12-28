@@ -9,6 +9,7 @@ import KeysReducer from './keys_reducer';
 import NotificationsReducer from './notifications_reducer';
 import StatusReducer from './status_reducer';
 import TrackReducer from './mediaPlayerReducer';
+import TrackListReducer from './trackListReducer';
 import UIReducer from './ui_reducer';
 
 const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   projects: ProjectsReducer,
   uploadProgress: UploadProgressReducer,
   statusList: StatusReducer,
+  trackList: TrackListReducer,
   UI: UIReducer
 })
 

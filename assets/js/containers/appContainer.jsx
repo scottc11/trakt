@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { fetchCurrentUser } from '../actions/actions';
 import { fetchProjects } from '../actions/actions';
+import { FetchTrackList } from '../actions/track_actions';
 import { fetchKeys } from '../actions/key_actions';
 import { fetchGenres } from '../actions/genre_actions';
 import { fetchStatusList } from '../actions/status_actions';
@@ -28,6 +29,7 @@ class AppContainer extends Component {
 
   componentDidMount() {
     this.props.fetchCurrentUser();
+    this.props.FetchTrackList();
     this.props.fetchProjects();
     this.props.fetchGenres();
     this.props.fetchKeys();
@@ -79,6 +81,7 @@ function mapDispatchToProps(dispatch) {
     fetchGenres,
     fetchKeys,
     fetchStatusList,
+    FetchTrackList,
     ScreenResize
   }, dispatch);
 }

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { UpdateTrackInProject } from '../actions/track_actions';
-import AudioFileForm from './forms/audioFileForm';
+import { UpdateTrackInProject } from '../../actions/track_actions';
+import AudioFileForm from '../forms/audioFileForm';
 
 
 

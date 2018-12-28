@@ -3,7 +3,7 @@ import { fetchProject } from './actions';
 import { updateUploadStatus } from './progress_actions';
 import {
   FETCH_TRACK,
-  FETCH_TRACKS,
+  FETCH_TRACK_LIST,
   DELETE_AUDIO_FILE,
   UPDATE_TRACK_IN_PROJECT
 } from './actionTypes';
@@ -44,11 +44,11 @@ export function fetchTrack(id) {
   }
 }
 
-export function FetchTracks() {
+export function FetchTrackList() {
   const url = 'api/tracks/'
   const request = axios.get(url);
   return {
-    type: FETCH_TRACKS,
+    type: FETCH_TRACK_LIST,
     payload: request
   }
 }
