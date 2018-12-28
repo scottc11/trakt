@@ -44,7 +44,6 @@ class TrackDetailFileList extends Component {
       <div className="track__file-list">
         <ul>{files}</ul>
         <AudioFileForm track={this.props.track}/>
-        <hr />
       </div>
     )
   }

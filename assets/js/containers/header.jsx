@@ -19,11 +19,20 @@ class Header extends Component {
           <div className="col-xs-3">
             <ProjectList />
           </div>
-          <div className="header--info col-xs-8">
-            <a href={axios.defaults.baseURL + `project/edit/${this.props.activeProject.id}`}>
-              <span className="fa fa-pencil-square-o"></span>
-            </a>
-            <a href={ axios.defaults.baseURL + 'track/submit/' }><span className="button__submit-track fa fa-plus-square"></span></a>
+          <div className="col-xs-5 header__actions">
+
+            <span className="txt--actionable">
+              <i className="far fa-edit"> </i>
+              Edit Project
+            </span>
+
+            <span className="txt--actionable" onClick={() => this.props.toggleActionWindowFn() }>
+              <i className="fa fa-plus-square"> </i>
+              Upload
+            </span>
+
+          </div>
+          <div className="header--info col-xs-3">
             <span className="">{ this.props.currentUser.username }</span>
             <a href={ window.location + 'logout/' }><span>Logout</span></a>
           </div>

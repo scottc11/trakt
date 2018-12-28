@@ -68,9 +68,10 @@ class TrackForm extends Component {
 
   validateFile(event) {
     const file = event.target.files[0];
+    const fileName = file.name.split('.')[0];
 
     if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
-      this.setState({ disabled: false });
+      this.setState({ disabled: false, title: fileName });
     } else {
       alert("Invalid file type.  File must be either '.mp3' or '.wav'");
       event.target.value = event.target.defaultValue;
@@ -96,7 +97,9 @@ class TrackForm extends Component {
           this.uploadFile(response.data.id) // passing track id
         }
       })
-      .catch( err => this.props.updateUploadStatus('error') );
+      .catch( err => {
+        this.props.updateUploadStatus('error')
+      } );
   }
 
   render() {
@@ -104,12 +107,17 @@ class TrackForm extends Component {
       <div className="form form__track">
         <form onSubmit={this.handleSubmit}>
           <label>
+            File:
+            <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
+          </label>
+          <label>
             Title:
             <input placeholder="ex. 'Ur Mom' " type="text" name="title" value={this.state.title} onChange={this.handleChange} />
           </label>
           <label>
             BPM:
             <input placeholder="ex. 100" type="text" name="bpm" value={this.state.bpm} onChange={this.handleChange} />
+            <span className="form--required">* required</span>
           </label>
           <label>
             Date:
@@ -131,11 +139,7 @@ class TrackForm extends Component {
             Status:
             <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
           </label>
-          <label>
-            File:
-            <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
-          </label>
-          <input type="submit" value="Submit" disabled={this.state.disabled}/>
+          <input type="submit" value="Upload" disabled={this.state.disabled}/>
         </form>
       </div>
     );

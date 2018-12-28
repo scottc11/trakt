@@ -14,14 +14,16 @@ import Header from './header';
 import Project from './project';
 import MediaPlayer from './mediaPlayer'
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
-import TrackForm from '../components/forms/trackForm';
-import GenreForm from '../components/forms/genreForm';
-import KeyForm from '../components/forms/keyForm';
-import StatusForm from '../components/forms/statusForm';
+import UploadTrack from '../components/UploadTrack';
+
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      actionWindow: false
+    }
+    this.toggleActionWindow = this.toggleActionWindow.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +38,10 @@ class AppContainer extends Component {
     window.addEventListener("resize", this.props.ScreenResize);
   }
 
+  toggleActionWindow() {
+    this.setState({ actionWindow: !this.state.actionWindow });
+  }
+
   render() {
 
     if (!this.props.CurrentUser || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList ) {
@@ -44,14 +50,11 @@ class AppContainer extends Component {
 
     return (
       <div>
-        <Header />
-        <div>
-          <TrackForm />
-          <GenreForm />
-          <StatusForm />
-          <KeyForm />
+        <Header toggleActionWindowFn={this.toggleActionWindow}/>
+        <div className="action-window" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
+          <UploadTrack />
         </div>
-        <Project />
+        <Project height={this.props.UI.body.height} />
         <MediaPlayer />
       </div>
     )
@@ -59,7 +62,14 @@ class AppContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  return { CurrentUser: state.currentUser, Projects: state.projects, Genres: state.genres, Keys: state.keys, StatusList: state.statusList };
+  return {
+    CurrentUser: state.currentUser,
+    Projects: state.projects,
+    Genres: state.genres,
+    Keys: state.keys,
+    StatusList: state.statusList,
+    UI: state.UI
+  };
 }
 
 function mapDispatchToProps(dispatch) {

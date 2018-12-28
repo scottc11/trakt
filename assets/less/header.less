@@ -4,6 +4,7 @@
   padding: 10px 10px;
   color: @white;
   height: auto;
+  font-family: @bungee-hairline;
   &--bg {
     background: @header-bg;
   }
@@ -13,11 +14,18 @@
     & a {
       color: @white;
     }
-
   }
+
+  &__actions {
+    font-size: @medium;
+    line-height: 55px;
+    & span {
+      margin: 0 10px;
+    }
+  }
+
   &--info {
     text-align: right;
-    font-family: @bungee-hairline;
     & span {
       line-height: 100%;
       vertical-align: middle;

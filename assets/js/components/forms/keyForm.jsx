@@ -33,10 +33,10 @@ class KeyForm extends Component {
       <div className="form form__misc">
         <form onSubmit={this.handleSubmit}>
           <label>
-            Key:
+            New Key -->
             <input placeholder="ie. 'G major' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Submit" disabled={this.state.disabled}/>
+          <input type="submit" value="Create" disabled={this.state.disabled}/>
         </form>
       </div>
     )

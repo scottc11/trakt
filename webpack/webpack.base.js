@@ -46,7 +46,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: { presets: ['react'] }
+        query: {
+          presets: ['react'],
+          plugins: ['transform-object-rest-spread']
+        }
       },
 
       // LESS

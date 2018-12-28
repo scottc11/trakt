@@ -34,11 +34,11 @@ class StatusForm extends Component {
       <div className="form form__misc">
         <form onSubmit={this.handleSubmit}>
           <label>
-            Status:
+            New Status -->
             <input placeholder="ie. 'Idea' or 'Mixing' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
           <input name="hex_code" type="color" value={this.state.hex_code} onChange={this.handleChange} />
-          <input type="submit" value="Submit" disabled={this.state.disabled}/>
+          <input type="submit" value="Create" disabled={this.state.disabled}/>
         </form>
       </div>
     )

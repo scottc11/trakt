@@ -8,12 +8,18 @@ export default function(activeAudioFile, playFn, pauseFn) {
       accessor: 'none',
       Cell: row => {
         if ( row.original.audio_files[0].file == activeAudioFile.url && !activeAudioFile.isPlaying || row.original.audio_files[0].file !== activeAudioFile.url ) {
-          return <span className="media-player__btn fa fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></span>
+          return <i className="fas fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></i>
         } else {
-          return <span className="media-player__btn fa fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></span>
+          return <i className="fas fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></i>
         }
       },
-      width: 50
+      width: 50,
+      style: {
+        cursor: "pointer",
+        fontSize: 16,
+        padding: "0",
+        textAlign: "center",
+      }
     },
     {
       Header: 'Title',
@@ -22,7 +28,7 @@ export default function(activeAudioFile, playFn, pauseFn) {
     {
       Header: 'BPM',
       accessor: 'bpm',
-      Cell: row => <div><span className="badge badge--bpm">{ row.original.bpm }</span></div>
+      Cell: row => <span className="badge badge--bpm">{ row.original.bpm }</span>
     },
     {
       Header: 'Date Recorded',
@@ -56,5 +62,17 @@ export default function(activeAudioFile, playFn, pauseFn) {
       accessor: 'submitter.username',
       Cell: row => <UserBadge user={row.original.submitter} />
     },
+    {
+      expander: true,
+      Header: '',
+      Expander: ({ isExpanded, ...rest }) => isExpanded ? <i className="txt--actionable fas fa-angle-double-up"></i> : <i className="txt--actionable fas fa-angle-double-down"></i>,
+      style: {
+        cursor: "pointer",
+        fontSize: 16,
+        padding: "0",
+        textAlign: "center",
+        userSelect: "none"
+      },
+    }
   ]
 }

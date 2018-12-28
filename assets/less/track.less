@@ -46,7 +46,6 @@
       display: inline-block;
       font-size: @xs-small;
     }
-    &--submitter {}
     &--date {
       color: @green;
       font-family: @console;
@@ -68,56 +67,5 @@
     background: @bg-white-opac;
     padding: 10px;
     box-shadow: @box-shadow-inner;
-    border-top: 1px solid @light-grey;
-    border-bottom-right-radius: @track-radius;
-    border-bottom-left-radius: @track-radius;
-    &--options {
-      display: inline-block;
-      font-size: @medium;
-      line-height: @row-line-height;
-      vertical-align: middle;
-      margin-left: 20px;
-      & span {
-        margin: 0 5px;
-      }
-    }
-    &--toggle {
-      background: @bg-opac-light;
-      box-sizing: border-box;
-      display: inline-block;
-      border-left: 1px solid #A8ADBB;
-      float: right;
-      padding-left: 12px;
-      padding-right: 12px;
-      height: @row-line-height;
-      line-height: @row-line-height;
-      vertical-align: middle;
-      border-bottom-right-radius: @track-radius;
-      border-top-right-radius: @track-radius;
-      &:hover {
-        cursor: pointer;
-        color: @action-color;
-      }
-    }
-  }
-  &--button {
-    float: left;
-    box-sizing: border-box;
-    margin: 0 10px;
-    height: @row-line-height;
-    line-height: @row-line-height;
-    & div {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      border-radius: 25%;
-      padding: 12px;
-      color: @white;
-      background: @baby-blue;
-      &:hover {
-        color: @onyx;
-        cursor: pointer;
-      }
-    }
   }
 }

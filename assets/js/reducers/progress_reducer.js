@@ -1,6 +1,11 @@
 import { UPDATE_PROGRESS, UPDATE_UPLOAD_STATUS } from '../actions/actionTypes';
 
-export default function(state = null, action) {
+const initialState = {
+  progress: 0,
+  status: 'N/A'
+}
+
+export default function(state = initialState, action) {
   switch (action.type) {
 
     case UPDATE_PROGRESS:

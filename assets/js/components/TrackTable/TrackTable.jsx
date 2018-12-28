@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { PlayAudioFile, PauseAudioFile } from '../../actions/mediaPlayerActions';
 import config from './table.config';
-
+import TrackDetail from '../trackDetail';
 
 class TrackTable extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class TrackTable extends Component {
         columns={config(this.props.activeTrack, this.props.PlayAudioFile, this.props.PauseAudioFile)}
         showPagination={false}
         className="-striped -highlight"
-        SubComponent={ row => <div>the sub compnenntss</div>}
+        SubComponent={ row => <TrackDetail track={row.original} /> }
       />
     )
   }
