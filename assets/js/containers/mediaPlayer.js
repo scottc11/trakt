@@ -1,43 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import convertRange from '../utils/convertRange';
-
+import { PlayAudioFile, PauseAudioFile } from '../actions/mediaPlayerActions';
 
 class MediaPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
       currentTime: 0,
       currentTimeString: '00:00',
       duration: 100,
       durationString: '00:00'
     }
     this.audioElement = null;
-    this.onPlay = this.onPlay.bind(this);
-    this.onPause = this.onPause.bind(this);
+    this.playAudioSource = this.playAudioSource.bind(this);
+    this.pauseAudioSource = this.pauseAudioSource.bind(this);
     this.updateTime = this.updateTime.bind(this);
     this.loadMetaData = this.loadMetaData.bind(this);
     this.onScrub = this.onScrub.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps, prevState) {
 
-    if (this.props.activeTrack !== nextProps.activeTrack) {
-      if (this.props.activeTrack.url !== nextProps.activeTrack.url) {
-        if (nextProps.activeTrack.active) {
-          if (this.props.activeTrack.active) { this.onPause() }
-          this.createAudioSource(nextProps.activeTrack.url);
-          this.onPlay();
-        }
+    // new file
+    if (prevProps.activeTrack.url !== this.props.activeTrack.url ) {
+      if (this.props.activeTrack.isPlaying) {
+        this.createAudioSource(this.props.activeTrack.url);
+        this.playAudioSource();
       } else {
-        nextProps.activeTrack.active ? this.onPlay() : this.onPause();
+        this.pauseAudioSource();
+      }
+    // same file
+    } else {
+      if (prevProps.activeTrack.isPlaying !== this.props.activeTrack.isPlaying) {
+        if (this.props.activeTrack.isPlaying) {
+          this.playAudioSource();
+        } else {
+          this.pauseAudioSource();
+        }
       }
     }
+
   }
 
   createAudioSource(url) {
-    let element = new Audio(url);
+    const element = new Audio(url);
     element.crossOrigin = "anonymous";
     element.controls = false;
     element.loop = false;
@@ -47,15 +55,13 @@ class MediaPlayer extends Component {
     this.audioElement = element;
   }
 
-  onPlay() {
+  playAudioSource() {
     this.audioElement.play();
-    this.setState({ active: true })
   }
 
-  onPause() {
+  pauseAudioSource() {
     //TODO: add redux action here to toggle ALL project track media buttons OFF
     this.audioElement.pause();
-    this.setState({ active: false })
   }
 
   updateTime() {
@@ -89,11 +95,14 @@ class MediaPlayer extends Component {
 
   render() {
 
+    const file = this.props.activeTrack.url;
+    const isPlaying = this.props.activeTrack.isPlaying;
+
     let button = null;
-    if (this.state.active) {
-      button = <span onClick={ () => this.onPause() } className="media-player__btn media-player__btn--pause fa fa-pause"></span>
+    if (isPlaying) {
+      button = <span onClick={ () => this.props.PauseAudioFile(file) } className="media-player__btn fa fa-pause"></span>
     } else {
-      button = <span onClick={ () => this.onPlay() } className="media-player__btn media-player__btn--play fa fa-play"></span>
+      button = <span onClick={ () => this.props.PlayAudioFile(file) } className="media-player__btn fa fa-play"></span>
     }
 
     return (
@@ -112,5 +121,8 @@ function mapStateToProps(state) {
   return { activeTrack: state.activeTrack };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ PlayAudioFile, PauseAudioFile }, dispatch);
+}
 
-export default connect(mapStateToProps)(MediaPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(MediaPlayer);

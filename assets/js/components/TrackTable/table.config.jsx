@@ -7,10 +7,10 @@ export default function(activeAudioFile, playFn, pauseFn) {
       Header: '',
       accessor: 'none',
       Cell: row => {
-        if ( row.original.audio_files[0].file == activeAudioFile.url && activeAudioFile.active == false || row.original.audio_files[0].file !== activeAudioFile.url ) {
-          return <span className="fa fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></span>
+        if ( row.original.audio_files[0].file == activeAudioFile.url && !activeAudioFile.isPlaying || row.original.audio_files[0].file !== activeAudioFile.url ) {
+          return <span className="media-player__btn fa fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></span>
         } else {
-          return <span className="fa fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></span>
+          return <span className="media-player__btn fa fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></span>
         }
       },
       width: 50
@@ -22,7 +22,7 @@ export default function(activeAudioFile, playFn, pauseFn) {
     {
       Header: 'BPM',
       accessor: 'bpm',
-      Cell: row => <span className="badge badge--bpm">{ row.original.bpm }</span>
+      Cell: row => <div><span className="badge badge--bpm">{ row.original.bpm }</span></div>
     },
     {
       Header: 'Date Recorded',

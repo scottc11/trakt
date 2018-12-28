@@ -9,16 +9,16 @@ export function updateMediaPlayer(url, bool) {
 }
 
 
-export function PlayAudioFile(file) {
+export function PlayAudioFile(filePath) {
   return {
     type: PLAY,
-    payload: file
+    payload: filePath
   }
 }
 
-export function PauseAudioFile(file) {
+export function PauseAudioFile(filePath) {
   return {
     type: PAUSE,
-    payload: file
+    payload: filePath
   }
 }

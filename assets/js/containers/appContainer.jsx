@@ -14,6 +14,10 @@ import Header from './header';
 import Project from './project';
 import MediaPlayer from './mediaPlayer'
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
+import TrackForm from '../components/forms/trackForm';
+import GenreForm from '../components/forms/genreForm';
+import KeyForm from '../components/forms/keyForm';
+import StatusForm from '../components/forms/statusForm';
 
 class AppContainer extends Component {
   constructor(props) {
@@ -34,18 +38,20 @@ class AppContainer extends Component {
 
   render() {
 
-    if (!this.props.currentUser || !this.props.projects) {
+    if (!this.props.CurrentUser || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList ) {
       return <FullScreenSpinner />
     }
 
     return (
       <div>
+        <Header />
         <div>
-          <Header />
+          <TrackForm />
+          <GenreForm />
+          <StatusForm />
+          <KeyForm />
         </div>
-        <div>
-          <Project />
-        </div>
+        <Project />
         <MediaPlayer />
       </div>
     )
@@ -53,7 +59,7 @@ class AppContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser, projects: state.projects };
+  return { CurrentUser: state.currentUser, Projects: state.projects, Genres: state.genres, Keys: state.keys, StatusList: state.statusList };
 }
 
 function mapDispatchToProps(dispatch) {

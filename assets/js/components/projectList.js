@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchProject, fetchProjects } from '../actions/actions';
+import { fetchProject } from '../actions/actions';
 import DropdownItemList from '../components/DropdownItemList'
 
 
@@ -46,7 +46,7 @@ class ProjectList extends Component {
     if (this.state.menuActive) {
       menu = <DropdownItemList select={this.onSelectItem} itemList={this.props.projects} />
     } else {
-      menu = "";
+      menu = null;
     }
     return (
       <div>

@@ -13,7 +13,7 @@ class TrackTable extends Component {
 
 
   render() {
-    return(
+    return (
       <ReactTable
         data={this.props.tracks}
         columns={config(this.props.activeTrack, this.props.PlayAudioFile, this.props.PauseAudioFile)}

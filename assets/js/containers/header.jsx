@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import ProjectList from '../components/projectList';
 
 
 class Header extends Component {
@@ -12,13 +13,13 @@ class Header extends Component {
     return (
       <div className="header--bg" >
         <div className="container header">
-          <div className="header--heading col-xs-2">
+          <div className="header--heading col-xs-1">
             <a href=""><span>V2</span></a>
           </div>
-          <div className="col-xs-6">
-
+          <div className="col-xs-3">
+            <ProjectList />
           </div>
-          <div className="header--info col-xs-4">
+          <div className="header--info col-xs-8">
             <a href={axios.defaults.baseURL + `project/edit/${this.props.activeProject.id}`}>
               <span className="fa fa-pencil-square-o"></span>
             </a>
