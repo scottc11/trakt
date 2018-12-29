@@ -12,7 +12,7 @@ import { fetchGenres } from '../actions/genre_actions';
 import { fetchStatusList } from '../actions/status_actions';
 import { ScreenResize } from '../actions/ui_actions';
 import Header from './header';
-import Project from './project';
+import TrackList from './TrackList';
 import MediaPlayer from './mediaPlayer'
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
 import UploadTrack from '../components/UploadTrack';
@@ -56,7 +56,7 @@ class AppContainer extends Component {
         <div className="action-window" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
           <UploadTrack />
         </div>
-        <Project height={this.props.UI.body.height} />
+        <TrackList height={this.props.UI.body.height} />
         <MediaPlayer />
       </div>
     )

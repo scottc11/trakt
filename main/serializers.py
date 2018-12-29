@@ -54,11 +54,12 @@ class TrackSerializer(serializers.ModelSerializer):
     status = StatusSerializer(many=False, read_only=True)
     audio_files = TrackFileSerializer(many=True)
     sessions = SessionFileSerializer(many=True)
+    activeFileIndex = serializers.IntegerField(min_value=0, default=0)
 
     class Meta:
         model = Track
         fields = (
-                'id', 'submitter', 'pub_date',
+                'id', 'activeFileIndex', 'submitter', 'pub_date',
                 'title', 'bpm', 'date_recorded', 'key',
                 'genre', 'status', 'projects', 'audio_files',
                 'sessions'

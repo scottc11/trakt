@@ -8,9 +8,9 @@ export default function(activeAudioFile, playFn, pauseFn) {
       accessor: 'none',
       Cell: row => {
         if ( row.original.id == activeAudioFile.id && !activeAudioFile.isPlaying || row.original.id !== activeAudioFile.id ) {
-          return <i className="txt--turquoise txt--actionable fas fa-play-circle" onClick={ () => playFn(row.original, 0) }></i>
+          return <i className="txt--turquoise txt--actionable fas fa-play-circle" onClick={ () => playFn(row.original) }></i>
         } else {
-          return <i className="txt--turquoise txt--actionable fas fa-pause-circle" onClick={ () => pauseFn(row.original, 0) }></i>
+          return <i className="txt--turquoise txt--actionable fas fa-pause-circle" onClick={ () => pauseFn(row.original) }></i>
         }
       },
       width: 50,

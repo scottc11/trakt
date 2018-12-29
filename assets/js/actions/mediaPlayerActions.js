@@ -1,24 +1,23 @@
-import { PLAY, PAUSE, UPDATE_MEDIA_PLAYER } from './actionTypes';
+import { PLAY, PAUSE, INIT_MEDIA_PLAYER } from './actionTypes';
 
-// update the media player with a new url to create <audio> element.
-export function updateMediaPlayer(url, bool) {
-  return {
-    type: UPDATE_MEDIA_PLAYER,
-    payload: { 'url': url, 'active': bool }
-  }
-}
-
-
-export function PlayAudioFile(track, fileIndex) {
+export function PlayAudioFile(track) {
   return {
     type: PLAY,
-    payload: {...track, fileIndex, isPlaying: true}
+    payload: {...track, isPlaying: true}
   }
 }
 
-export function PauseAudioFile(track, fileIndex) {
+export function PauseAudioFile(track) {
   return {
     type: PAUSE,
-    payload: {...track, fileIndex, isPlaying: false}
+    payload: {...track, isPlaying: false}
+  }
+}
+
+
+export function InitMediaPlayer(track) {
+  return {
+    type: INIT_MEDIA_PLAYER,
+    payload: {...track, isPlaying: false}
   }
 }

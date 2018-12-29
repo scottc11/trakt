@@ -5,7 +5,8 @@ import {
   FETCH_TRACK,
   FETCH_TRACK_LIST,
   DELETE_AUDIO_FILE,
-  UPDATE_TRACK_IN_PROJECT
+  UPDATE_ACTIVE_FILE_INDEX,
+  UPDATE_ACTIVE_TRACK_ACTIVE_FILE
 } from './actionTypes';
 
 export function createTrackFile(filePath, trackID) {
@@ -26,7 +27,7 @@ export function createTrackFile(filePath, trackID) {
     request.then( (response) => {
       if (response.status == 201) {
         dispatch(updateUploadStatus('Done'));
-        dispatch(UpdateTrackInProject(trackID));
+        dispatch(DeleteAudioFile(trackID));
       }
     })
   }
@@ -54,13 +55,27 @@ export function FetchTrackList() {
 }
 
 
-export function UpdateTrackInProject(id) {
+export function DeleteAudioFile(id) {
   const url = axios.defaults.baseURL + `api/tracks/${id}/`;
 
   const request = axios.get(url);
 
   return {
-    type: UPDATE_TRACK_IN_PROJECT,
+    type: DELETE_AUDIO_FILE,
     payload: request
+  }
+}
+
+export function UpdateActiveFileIndex(trackId, index) {
+  const payload = {trackId, index};
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_ACTIVE_FILE_INDEX,
+      payload: payload
+    })
+    dispatch({
+      type: UPDATE_ACTIVE_TRACK_ACTIVE_FILE,
+      payload: payload
+    })
   }
 }

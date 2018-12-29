@@ -27,10 +27,9 @@ class MediaPlayer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const activeTrack = this.props.activeTrack
     // new file
     if (prevProps.activeTrack.id !== this.props.activeTrack.id ) {
-      this.loadAudioSource(activeTrack.audio_files[activeTrack.fileIndex].file);
+      this.loadAudioSource();
       if (this.props.activeTrack.isPlaying) {
         this.playAudioSource();
       } else {
@@ -38,8 +37,10 @@ class MediaPlayer extends Component {
       }
     // same file
     } else {
-      if (prevProps.activeTrack.fileIndex !== this.props.activeTrack.fileIndex) {
-        this.loadAudioSource(activeTrack.audio_files[activeTrack.fileIndex].file);
+      // if user selected a different file in a track
+      if (prevProps.activeTrack.activeFileIndex !== this.props.activeTrack.activeFileIndex) {
+        this.loadAudioSource();
+        this.playAudioSource();
       }
       if (prevProps.activeTrack.isPlaying !== this.props.activeTrack.isPlaying) {
         if (this.props.activeTrack.isPlaying) {
@@ -63,9 +64,9 @@ class MediaPlayer extends Component {
     this.audioElement = element;
   }
 
-  loadAudioSource(url) {
-    this.audioElement.src = url
-    this.audioElement.load()
+  loadAudioSource() {
+    this.audioElement.src = this.props.activeTrack.audio_files[this.props.activeTrack.activeFileIndex].file;;
+    this.audioElement.load();
   }
 
   playAudioSource() {
@@ -107,15 +108,13 @@ class MediaPlayer extends Component {
 
 
   render() {
-
-    const file = this.props.activeTrack.url;
     const isPlaying = this.props.activeTrack.isPlaying;
 
     let button = null;
     if (isPlaying) {
-      button = <span onClick={ () => this.props.PauseAudioFile(file) } className="media-player__btn fa fa-pause"></span>
+      button = <span onClick={ () => this.props.PauseAudioFile(this.props.activeTrack) } className="media-player__btn fa fa-pause"></span>
     } else {
-      button = <span onClick={ () => this.props.PlayAudioFile(file) } className="media-player__btn fa fa-play"></span>
+      button = <span onClick={ () => this.props.PlayAudioFile(this.props.activeTrack) } className="media-player__btn fa fa-play"></span>
     }
 
     return (
