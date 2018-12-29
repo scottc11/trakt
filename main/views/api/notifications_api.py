@@ -16,6 +16,6 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
 
     def list(self, request):
-        queryset = Notification.objects.filter(recipient_id=self.request.user.id)
+        queryset = Notification.objects.filter(recipient_id=self.request.user.id)[:5]
         serializer = NotificationSerializer(queryset, many=True)
         return Response(serializer.data)

@@ -32,7 +32,7 @@ class TrackDetailFileList extends Component {
       const date = file.pub_date.split('T')[0];
       const style = this.props.track.activeFileIndex == index ? 'track__file-list--active' : '';
       return (
-          <li className={ style } key={file.id} onClick={ () => this.props.UpdateActiveFileIndex(trackID, index) }>
+          <li className={ style } key={file.id} onClick={ () => this.props.UpdateActiveFileIndex(this.props.track, index) }>
             <span className="fa fa-play-circle"></span> {file.title}
             <span className="track__file-list--date-time"> - {date}</span>
             <a href={ file.file } download ><span className="track__file-list--action fa fa-cloud-download"></span></a>

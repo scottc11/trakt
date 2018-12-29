@@ -9,6 +9,7 @@ export default function(props) {
 
   return (
     <select name={props.name} onChange={ (e) => props.handleChange(e) }>
+      { props.optional && <option value="">------</option>}
       {options}
     </select>
   );

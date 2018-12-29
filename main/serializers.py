@@ -55,6 +55,7 @@ class TrackSerializer(serializers.ModelSerializer):
     audio_files = TrackFileSerializer(many=True)
     sessions = SessionFileSerializer(many=True)
     activeFileIndex = serializers.IntegerField(min_value=0, default=0)
+    projects = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Track

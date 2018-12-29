@@ -9,6 +9,9 @@
 }
 
 .rt {
+  &-thead {
+    border-right: 1px solid rgba(0,0,0,0.5) !important; // doesn't work
+  }
   &-table {
     // table-layout: fixed;
     background-color: @tbl-bg;
@@ -18,9 +21,15 @@
   }
   // ROWS
   &-tr {
-    font-weight: @tbl-row-fnt-weight;
     height: 40px;
     text-align: center;
+    font-size: @xs-small;
+    font-family: @console;
+    font-weight: @font-weight-lite;
+  }
+
+  &-th {
+
   }
 
   &-td {

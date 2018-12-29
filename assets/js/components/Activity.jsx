@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import Spinner from './spinners/mediumSpinner';
 
 export default function(props) {
-
-  if (!props.activity) {
-    return <Spinner />
-  }
 
   const activity = props.activity.map( i => {
     const date = Date(i.timestamp).split('GMT')[0];

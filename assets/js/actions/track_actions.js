@@ -27,7 +27,7 @@ export function createTrackFile(filePath, trackID) {
     request.then( (response) => {
       if (response.status == 201) {
         dispatch(updateUploadStatus('Done'));
-        dispatch(DeleteAudioFile(trackID));
+        dispatch(FetchTrackList());
       }
     })
   }
@@ -66,8 +66,8 @@ export function DeleteAudioFile(id) {
   }
 }
 
-export function UpdateActiveFileIndex(trackId, index) {
-  const payload = {trackId, index};
+export function UpdateActiveFileIndex(track, index) {
+  const payload = {track, index};
   return (dispatch) => {
     dispatch({
       type: UPDATE_ACTIVE_FILE_INDEX,

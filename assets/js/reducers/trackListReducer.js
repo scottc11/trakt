@@ -12,7 +12,7 @@ export default function(state = [], action) {
     case UPDATE_ACTIVE_FILE_INDEX:
       // Updating an Item in an Array
       return state.map( (track, i) => {
-        if (track.id == action.payload.trackId) {
+        if (track.id == action.payload.track.id) {
           return { ...state[i], activeFileIndex: action.payload.index}
         } else {
           return track

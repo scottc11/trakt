@@ -12,11 +12,11 @@ class TrackForm extends Component {
     super(props);
     this.state = {
       title: '', // string
-      key: this.props.keys[0].id, // foreign key
-      genre: this.props.genres[0].id, // foreign key
+      key: null, // foreign key
+      genre: null, // foreign key
       projects: this.props.projects[0].id, // foreign key
       bpm: '', // num
-      status: this.props.statusList[0].id, // string
+      status: null, // string
       date_recorded: new Date().toDateInputValue(), // Date object
       disabled: true
     };
@@ -71,7 +71,13 @@ class TrackForm extends Component {
     const fileName = file.name.split('.')[0];
 
     if (file.type.match(`audio/mp3`) || file.type.match(`audio/wav`) ) {
-      this.setState({ disabled: false, title: fileName });
+      this.setState(
+        {
+          disabled: false,
+          title: fileName,
+          date_recorded: new Date(file.lastModified).toDateInputValue()
+        }
+      );
     } else {
       alert("Invalid file type.  File must be either '.mp3' or '.wav'");
       event.target.value = event.target.defaultValue;
@@ -125,19 +131,20 @@ class TrackForm extends Component {
           </label>
           <label>
             Project:
-            <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects}/>
+            <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects} optional={false} />
+            <span className="form--required">* required</span>
           </label>
           <label>
             Genre:
-            <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres}/>
+            <FormDropdown label="Genre" name="genre" handleChange={this.handleChange} items={this.props.genres} optional={true}/>
           </label>
           <label>
             Key:
-            <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys}/>
+            <FormDropdown label="Key" name="key" handleChange={this.handleChange} items={this.props.keys} optional={true}/>
           </label>
           <label>
             Status:
-            <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList}/>
+            <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList} optional={true}/>
           </label>
           <input type="submit" value="Upload" disabled={this.state.disabled}/>
         </form>

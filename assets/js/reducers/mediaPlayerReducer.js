@@ -13,7 +13,7 @@ export default function(state = { url: '', isPlaying: false }, action) {
       return action.payload
 
     case UPDATE_ACTIVE_TRACK_ACTIVE_FILE:
-      return Object.assign({}, state, {activeFileIndex: action.payload.index})
+      return Object.assign({}, state, {...action.payload.track, activeFileIndex: action.payload.index})
 
     default:
       return state;

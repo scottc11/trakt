@@ -11,11 +11,13 @@ import { fetchKeys } from '../actions/key_actions';
 import { fetchGenres } from '../actions/genre_actions';
 import { fetchStatusList } from '../actions/status_actions';
 import { ScreenResize } from '../actions/ui_actions';
+import { FetchNotifications } from '../actions/notification_actions';
 import Header from './header';
-import TrackList from './TrackList';
+import TrackTable from './TrackTable';
 import MediaPlayer from './mediaPlayer'
 import FullScreenSpinner from '../components/spinners/FullScreenSpinner';
 import UploadTrack from '../components/UploadTrack';
+import Activity from '../components/Activity';
 
 
 class AppContainer extends Component {
@@ -33,6 +35,7 @@ class AppContainer extends Component {
     this.props.fetchProjects();
     this.props.fetchGenres();
     this.props.fetchKeys();
+    this.props.FetchNotifications();
     this.props.fetchStatusList();
 
     // UI LISTENERS
@@ -46,17 +49,20 @@ class AppContainer extends Component {
 
   render() {
 
-    if (!this.props.CurrentUser || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList ) {
+    if (!this.props.CurrentUser || !this.props.Notifications || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList ) {
       return <FullScreenSpinner />
     }
 
     return (
       <div>
         <Header toggleActionWindowFn={this.toggleActionWindow}/>
-        <div className="action-window" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
+        <div className="action-window container" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
           <UploadTrack />
+          <div className="col-xs-12">
+            <Activity activity={this.props.Notifications} />
+          </div>
         </div>
-        <TrackList height={this.props.UI.body.height} />
+        <TrackTable height={this.props.UI.body.height} />
         <MediaPlayer />
       </div>
     )
@@ -68,6 +74,7 @@ function mapStateToProps(state) {
     CurrentUser: state.currentUser,
     Projects: state.projects,
     Genres: state.genres,
+    Notifications: state.notifications,
     Keys: state.keys,
     StatusList: state.statusList,
     UI: state.UI
@@ -82,6 +89,7 @@ function mapDispatchToProps(dispatch) {
     fetchKeys,
     fetchStatusList,
     FetchTrackList,
+    FetchNotifications,
     ScreenResize
   }, dispatch);
 }

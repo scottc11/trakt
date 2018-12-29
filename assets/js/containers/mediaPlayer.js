@@ -65,7 +65,7 @@ class MediaPlayer extends Component {
   }
 
   loadAudioSource() {
-    this.audioElement.src = this.props.activeTrack.audio_files[this.props.activeTrack.activeFileIndex].file;;
+    this.audioElement.src = this.props.activeTrack.audio_files[this.props.activeTrack.activeFileIndex].file;
     this.audioElement.load();
   }
 
