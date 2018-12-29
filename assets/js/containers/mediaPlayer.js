@@ -16,23 +16,31 @@ class MediaPlayer extends Component {
     this.audioElement = null;
     this.playAudioSource = this.playAudioSource.bind(this);
     this.pauseAudioSource = this.pauseAudioSource.bind(this);
+    this.loadAudioSource = this.loadAudioSource.bind(this);
+    this.createAudioSource = this.createAudioSource.bind(this);
     this.updateTime = this.updateTime.bind(this);
     this.loadMetaData = this.loadMetaData.bind(this);
     this.onScrub = this.onScrub.bind(this);
+
+    this.createAudioSource('');
+
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+    const activeTrack = this.props.activeTrack
     // new file
-    if (prevProps.activeTrack.url !== this.props.activeTrack.url ) {
+    if (prevProps.activeTrack.id !== this.props.activeTrack.id ) {
+      this.loadAudioSource(activeTrack.audio_files[activeTrack.fileIndex].file);
       if (this.props.activeTrack.isPlaying) {
-        this.createAudioSource(this.props.activeTrack.url);
         this.playAudioSource();
       } else {
         this.pauseAudioSource();
       }
     // same file
     } else {
+      if (prevProps.activeTrack.fileIndex !== this.props.activeTrack.fileIndex) {
+        this.loadAudioSource(activeTrack.audio_files[activeTrack.fileIndex].file);
+      }
       if (prevProps.activeTrack.isPlaying !== this.props.activeTrack.isPlaying) {
         if (this.props.activeTrack.isPlaying) {
           this.playAudioSource();
@@ -53,6 +61,11 @@ class MediaPlayer extends Component {
     element.ontimeupdate = () => this.updateTime();
     element.addEventListener('loadedmetadata', () => this.loadMetaData(element.duration))
     this.audioElement = element;
+  }
+
+  loadAudioSource(url) {
+    this.audioElement.src = url
+    this.audioElement.load()
   }
 
   playAudioSource() {

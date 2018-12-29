@@ -1,6 +1,22 @@
 @import 'variables';
 
+body {
+  font-family: @roboto-mono;
+  background: @mako;
+}
+
 .txt {
+  &--orange { color: @sunset-orange; }
+  &--turquoise {color: @turquoise;}
+  &--onyx {color: @onyx;}
+  &--mikado {color: @mikado;}
+  &--white {color: @white;}
+  &--mako {color: @mako;}
+
+  &--no-wrap { white-space: nowrap; }
+
+  &--inline-block { display: inline-block; }
+
   &--actionable {
     cursor: pointer;
     opacity: 1;

@@ -8,11 +8,15 @@ class UploadProgress extends Component {
 
   render() {
     return (
-      <div className="upload__list">
-        <h6 className="upload__detail--label">status: </h6>
-        <span className="upload__detail--status">{this.props.uploadProgress.status} </span>
-        <h6 className="upload__detail--label">progress: </h6>
-        <span className="upload__detail--progress">{this.props.uploadProgress.progress}%</span>
+      <div>
+        <div className="txt--no-wrap">
+          <span>upload status: </span>
+          <span className="upload__detail--status"> {this.props.uploadProgress.status} </span>
+        </div>
+        <div className="txt--no-wrap">
+          <span>upload progress: </span>
+          <span className="upload__detail--progress"> {this.props.uploadProgress.progress}%</span>
+        </div>
       </div>
     )
   }

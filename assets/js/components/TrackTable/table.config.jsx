@@ -7,19 +7,31 @@ export default function(activeAudioFile, playFn, pauseFn) {
       Header: '',
       accessor: 'none',
       Cell: row => {
-        if ( row.original.audio_files[0].file == activeAudioFile.url && !activeAudioFile.isPlaying || row.original.audio_files[0].file !== activeAudioFile.url ) {
-          return <i className="fas fa-play" onClick={ () => playFn(row.original.audio_files[0].file) }></i>
+        if ( row.original.id == activeAudioFile.id && !activeAudioFile.isPlaying || row.original.id !== activeAudioFile.id ) {
+          return <i className="txt--turquoise txt--actionable fas fa-play-circle" onClick={ () => playFn(row.original, 0) }></i>
         } else {
-          return <i className="fas fa-pause" onClick={ () => pauseFn(row.original.audio_files[0].file) }></i>
+          return <i className="txt--turquoise txt--actionable fas fa-pause-circle" onClick={ () => pauseFn(row.original, 0) }></i>
         }
       },
       width: 50,
       style: {
         cursor: "pointer",
-        fontSize: 16,
+        fontSize: 20,
         padding: "0",
         textAlign: "center",
       }
+    },
+    {
+      expander: true,
+      Header: '',
+      Expander: ({ isExpanded, ...rest }) => isExpanded ? <i className="txt--mikado txt--actionable fas fa-minus"></i> : <i className="txt--mikado txt--actionable fas fa-plus"></i>,
+      style: {
+        cursor: "pointer",
+        fontSize: 16,
+        padding: "0",
+        textAlign: "center",
+        userSelect: "none"
+      },
     },
     {
       Header: 'Title',
@@ -61,18 +73,6 @@ export default function(activeAudioFile, playFn, pauseFn) {
       Header: 'Submitter',
       accessor: 'submitter.username',
       Cell: row => <UserBadge user={row.original.submitter} />
-    },
-    {
-      expander: true,
-      Header: '',
-      Expander: ({ isExpanded, ...rest }) => isExpanded ? <i className="txt--actionable fas fa-angle-double-up"></i> : <i className="txt--actionable fas fa-angle-double-down"></i>,
-      style: {
-        cursor: "pointer",
-        fontSize: 16,
-        padding: "0",
-        textAlign: "center",
-        userSelect: "none"
-      },
     }
   ]
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ProjectList from '../components/projectList';
+import UploadProgress from '../components/UploadProgress';
 
 
 class Header extends Component {
@@ -19,7 +20,7 @@ class Header extends Component {
           <div className="col-xs-3">
             <ProjectList />
           </div>
-          <div className="col-xs-5 header__actions">
+          <div className="col-xs-3 header__actions">
 
             <span className="txt--actionable">
               <i className="far fa-edit"> </i>
@@ -27,10 +28,13 @@ class Header extends Component {
             </span>
 
             <span className="txt--actionable" onClick={() => this.props.toggleActionWindowFn() }>
-              <i className="fa fa-plus-square"> </i>
+              <i className="fas fa-upload"></i>
               Upload
             </span>
 
+          </div>
+          <div className="col-xs-2">
+            <UploadProgress />
           </div>
           <div className="header--info col-xs-3">
             <span className="">{ this.props.currentUser.username }</span>
