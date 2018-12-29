@@ -46,4 +46,6 @@ class Track(models.Model):
     def delete(self, *args, **kwargs):
         for file in self.audio_files.all():
             file.delete()
+        for session in self.sessions.all():
+            session.delete()
         super(Track, self).delete(*args, **kwargs)

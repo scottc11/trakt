@@ -5,6 +5,7 @@ import {
   FETCH_TRACK,
   FETCH_TRACK_LIST,
   DELETE_AUDIO_FILE,
+  DELETE_TRACK,
   UPDATE_ACTIVE_FILE_INDEX,
   UPDATE_ACTIVE_TRACK_ACTIVE_FILE
 } from './actionTypes';
@@ -55,14 +56,28 @@ export function FetchTrackList() {
 }
 
 
-export function DeleteAudioFile(id) {
-  const url = axios.defaults.baseURL + `api/tracks/${id}/`;
+export function DeleteAudioFile(fileId, trackId) {
+  const url = `api/files/${fileId}/`;
 
-  const request = axios.get(url);
+  return (dispatch) => {
+    axios.delete(url).then( (res) => {
+      if (res.status === 204) {
+        dispatch({ type: DELETE_AUDIO_FILE, payload: null })
+      }
+      dispatch(fetchTrack(trackId))
+    })
+  }
+}
 
-  return {
-    type: DELETE_AUDIO_FILE,
-    payload: request
+export function DeleteTrack(id) {
+  const url = `api/tracks/${id}/`;
+
+  return (dispatch) => {
+    axios.delete(url).then( (res) => {
+      if (res.status === 204) {
+        dispatch({ type: DELETE_TRACK, payload: id })
+      }
+    })
   }
 }
 

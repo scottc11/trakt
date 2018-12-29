@@ -59,7 +59,7 @@ class AppContainer extends Component {
         <div className="action-window container" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
           <UploadTrack />
           <div className="col-xs-12">
-            <Activity activity={this.props.Notifications} />
+            
           </div>
         </div>
         <TrackTable height={this.props.UI.body.height} />
