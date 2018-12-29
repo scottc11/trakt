@@ -11,8 +11,10 @@ class Button extends Component {
 
     const icon = this.props.icon ? <i className={this.props.icon}></i> : '';
 
+    const clickHandler = this.props.isDisabled ? null : this.props.action;
+
     return (
-      <span onClick={this.props.action} className={`${this.props.class}`} style={styles}>{icon} {this.props.label}</span>
+      <span disabled={this.props.isDisabled} onClick={clickHandler} className={`${this.props.class}`} style={styles}>{icon} {this.props.label}</span>
     )
   }
 }
@@ -21,6 +23,7 @@ Button.defaultProps = {
   class: 'btn btn--blue',
   label: 'Submit',
   inline: true,
+  isDisabled: false,
   round: true,
   styleOverides: {}
 }

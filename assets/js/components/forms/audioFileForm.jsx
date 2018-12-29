@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getSignedUrl } from '../../actions/progress_actions';
+import Button from '../Button';
 
 class AudioFileForm extends Component {
   constructor(props) {
@@ -35,12 +36,12 @@ class AudioFileForm extends Component {
   render() {
     return(
       <div className="form form__misc">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             Upload Audio File:
             <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
           </label>
-          <input type="submit" value="Upload" disabled={this.state.disabled}/>
+          <Button action={(event) => this.handleSubmit(event) } icon="fas fa-upload" class="btn btn--orange" label="Upload" isDisabled={this.state.disabled} />
         </form>
       </div>
     )

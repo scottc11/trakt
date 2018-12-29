@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import axios from 'axios';
-
 import { createTrackFile } from '../../actions/track_actions';
 import { updateUploadProgress, updateUploadStatus } from '../../actions/progress_actions';
 import FormDropdown from './formDropdown';
+import Button from '../Button';
+
 
 class TrackForm extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class TrackForm extends Component {
       key: null, // foreign key
       genre: null, // foreign key
       projects: this.props.projects[0].id, // foreign key
-      bpm: '', // num
+      bpm: 100, // num
       status: null, // string
       date_recorded: new Date().toDateInputValue(), // Date object
       disabled: true
@@ -111,7 +112,7 @@ class TrackForm extends Component {
   render() {
     return (
       <div className="form form__track">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             File:
             <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
@@ -146,7 +147,7 @@ class TrackForm extends Component {
             Status:
             <FormDropdown label="Status" name="status" handleChange={this.handleChange} items={this.props.statusList} optional={true}/>
           </label>
-          <input type="submit" value="Upload" disabled={this.state.disabled}/>
+          <Button action={(event) => this.handleSubmit(event) } round={false} icon="fas fa-upload" class="btn btn--orange" label="Upload" isDisabled={this.state.disabled} />
         </form>
       </div>
     );

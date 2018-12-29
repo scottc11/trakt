@@ -46,8 +46,6 @@ class TrackDetail(APIView):
 
     def put(self, request, pk, format=None):
         track = self.get_object(pk)
-        print(request)
-        print(request.data)
         track.audio_file.name = request.data['track_path']
         serializer = TrackSerializer(track, data=request.data, partial=True)
         if serializer.is_valid():
