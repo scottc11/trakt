@@ -2,14 +2,29 @@ from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.models import User
 from notifications.models import Notification
-from main.models.track import Track
-from main.models.track_file import TrackFile
-from main.models.track_session import TrackSession
-from main.models.project import Project
-from main.models.genre import Genre
-from main.models.key import Key
-from main.models.status import Status
-from main.models.profile import Profile
+from main.models import Track
+from main.models import TrackFile
+from main.models import TrackSession
+from main.models import Project
+from main.models import Genre
+from main.models import Key
+from main.models import Status
+from main.models import Profile
+from main.models import Tag, TagColor
+
+class TagColorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TagColor
+        fields = ('id', 'hex_code')
+
+
+class TagSerializer(serializers.ModelSerializer):
+    color = TagColorSerializer(many=False)
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'label', 'color')
+
 
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
