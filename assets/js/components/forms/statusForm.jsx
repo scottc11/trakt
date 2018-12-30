@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-
+import Button from '../Button';
 import { createStatus } from '../../actions/status_actions';
 
 class StatusForm extends Component {
@@ -32,13 +32,12 @@ class StatusForm extends Component {
   render() {
     return (
       <div className="form form__misc">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             New Status -->
             <input placeholder="ie. 'Idea' or 'Mixing' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
-          <input name="hex_code" type="color" value={this.state.hex_code} onChange={this.handleChange} />
-          <input type="submit" value="Create" disabled={this.state.disabled}/>
+          <Button action={(e) => this.handleSubmit(e) } round={false} class="btn btn--orange" label="Create" isDisabled={this.state.label == '' ? true : false} />
         </form>
       </div>
     )

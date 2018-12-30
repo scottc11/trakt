@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-
+import Button from '../Button';
 import { createKey } from '../../actions/key_actions';
 
 class KeyForm extends Component {
@@ -31,12 +31,12 @@ class KeyForm extends Component {
   render() {
     return (
       <div className="form form__misc">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             New Key -->
             <input placeholder="ie. 'G major' " type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Create" disabled={this.state.disabled}/>
+          <Button action={(e) => this.handleSubmit(e) } round={false} class="btn btn--orange" label="Create" isDisabled={this.state.label == '' ? true : false} />
         </form>
       </div>
     )

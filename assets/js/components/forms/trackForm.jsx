@@ -141,12 +141,13 @@ class TrackForm extends Component {
             Date:
             <input placeholder="Date" type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
           </label>
-          <label>
-            Tags:
+          <div>
+            <p>Tags:</p>
             <select multiple={true} size={5} name="tags" onChange={ (e) => this.handleChange(e) }>
               {tagOptions}
             </select>
-          </label>
+          </div>
+
           <label>
             Project:
             <FormDropdown label="Project" name="projects" handleChange={this.handleChange} items={this.props.projects} optional={false} />

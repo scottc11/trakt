@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-
+import Button from '../Button';
 import { createGenre } from '../../actions/genre_actions';
 
 class GenreForm extends Component {
@@ -31,12 +31,12 @@ class GenreForm extends Component {
   render() {
     return (
       <div className="form form__misc">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
-            New Genre --> 
+            New Genre -->
             <input placeholder="ex. 'electronic'" type="text" name="label" value={this.state.label} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Create" disabled={this.state.disabled}/>
+          <Button action={(e) => this.handleSubmit(e) } round={false} class="btn btn--orange" label="Create" isDisabled={this.state.label == '' ? true : false} />
         </form>
       </div>
     )
