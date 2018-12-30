@@ -131,6 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static'),
+    os.path.join(BASE_DIR, 'assets/images'),
 ]
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(BASE_DIR, 'google-app-credentials.json')

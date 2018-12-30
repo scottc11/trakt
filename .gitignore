@@ -6,7 +6,7 @@ __pycache__/
 *.pyc
 *.DS_Store
 cloud_sql_proxy
-bundles/
+static/
 npm-debug.log
 config.yaml
 package-lock.json
