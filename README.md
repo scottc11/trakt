@@ -84,8 +84,15 @@ password: Test1234
 email: lennon@thebeatles.com
 
 
-## HEROKU auth and deploy
+# DEPLOY APP TO HEROKU
+-----------------
+Copy local static folder and upload to cloud storage static folder
+```
+python manage.py collectstatic
+gsutil rsync -R static/ gs://trakt/static
+```
 
+deploy the app
 ```
 heroku login
 git push heroku testbranch:master OR git push heroku master
@@ -102,6 +109,7 @@ Continuously monitor the status of your database
 watch heroku pg:info
 ```
 
+-----------------
 ## POSTGRESQL
 
 install
@@ -181,30 +189,3 @@ guide --> https://cloud.google.com/storage/docs/cross-origin
 gsutil cors set cors-json-file.json gs://trakt
 gsutil cors set cors-json-file.json gs://trakt-dev
 ```
-
--------- DEPLOY APP ----------
-
-Copy local static folder and upload to cloud storage static folder
-```
-python manage.py collectstatic
-gsutil rsync -R static/ gs://trakt/static
-```
-
-Connect to the Postgres DB in cloud, and do any migrations if neseccary
-```
-./cloud_sql_proxy -instances="trakt-183713:us-central1:trakt-prod-db-1"=tcp:5432
-python manage.py makemigrations
-python manage.py migrate
-```
-
-Now deploy the app to App Engine
-
-```
-gcloud app deploy
-```
-
-
----- DEBUG APP ------
-```
-gcloud app --project [PROJECT-ID] instances enable-debug
-gcloud app --project [PROJECT-ID] instances disable-debug
