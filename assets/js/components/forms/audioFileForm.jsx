@@ -41,7 +41,7 @@ class AudioFileForm extends Component {
             Upload Audio File:
             <input type="file" onChange={this.validateFile} ref={ (input) => this.fileInput = input } />
           </label>
-          <Button action={(event) => this.handleSubmit(event) } icon="fas fa-upload" class="btn btn--orange" label="Upload" isDisabled={this.state.disabled} />
+          <Button action={(event) => this.handleSubmit(event) } icon="fas fa-cloud-upload-alt" class="btn btn--orange" label="Upload" isDisabled={this.state.disabled} />
         </form>
       </div>
     )

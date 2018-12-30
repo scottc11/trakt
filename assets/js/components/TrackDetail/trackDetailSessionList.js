@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Button from '../Button';
 
 const TrackSessionList = (props) => {
-  const sessions = props.sessions.map( (session) => {
+  const sessions = props.track.sessions.map( (session) => {
     return (
       <li key={session.id}>
-        <span className="fa fa-file"></span> {session.title}
+        <i className="fas fa-folder"></i> {session.title}
         <span className="track__file-list--date-time"> - {session.date}</span>
-        <a href={ session.file } download ><span className="track__file-list--action fa fa-cloud-download"></span></a>
+        <a href={ session.file } download ><i className="txt--actionable fas fa-cloud-download-alt"></i></a>
       </li>
     )
   })
@@ -15,6 +17,9 @@ const TrackSessionList = (props) => {
     <div className="track__file-list">
       <h6>sessions</h6>
       <ul>{sessions}</ul>
+      <div>
+        <Button action={() => window.location.href = `${axios.defaults.baseURL}track/upload/session/${props.track.id}/`} icon="fas fa-upload" class="btn btn--orange" label="Upload Session" />
+      </div>
     </div>
   )
 }

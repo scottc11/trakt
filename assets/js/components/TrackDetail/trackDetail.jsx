@@ -23,7 +23,7 @@ class TrackDetail extends Component {
     return (
       <div className="track__details">
         <TrackDetailFileList onSelect={this.props.UpdateActiveFileIndex} onDeleteFile={this.props.DeleteAudioFile} track={track} />
-        <TrackSessionList sessions={track.sessions} />
+        <TrackSessionList track={track} />
         <div style={{textAlign: 'right'}}>
           { this.state.deleteTrack == false &&
             <Button action={() => this.setState({deleteTrack: true}) } icon="fas fa-trash-alt" class="btn btn--red" label="Delete Track" />
