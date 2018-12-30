@@ -40,6 +40,9 @@ class Track(models.Model):
     def pub_date_pretty(self):
         return self.pub_date.strftime('%b %e %Y')
 
+    class Meta:
+        ordering = ('-pub_date',)
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)

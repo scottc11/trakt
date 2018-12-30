@@ -19,10 +19,21 @@ class TrackDetail extends Component {
 
   render() {
     const track = this.props.track;
+    const tags = this.props.track.tags.map(tag => {
+      return <span key={tag.id} className="badge badge--tag" style={{background: tag.color.hex_code}}>{tag.label}</span>
+    })
 
     return (
       <div className="track__details">
-        <TrackDetailFileList onSelect={this.props.UpdateActiveFileIndex} onDeleteFile={this.props.DeleteAudioFile} track={track} />
+
+        <div>
+          {tags}
+        </div>
+
+        <div>
+          <h6>files</h6>
+          <TrackDetailFileList onSelect={this.props.UpdateActiveFileIndex} onDeleteFile={this.props.DeleteAudioFile} track={track} />
+        </div>
         <TrackSessionList track={track} />
         <div style={{textAlign: 'right'}}>
           { this.state.deleteTrack == false &&

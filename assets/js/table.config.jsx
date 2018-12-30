@@ -59,6 +59,18 @@ export default function(activeAudioFile, playFn, pauseFn) {
       accessor: 'status.label'
     },
     {
+      Header: 'Tags',
+      accessor: 'tags',
+      width: 150,
+      style: {
+        overflowX: 'scroll',
+        textOverflow: 'unset',
+      },
+      Cell: row => row.original.tags.map( tag => {
+        return <span key={tag.id} className="badge badge--tag" style={{background: tag.color.hex_code}}>{tag.label}</span>
+      })
+    },
+    {
       Header: 'Project',
       accessor: 'projects',
       Cell: row => row.original.projects.map( project => {
@@ -81,7 +93,6 @@ export default function(activeAudioFile, playFn, pauseFn) {
     {
       Header: 'Uploader',
       accessor: 'submitter.username',
-      Cell: row => <UserBadge user={row.original.submitter} />
     }
   ]
 }

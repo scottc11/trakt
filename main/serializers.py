@@ -78,6 +78,25 @@ class TrackSerializer(serializers.ModelSerializer):
     projects = serializers.StringRelatedField(many=True)
     tags = TagSerializer(many=True)
 
+    # speed up database calls to related fields
+    # see http://ses4j.github.io/2015/11/23/optimizing-slow-django-rest-framework-performance/
+    @staticmethod
+    def setup_eager_loading(queryset):
+        queryset = queryset.prefetch_related('key')
+        queryset = queryset.prefetch_related('genre')
+        queryset = queryset.prefetch_related('submitter')
+        queryset = queryset.prefetch_related('status')
+        queryset = queryset.prefetch_related('tags')
+        queryset = queryset.prefetch_related('tags__color')
+        queryset = queryset.prefetch_related('sessions')
+        queryset = queryset.prefetch_related('audio_files')
+        queryset = queryset.prefetch_related('audio_files__uploader')
+        queryset = queryset.prefetch_related('projects')
+        queryset = queryset.prefetch_related('projects__collaborators')
+
+        return queryset
+
+
     class Meta:
         model = Track
         fields = (

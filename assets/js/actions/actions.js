@@ -17,7 +17,7 @@ export function fetchCurrentUser() {
 }
 
 export function fetchProjects() {
-  const url = axios.defaults.baseURL + 'api/projects/'
+  const url = 'api/projects/'
   const request = axios.get(url);
 
   return {

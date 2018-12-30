@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from main.models.track import Track
+from main.models import Track, Project
 from main.serializers import TrackSerializer, TrackCreateSerializer
 
 
@@ -16,7 +16,13 @@ class TrackViewset(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        queryset = Track.objects.filter(projects__collaborators__id=self.request.user.id)
+        if self.request.GET.get('project'):
+            project = Project.objects.get(id=self.request.GET.get('project'))
+            queryset = Track.objects.filter(projects__collaborators__id=self.request.user.id, projects__in=[project])
+        else:
+            queryset = Track.objects.filter(projects__collaborators__id=self.request.user.id)
+
+        queryset = TrackSerializer.setup_eager_loading(queryset)
         return queryset
 
     def create(self, request, *args, **kwargs):

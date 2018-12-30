@@ -44,3 +44,30 @@ body {
     }
   }
 }
+
+
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  /* Track */
+  &-track {
+    background: transparent;
+  }
+  &-track-piece {
+    background: transparent;
+  }
+  // corner where vertical / horizontal meet
+  &-corner {
+    background: transparent;
+  }
+  /* Handle */
+  &-thumb {
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  /* Handle on hover */
+  &-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+}
