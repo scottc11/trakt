@@ -94,6 +94,7 @@ gsutil rsync -R static/ gs://trakt/static
 
 deploy the app
 ```
+heroku git:remote -a trakt-app-1 # if heroku not already set as remote
 heroku login
 git push heroku testbranch:master OR git push heroku master
 ```
