@@ -7,6 +7,7 @@ from main.models.key import Key
 from main.models.genre import Genre
 from main.models.status import Status
 from main.models.project import Project
+from main.models.tag import Tag
 
 # you are going to need to keep this function around for your migrations....
 def format_storage_path(instance, filename):
@@ -31,6 +32,7 @@ class Track(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, blank=True, null=True)
     projects = models.ManyToManyField(Project, blank=True, related_name='tracks')
+    tags = models.ManyToManyField(Tag, blank=True, related_name='tags')
 
     def __str__(self):
         return self.title

@@ -8,6 +8,8 @@ import GenresReducer from './genres_reducer';
 import KeysReducer from './keys_reducer';
 import NotificationsReducer from './notifications_reducer';
 import StatusReducer from './status_reducer';
+import TagColorsReducer from './tagColorsReducer';
+import TagsReducer from './tagsReducer';
 import TrackReducer from './mediaPlayerReducer';
 import TrackListReducer from './trackListReducer';
 import UIReducer from './ui_reducer';
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   projects: ProjectsReducer,
   uploadProgress: UploadProgressReducer,
   statusList: StatusReducer,
+  tagColors: TagColorsReducer,
+  tags: TagsReducer,
   trackList: TrackListReducer,
   UI: UIReducer
 })

@@ -25,6 +25,11 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ('id', 'label', 'color')
 
+class TagCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'label', 'color')
 
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,13 +76,14 @@ class TrackSerializer(serializers.ModelSerializer):
     sessions = SessionFileSerializer(many=True)
     activeFileIndex = serializers.IntegerField(min_value=0, default=0)
     projects = serializers.StringRelatedField(many=True)
+    tags = TagSerializer(many=True)
 
     class Meta:
         model = Track
         fields = (
                 'id', 'activeFileIndex', 'submitter', 'pub_date',
                 'title', 'bpm', 'date_recorded', 'key',
-                'genre', 'status', 'projects', 'audio_files',
+                'genre', 'status', 'projects', 'audio_files', 'tags',
                 'sessions'
                 )
 
@@ -95,7 +101,8 @@ class TrackCreateSerializer(serializers.ModelSerializer):
         fields = (
                 'id', 'submitter', 'pub_date',
                 'title', 'bpm', 'date_recorded',
-                'key', 'genre', 'status', 'projects'
+                'key', 'genre', 'status', 'projects',
+                'tags',
                 )
 
 

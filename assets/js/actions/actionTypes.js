@@ -1,6 +1,10 @@
 
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 
+export const FETCH_TAG_COLORS = 'FETCH_TAG_COLORS';
+export const FETCH_TAGS = 'FETCH_TAGS';
+export const CREATE_TAG = 'CREATE_TAG';
+
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 

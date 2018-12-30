@@ -4,6 +4,7 @@ import GenreForm from '../components/forms/genreForm';
 import KeyForm from '../components/forms/keyForm';
 import StatusForm from '../components/forms/statusForm';
 import InfoText from './InfoText';
+import TagForm from '../components/forms/TagForm';
 
 export default function(props) {
   return (
@@ -12,6 +13,7 @@ export default function(props) {
         <TrackForm />
       </div>
       <div className="col-xs-12 col-sm-6">
+        <TagForm />
         <GenreForm />
         <StatusForm />
         <KeyForm />

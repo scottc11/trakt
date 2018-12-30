@@ -4,7 +4,7 @@ import { CREATE_STATUS, FETCH_STATUS_LIST } from './actionTypes';
 
 
 export function createStatus(label, hex_code) {
-  const url = window.location.href + `api/status/`;
+  const url = `api/status/`;
 
   const data = {
     label: label,

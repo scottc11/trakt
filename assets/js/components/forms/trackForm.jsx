@@ -15,6 +15,7 @@ class TrackForm extends Component {
       title: '', // string
       key: null, // foreign key
       genre: null, // foreign key
+      tags: null,
       projects: this.props.projects[0].id, // foreign key
       bpm: 100, // num
       status: null, // string
@@ -86,7 +87,12 @@ class TrackForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    if (event.target.type == "select-multiple") {
+      const selected = Array.apply(null, event.target.selectedOptions).map( opt => parseInt(opt.value))
+      this.setState({[event.target.name]: selected});
+    } else {
+      this.setState({[event.target.name]: event.target.value});
+    }
   }
 
   handleSubmit(event) {
@@ -110,6 +116,11 @@ class TrackForm extends Component {
   }
 
   render() {
+
+    const tagOptions = this.props.tags.map( item => {
+      return <option key={item.id} value={item.id}>{item.label}</option>;
+    })
+
     return (
       <div className="form form__track">
         <form>
@@ -129,6 +140,12 @@ class TrackForm extends Component {
           <label>
             Date:
             <input placeholder="Date" type="date" name="date_recorded" value={this.state.date_recorded} onChange={this.handleChange} />
+          </label>
+          <label>
+            Tags:
+            <select multiple={true} size={5} name="tags" onChange={ (e) => this.handleChange(e) }>
+              {tagOptions}
+            </select>
           </label>
           <label>
             Project:
@@ -159,6 +176,7 @@ function mapStateToProps(state) {
     projects: state.projects,
     genres: state.genres,
     keys: state.keys,
+    tags: state.tags,
     statusList: state.statusList,
     activeProject: state.activeProject
   };

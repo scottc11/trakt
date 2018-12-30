@@ -4,8 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 
-import { fetchCurrentUser } from '../actions/actions';
-import { fetchProjects } from '../actions/actions';
+import { fetchCurrentUser, fetchProjects } from '../actions/actions';
+import { FetchTagColors, FetchTags } from '../actions/tag_actions';
 import { FetchTrackList } from '../actions/track_actions';
 import { fetchKeys } from '../actions/key_actions';
 import { fetchGenres } from '../actions/genre_actions';
@@ -31,6 +31,8 @@ class AppContainer extends Component {
 
   componentDidMount() {
     this.props.fetchCurrentUser();
+    this.props.FetchTagColors();
+    this.props.FetchTags();
     this.props.FetchTrackList();
     this.props.fetchProjects();
     this.props.fetchGenres();
@@ -49,7 +51,7 @@ class AppContainer extends Component {
 
   render() {
 
-    if (!this.props.CurrentUser || !this.props.Notifications || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList ) {
+    if (!this.props.CurrentUser || !this.props.Notifications || !this.props.Projects || !this.props.Genres || !this.props.Keys || !this.props.StatusList || !this.props.tagColors || !this.props.tags ) {
       return <FullScreenSpinner />
     }
 
@@ -58,9 +60,6 @@ class AppContainer extends Component {
         <Header toggleActionWindowFn={this.toggleActionWindow}/>
         <div className="action-window container" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
           <UploadTrack />
-          <div className="col-xs-12">
-            
-          </div>
         </div>
         <TrackTable height={this.props.UI.body.height} />
         <MediaPlayer />
@@ -77,6 +76,8 @@ function mapStateToProps(state) {
     Notifications: state.notifications,
     Keys: state.keys,
     StatusList: state.statusList,
+    tags: state.tags,
+    tagColors: state.tagColors,
     UI: state.UI
   };
 }
@@ -90,7 +91,9 @@ function mapDispatchToProps(dispatch) {
     fetchStatusList,
     FetchTrackList,
     FetchNotifications,
-    ScreenResize
+    ScreenResize,
+    FetchTagColors,
+    FetchTags,
   }, dispatch);
 }
 
