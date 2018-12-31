@@ -1,5 +1,11 @@
 import _ from 'lodash';
-import { FETCH_TRACK, FETCH_TRACK_LIST, UPDATE_ACTIVE_FILE_INDEX, DELETE_AUDIO_FILE, DELETE_TRACK } from '../actions/actionTypes';
+import {
+  FETCH_TRACK,
+  FETCH_TRACK_LIST,
+  UPDATE_ACTIVE_FILE_INDEX,
+  DELETE_AUDIO_FILE,
+  DELETE_TRACK
+} from '../actions/actionTypes';
 
 
 

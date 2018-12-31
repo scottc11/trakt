@@ -9,7 +9,7 @@ class TagForm extends Component {
     super(props);
     this.state = {
       label: '',
-      hex_code: null, // is an id
+      hex_code: this.props.tagColors[0].id, // is an id
     }
 
     this.handleChange = this.handleChange.bind(this);

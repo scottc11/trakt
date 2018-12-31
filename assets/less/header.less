@@ -3,7 +3,6 @@
 .header {
   padding: 10px 10px;
   color: @white;
-  height: auto;
   font-family: @bungee-hairline;
   &--bg {
     background: @header-bg;
@@ -17,10 +16,13 @@
   }
 
   &__actions {
-    font-size: @small;
-    line-height: 55px;
+    font-size: @medium;
+
     & span {
       margin: 0 10px;
+      & i {
+        margin-right: 5px;
+      }
     }
   }
 

@@ -25,9 +25,19 @@ class TrackTable extends Component {
     return (
       <ReactTable
         data={this.props.trackList}
+        filterable={true}
+        defaultFilterMethod={ (filter, row, column) => {
+            const id = filter.pivotId || filter.id
+            if (!row[id]) { return false }
+            const value = typeof filter.value === 'string' ? filter.value.toLowerCase() : filter.value;
+            return row[id] !== undefined ? String(row[id].toLowerCase()).startsWith(value) : true
+          }
+        }
         columns={config(this.props.activeTrack, this.props.PlayAudioFile, this.props.PauseAudioFile)}
         showPagination={false}
+        style={{height: this.props.height}}
         className="-striped -highlight"
+        loading={this.props.UI.isFetching}
         SubComponent={ row => <TrackDetail track={row.original} /> }
       />
     )
@@ -36,7 +46,7 @@ class TrackTable extends Component {
 }
 
 function mapStateToProps(state) {
-  return { activeTrack: state.activeTrack, trackList: state.trackList }
+  return { activeTrack: state.activeTrack, trackList: state.trackList, UI: state.UI }
 }
 
 function mapDispatchToProps(dispatch) {

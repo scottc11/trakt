@@ -12,33 +12,29 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="header--bg" >
+      <div className="header--bg" style={{height: this.props.height}}>
         <div className="container header">
           <div className="header--heading col-xs-1">
-            <a href=""><span>V2</span></a>
+            <a href=""><span>V3</span></a>
           </div>
           <div className="col-xs-3">
             <ProjectList />
           </div>
-          <div className="col-xs-3 header__actions">
 
-            <span className="txt--actionable">
-              <i className="far fa-edit"> </i>
-              Edit Project
-            </span>
-
+          <div className="col-xs-2 header__actions">
             <span className="txt--actionable" onClick={() => this.props.toggleActionWindowFn() }>
-              <i className="fas fa-upload"></i>
+              <i className="fas fa-upload">&#x20;</i>
               Upload
             </span>
-
           </div>
-          <div className="col-xs-2">
+
+          <div className="col-xs-3">
             <UploadProgress />
           </div>
           <div className="header--info col-xs-3">
             <span className="">{ this.props.currentUser.username }</span>
-            <a href={ window.location + 'logout/' }><span>Logout</span></a>
+            <a href={ axios.defaults.baseURL + 'logout/' }><span>Logout</span></a>
+            <a href={ axios.defaults.baseURL + 'admin/' }><span>Admin</span></a>
           </div>
         </div>
       </div>

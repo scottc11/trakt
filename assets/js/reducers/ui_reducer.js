@@ -1,21 +1,22 @@
-import { SCREEN_RESIZE } from '../actions/actionTypes';
+import { SCREEN_RESIZE, FETCHING_IN_PROGRESS, } from '../actions/actionTypes';
 
 const initialState = {
-  screen: null,
   header: null,
   body: null,
-  mediaPlayer: null
+  mediaPlayer: null,
+  isFetching: true,
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case SCREEN_RESIZE:
-        return Object.assign({}, state, {
-            screen: action.screen,
-            header: action.header,
-            body: action.body,
-            mediaPlayer: action.mediaPlayer
-        });
+        return Object.assign({}, state, {...action.payload});
+
+    case FETCHING_IN_PROGRESS:
+      return {...state, isFetching: action.payload}
+
+    default:
+      return state;
   }
-  return state;
+
 }
