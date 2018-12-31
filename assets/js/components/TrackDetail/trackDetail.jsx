@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { DeleteAudioFile, UpdateActiveFileIndex, DeleteTrack } from '../../actions/track_actions';
@@ -25,7 +26,7 @@ class TrackDetail extends Component {
 
     return (
       <div className="track__details">
-
+        <h4>{track.title}</h4>
         <div>
           {tags}
         </div>
@@ -36,6 +37,7 @@ class TrackDetail extends Component {
         </div>
         <TrackSessionList track={track} />
         <div style={{textAlign: 'right'}}>
+          <Button action={() => window.location.href = `${axios.defaults.baseURL}admin/main/track/${track.id}/change/` } icon="far fa-edit" class="btn btn--blue" label="Edit Track"/>
           { this.state.deleteTrack == false &&
             <Button action={() => this.setState({deleteTrack: true}) } icon="fas fa-trash-alt" class="btn btn--red" label="Delete Track" />
           }

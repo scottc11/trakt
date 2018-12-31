@@ -57,12 +57,12 @@ class AppContainer extends Component {
 
     return (
       <div>
-        <Header toggleActionWindowFn={this.toggleActionWindow}/>
-        <div className="action-window container" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
+        <Header toggleActionWindowFn={this.toggleActionWindow} height={this.props.UI.header.height}/>
+        <div className="action-window" style={{ display: this.state.actionWindow ? 'block' : 'none' }}>
           <UploadTrack />
         </div>
         <TrackTable height={this.props.UI.body.height} />
-        <MediaPlayer />
+        <MediaPlayer height={this.props.UI.mediaPlayer.height}/>
       </div>
     )
   }

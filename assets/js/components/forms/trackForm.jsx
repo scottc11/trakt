@@ -15,7 +15,7 @@ class TrackForm extends Component {
       title: '', // string
       key: null, // foreign key
       genre: null, // foreign key
-      tags: null,
+      tags: [],
       projects: this.props.projects[0].id, // foreign key
       bpm: 100, // num
       status: null, // string

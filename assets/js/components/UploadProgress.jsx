@@ -9,11 +9,11 @@ class UploadProgress extends Component {
   render() {
     return (
       <div>
-        <div className="txt--no-wrap">
+        <div>
           <span>upload status: </span>
           <span className="upload__detail--status"> {this.props.uploadProgress.status} </span>
         </div>
-        <div className="txt--no-wrap">
+        <div>
           <span>upload progress: </span>
           <span className="upload__detail--progress"> {this.props.uploadProgress.progress}%</span>
         </div>

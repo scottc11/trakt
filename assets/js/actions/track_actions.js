@@ -4,7 +4,7 @@ import { updateUploadStatus } from './progress_actions';
 import {
   FETCH_TRACK,
   FETCH_TRACK_LIST,
-  FETCH_TRACK_LIST_BY_PROJECT,
+  FETCHING_IN_PROGRESS,
   DELETE_AUDIO_FILE,
   DELETE_TRACK,
   UPDATE_ACTIVE_FILE_INDEX,
@@ -49,10 +49,13 @@ export function fetchTrack(id) {
 
 export function FetchTrackList(proj_id = null) {
   const url = proj_id == null ? 'api/tracks/' : `api/tracks/?project=${proj_id}`
-  const request = axios.get(url);
-  return {
-    type: FETCH_TRACK_LIST,
-    payload: request
+
+  return (dispatch) => {
+    dispatch({ type: FETCHING_IN_PROGRESS, payload: true })
+    axios.get(url).then(res => {
+      dispatch({ type: FETCH_TRACK_LIST, payload: res })
+      dispatch({ type: FETCHING_IN_PROGRESS, payload: false })
+    })
   }
 }
 

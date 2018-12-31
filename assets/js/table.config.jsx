@@ -13,6 +13,7 @@ export default function(activeAudioFile, playFn, pauseFn) {
           return <i className="txt--turquoise txt--actionable fas fa-pause-circle" onClick={ () => pauseFn(row.original) }></i>
         }
       },
+      filterable: false,
       width: 50,
       style: {
         cursor: "pointer",
@@ -36,6 +37,7 @@ export default function(activeAudioFile, playFn, pauseFn) {
     {
       Header: 'Title',
       accessor: 'title',
+      filterable: true,
       Cell: row => <span>{row.original.title}</span>
     },
     {
@@ -62,6 +64,20 @@ export default function(activeAudioFile, playFn, pauseFn) {
       Header: 'Tags',
       accessor: 'tags',
       width: 150,
+      filterMethod: (filter, row, column) => {
+          const id = filter.pivotId || filter.id
+          const value = typeof filter.value === 'string' ? filter.value.toLowerCase() : filter.value;
+          const searchArray = () => {
+            let boolVal = false;
+            for (let i = 0; i < row[id].length; i++) {
+              if (String(row[id][i].label.toLowerCase()).startsWith(value)) {
+                boolVal = true
+              }
+            }
+            return boolVal;
+          }
+          return row[id] !== undefined ? searchArray() : true
+        },
       style: {
         overflowX: 'scroll',
         textOverflow: 'unset',
@@ -73,6 +89,20 @@ export default function(activeAudioFile, playFn, pauseFn) {
     {
       Header: 'Project',
       accessor: 'projects',
+      filterMethod: (filter, row, column) => {
+          const id = filter.pivotId || filter.id
+          const value = typeof filter.value === 'string' ? filter.value.toLowerCase() : filter.value;
+          const searchArray = () => {
+            let boolVal = false;
+            for (let i = 0; i < row[id].length; i++) {
+              if (String(row[id][i].toLowerCase()).startsWith(value)) {
+                boolVal = true
+              }
+            }
+            return boolVal;
+          }
+          return row[id] !== undefined ? searchArray() : true
+        },
       Cell: row => row.original.projects.map( project => {
         return <span key={project}>{project} </span>
       })

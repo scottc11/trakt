@@ -3,10 +3,6 @@ import {SCREEN_RESIZE} from './actionTypes';
 // ACTIONS FOR GENERAL UI CHANGES
 
 export function ScreenResize() {
-  const screen = {
-    width: window.innerWidth,
-    height: window.innerHeight
-  }
 
   const header = {
     width: window.innerWidth,
@@ -20,14 +16,15 @@ export function ScreenResize() {
 
   const body = {
     width: window.innerWidth,
-    height: screen.height - mediaPlayer.height - header.height
+    height: window.innerHeight - mediaPlayer.height - header.height
   }
 
   return {
     type: SCREEN_RESIZE,
-    screen: window,
-    header: header,
-    body: body,
-    mediaPlayer: mediaPlayer
+    payload: {
+      header: header,
+      body: body,
+      mediaPlayer: mediaPlayer
+    }
   };
 }

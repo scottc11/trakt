@@ -118,7 +118,7 @@ class MediaPlayer extends Component {
     }
 
     return (
-      <div className="media-player">
+      <div className="media-player" style={{height: this.props.height}}>
         { button }
         <span className="media-player__time">{this.state.currentTimeString}</span>
         <progress id='progress-bar' onClick={ (event) => this.onScrub(event) } max={this.state.duration} value={this.state.currentTime} ></progress>
