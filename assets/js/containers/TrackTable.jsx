@@ -33,6 +33,7 @@ class TrackTable extends Component {
             return row[id] !== undefined ? String(row[id].toLowerCase()).startsWith(value) : true
           }
         }
+        pageSize={this.props.trackList.length}
         columns={config(this.props.activeTrack, this.props.PlayAudioFile, this.props.PauseAudioFile)}
         showPagination={false}
         style={{height: this.props.height}}
