@@ -38,32 +38,13 @@ export default function(activeAudioFile, playFn, pauseFn) {
       Header: 'Title',
       accessor: 'title',
       filterable: true,
+      width: 250,
       Cell: row => <span>{row.original.title}</span>
-    },
-    {
-      Header: 'BPM',
-      accessor: 'bpm',
-      width: 50,
-      Cell: row => <span className="badge badge--bpm">{ row.original.bpm }</span>
-    },
-    {
-      Header: 'Genre',
-      accessor: 'genre',
-      Cell: row => <span className="badge badge--genre">{ row.original.genre }</span>
-    },
-    {
-      Header: 'Key',
-      accessor: 'key',
-      Cell: row => <span className="badge badge--key">{ row.original.key }</span>
-    },
-    {
-      Header: 'Status',
-      accessor: 'status.label'
     },
     {
       Header: 'Tags',
       accessor: 'tags',
-      width: 150,
+      minWidth: 300,
       filterMethod: (filter, row, column) => {
           const id = filter.pivotId || filter.id
           const value = typeof filter.value === 'string' ? filter.value.toLowerCase() : filter.value;
@@ -108,21 +89,54 @@ export default function(activeAudioFile, playFn, pauseFn) {
       })
     },
     {
-      Header: 'Date Recorded',
-      accessor: 'date_recorded',
-      Cell: row => <span className="track__info--date">{ new Date(row.original.date_recorded).toDateString() }</span>
+      Header: 'BPM',
+      accessor: 'bpm',
+      width: 50,
+      style: {
+        textAlign: 'center'
+      },
+      Cell: row => <span className="badge badge--bpm">{ row.original.bpm }</span>
     },
     {
-      Header: 'Uploaded',
-      accessor: 'pub_date',
-      Cell: row => {
-        const pub_date = new Date(row.original.pub_date).toDateString();
-        return <span title={pub_date} className="track__info--date">{ pub_date }</span>
-      }
+      Header: 'Key',
+      accessor: 'key',
+      width: 100,
+      style: {
+        textAlign: 'center'
+      },
+      Cell: row => <span className="badge badge--key">{ row.original.key }</span>
+    },
+    {
+      Header: 'Date Recorded',
+      accessor: 'date_recorded',
+      style: {
+        textAlign: 'center'
+      },
+      Cell: row => <span className="track__info--date">{ new Date(row.original.date_recorded).toDateString() }</span>
     },
     {
       Header: 'Uploader',
       accessor: 'submitter.username',
-    }
+      style: {
+        textAlign: 'center'
+      },
+    },
+    // {
+    //   Header: 'Uploaded',
+    //   accessor: 'pub_date',
+    //   Cell: row => {
+    //     const pub_date = new Date(row.original.pub_date).toDateString();
+    //     return <span title={pub_date} className="track__info--date">{ pub_date }</span>
+    //   }
+    // },
+    // {
+    //   Header: 'Status',
+    //   accessor: 'status.label'
+    // },
+    // {
+    //   Header: 'Genre',
+    //   accessor: 'genre',
+    //   Cell: row => <span className="badge badge--genre">{ row.original.genre }</span>
+    // },
   ]
 }

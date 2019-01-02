@@ -15,7 +15,6 @@ const TrackSessionList = (props) => {
 
   return (
     <div className="track__file-list">
-      <h6>sessions</h6>
       <ul>{sessions}</ul>
       <div>
         <Button action={() => window.location.href = `${axios.defaults.baseURL}track/upload/session/${props.track.id}/`} icon="fas fa-upload" class="btn btn--orange" label="Upload Session" />
